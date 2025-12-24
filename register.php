@@ -1,66 +1,126 @@
+<?php include("includes/a_config.php"); ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro</title>
-    <?php
-        include_once 'includes/head-tag-contents.php';
-    ?>
+    <title>Registro - Kairos</title>
+    <?php include("includes/head-tag-contents.php"); ?>
 </head>
 <body>
-<div class="registro-pc">
-  <div class="frame-11">
-    <img class="logo" src="assets/img/kairos.png" onerror="this.src='https://placehold.co/150x50/1c0538/ffffff?text=Kairos'" alt="Kairos Logo"/>
-  </div>
-  
-  <!-- Contenedor del Formulario -->
-  <div class="registro">
-    <form class="frame-9">
-      <div class="frame-20">
-        <div class="a-n-no-tienes-cuenta-registate">
-          ¡Registrate rellenando el formulario!
-        </div>
-      </div>
-      
-      <div class="frame-12">
-        <!-- Campo Nombre -->
-        <div class="frame-13 frame-input-group">
-          <label for="nombre-input" class="label-field">Nombre:</label>
-          <input type="text" id="nombre-input" class="frame-17" placeholder="Introduce tu nombre" required />
-        </div>
-        
-        <!-- Campo Apellidos -->
-        <div class="frame-25 frame-input-group">
-          <label for="apellidos-input" class="label-field">Apellidos:</label>
-          <input type="text" id="apellidos-input" class="frame-17" placeholder="Introduce tus apellidos" required />
-        </div>
-        
-        <!-- Campo Email -->
-        <div class="frame-26 frame-input-group">
-          <label for="email-input" class="label-field">Email:</label>
-          <input type="email" id="email-input" class="frame-17" placeholder="Introduce tu email" required />
-        </div>
-        
-        <!-- Campo Contraseña -->
-        <div class="frame-27 frame-input-group">
-          <label for="password-input" class="label-field">Contraseña:</label>
-          <input type="password" id="password-input" class="frame-17" placeholder="Crea una contraseña" required />
-        </div>
-        
-        <!-- Botones Aceptar/Cancelar -->
-        <div class="frame-24">
-          <button type="submit" class="frame-23">
-            <div class="aceptar">Aceptar</div>
-          </button>
-          <a href="login.php" class="frame-22">
-            <div class="cancelar">Cancelar</div>
-          </a>
-        </div>
-      </div>
-    </form>
-  </div>
-</div>
+    <main class="d-flex align-items-center justify-content-center min-vh-100">
+        <div class="container">
+            <div class="row justify-content-center">
+                <!-- Logo -->
+                <div class="col-12 text-center mb-5">
+                    <img class="img-fluid" style="max-width: 150px; height: auto;" 
+                         src="assets/img/kairos.png" 
+                         onerror="this.src='https://placehold.co/150x50/1c0538/ffffff?text=Kairos'" 
+                         alt="Kairos Logo"/>
+                </div>
 
+                <!-- Register Form Card -->
+                <div class="col-12 col-sm-9 col-md-7 col-lg-5 col-xl-4">
+                    <div class="card border-0 shadow-lg">
+                        <div class="card-body p-5">
+                            <!-- Título -->
+                            <h1 class="card-title h2 text-center mb-2">
+                                ¡Regístrate!
+                            </h1>
+                            <p class="text-center text-muted small mb-4">
+                                Crea tu cuenta rellenando el formulario
+                            </p>
+
+                            <!-- Formulario Registro -->
+                            <form method="POST" action="includes/register-process.php" novalidate>
+                                
+                                <!-- Nombre Input -->
+                                <div class="mb-3">
+                                    <label for="nombre" class="form-label fw-500">Nombre</label>
+                                    <input 
+                                        type="text" 
+                                        id="nombre" 
+                                        name="nombre"
+                                        class="form-control form-control-lg" 
+                                        placeholder="Tu nombre" 
+                                        required />
+                                    <div class="invalid-feedback d-block" style="display: none;">
+                                        El nombre es obligatorio.
+                                    </div>
+                                </div>
+
+                                <!-- Apellidos Input -->
+                                <div class="mb-3">
+                                    <label for="apellidos" class="form-label fw-500">Apellidos</label>
+                                    <input 
+                                        type="text" 
+                                        id="apellidos" 
+                                        name="apellidos"
+                                        class="form-control form-control-lg" 
+                                        placeholder="Tus apellidos" 
+                                        required />
+                                    <div class="invalid-feedback d-block" style="display: none;">
+                                        Los apellidos son obligatorios.
+                                    </div>
+                                </div>
+
+                                <!-- Email Input -->
+                                <div class="mb-3">
+                                    <label for="email" class="form-label fw-500">Email</label>
+                                    <input 
+                                        type="email" 
+                                        id="email" 
+                                        name="email"
+                                        class="form-control form-control-lg" 
+                                        placeholder="correo@ejemplo.com" 
+                                        required />
+                                    <div class="invalid-feedback d-block" style="display: none;">
+                                        Por favor introduce un email válido.
+                                    </div>
+                                </div>
+
+                                <!-- Password Input -->
+                                <div class="mb-4">
+                                    <label for="password" class="form-label fw-500">Contraseña</label>
+                                    <input 
+                                        type="password" 
+                                        id="password" 
+                                        name="password"
+                                        class="form-control form-control-lg" 
+                                        placeholder="Crea una contraseña segura" 
+                                        required />
+                                    <div class="invalid-feedback d-block" style="display: none;">
+                                        La contraseña es obligatoria.
+                                    </div>
+                                </div>
+
+                                <!-- Buttons Row -->
+                                <div class="d-grid gap-2 mb-3">
+                                    <button type="submit" class="btn btn-primary btn-lg fw-bold">
+                                        Aceptar
+                                    </button>
+                                    <a href="login.php" class="btn btn-outline-secondary btn-lg fw-bold">
+                                        Cancelar
+                                    </a>
+                                </div>
+
+                                <!-- Login Link -->
+                                <div class="text-center">
+                                    <p class="small mb-0">
+                                        ¿Ya tienes cuenta? 
+                                        <a href="login.php" class="text-primary text-decoration-none fw-bold">
+                                            Inicia sesión aquí
+                                        </a>
+                                    </p>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/scripts.js"></script>
 </body>
 </html>

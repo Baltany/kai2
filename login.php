@@ -1,61 +1,89 @@
+<?php include("includes/a_config.php"); ?>
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Login</title>
-        <?php
-        include_once 'includes/head-tag-contents.php';
-        ?>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Kairos</title>
+    <?php include("includes/head-tag-contents.php"); ?>
+</head>
+<body>
+    <main class="d-flex align-items-center justify-content-center min-vh-100">
+        <div class="container">
+            <div class="row justify-content-center">
+                <!-- Logo -->
+                <div class="col-12 text-center mb-5">
+                    <img class="img-fluid" style="max-width: 150px; height: auto;" 
+                         src="assets/img/kairos.png" 
+                         onerror="this.src='https://placehold.co/150x50/1c0538/ffffff?text=Kairos'" 
+                         alt="Kairos Logo"/>
+                </div>
 
-    </head>
-    <body>
+                <!-- Login Form Card -->
+                <div class="col-12 col-sm-9 col-md-7 col-lg-5 col-xl-4">
+                    <div class="card border-0 shadow-lg">
+                        <div class="card-body p-5">
+                            <!-- Título -->
+                            <h1 class="card-title h2 text-center mb-4">
+                                ¡Bienvenido a Kairos!
+                            </h1>
 
-        <div class="login-pc">
-            <div class="frame-11">
-                <!-- Se asume que el logo es un elemento de cabecera -->
-                <img class="logo" src="assets/img/kairos.png" onerror="this.src='https://placehold.co/150x50/1c0538/ffffff?text=Kairos'" alt="Kairos Logo"/>
-            </div>
-            
-            <!-- Contenedor del Formulario (Registro/Login) -->
-            <div class="registro">
-                <form class="frame-9">
-                    <div class="frame-20">
-                        <div class="bienvenido-a-kairos">¡Bienvenido a Kairos!</div>
+                            <!-- Formulario Login -->
+                            <form method="POST" action="includes/login-process.php" novalidate>
+                                
+                                <!-- Email Input -->
+                                <div class="mb-3">
+                                    <label for="email" class="form-label fw-500">Email</label>
+                                    <input 
+                                        type="email" 
+                                        id="email" 
+                                        name="email"
+                                        class="form-control form-control-lg" 
+                                        placeholder="correo@ejemplo.com" 
+                                        required />
+                                    <div class="invalid-feedback d-block" style="display: none;">
+                                        Por favor introduce un email válido.
+                                    </div>
+                                </div>
+
+                                <!-- Password Input -->
+                                <div class="mb-4">
+                                    <label for="password" class="form-label fw-500">Contraseña</label>
+                                    <input 
+                                        type="password" 
+                                        id="password" 
+                                        name="password"
+                                        class="form-control form-control-lg" 
+                                        placeholder="••••••••" 
+                                        required />
+                                    <div class="invalid-feedback d-block" style="display: none;">
+                                        Por favor introduce tu contraseña.
+                                    </div>
+                                </div>
+
+                                <!-- Login Button -->
+                                <div class="d-grid gap-2 mb-4">
+                                    <button type="submit" class="btn btn-primary btn-lg fw-bold">
+                                        Iniciar Sesión
+                                    </button>
+                                </div>
+
+                                <!-- Register Link -->
+                                <div class="text-center">
+                                    <p class="mb-0">
+                                        ¿Aún no tienes cuenta? 
+                                        <a href="register.php" class="text-primary text-decoration-none fw-bold">
+                                            Regístrate aquí
+                                        </a>
+                                    </p>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                    
-                    <div class="frame-12">
-                        
-                        <!-- Campo Email -->
-                        <div class="frame-18">
-                            <label for="email-input" class="label-field">Email:</label>
-                            <input type="email" id="email-input" class="frame-17" placeholder="Introduce tu email" required />
-                        </div>
-                        
-                        <!-- Campo Contraseña -->
-                        <div class="frame-18">
-                            <label for="password-input" class="label-field">Contraseña:</label>
-                            <input type="password" id="password-input" class="frame-17" placeholder="Introduce tu contraseña" required />
-                        </div>
-                        
-                        <!-- Botón Log In -->
-                        <div class="frame-24">
-                            <button type="submit" class="frame-23">
-                                <div class="log-in">Log in</div>
-                            </button>
-                        </div>
-                        
-                        <!-- Enlace de registro -->
-                        <div class="frame-202">
-                            <div class="a-n-no-tienes-cuenta-registrate-aqu">
-                                <a href="register.php">
-                                    ¿Aún no tienes cuenta? Regístrate aquí
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </form>
+                </div>
             </div>
         </div>
-    </body>
+    </main>
+
+</body>
 </html>

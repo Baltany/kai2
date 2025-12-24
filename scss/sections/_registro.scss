@@ -1,275 +1,250 @@
-// --- Variables ---
-$principal: #1c0538;
-$texto-principal: #ffffff;
-$principal-de-acento: #6f12e0;
-$secundario: #5e3a8b;
-$input-bg: #ffffff;
-$cancel-color: #555555; // Gris oscuro para el botón Cancelar
+// ============================================================================
+// LOGIN.SCSS - Personalización de Bootstrap para Login
+// ============================================================================
+// Importa las variables ANTES de usar
+@import '../variables';
 
-$h1-font-family: "GasoekOne-Regular", sans-serif;
-$h2-font-family: "GasoekOne-Regular", sans-serif;
-$body-font-family: "Inter", sans-serif;
+// ============================================================================
+// MAIN - Contenedor principal (reemplaza .login-pc)
+// ============================================================================
+main {
+    background: $primario;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    overflow: auto;
 
-$font-size-h1: 32px;
-$font-size-h2: 24px;
-$font-weight-base: 400;
-
-// -----------------------------------------------------------------------------
-// Componente Principal
-// -----------------------------------------------------------------------------
-.registro-pc {
-  &, * {
-    box-sizing: border-box;
-  }
-
-  // Contenedor principal (Centrado en pantalla)
-  background: $principal;
-  min-height: 100vh;
-  padding: 40px 0;
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-  align-items: center;
-  justify-content: center; // Centrado verticalmente
-  position: relative;
-  overflow: auto; 
+    @media (max-width: 768px) {
+        padding: 20px;
+        justify-content: flex-start;
+        gap: 20px;
+    }
 }
 
-// -----------------------------------------------------------------------------
-// Logo (Frame 11)
-// -----------------------------------------------------------------------------
-.frame-11 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-shrink: 0;
-  width: 100%;
-  max-width: 300px; 
-  height: auto;
-  
-  .logo {
-    width: 100%;
-    height: auto;
-    object-fit: contain;
-  }
+// ============================================================================
+// LOGO
+// ============================================================================
+main > .container > .row > .col-12:first-child {
+    img {
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+
+        @media (max-width: 768px) {
+            max-width: 200px;
+        }
+    }
 }
 
-// -----------------------------------------------------------------------------
-// Formulario de Registro
-// -----------------------------------------------------------------------------
-.registro {
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  flex: none;
-
-  // Frame 9 (El Contenedor del Formulario)
-  .frame-9 {
+// ============================================================================
+// CARD - Contenedor del formulario (reemplaza .frame-9)
+// ============================================================================
+.card {
     background: $secundario;
     border-radius: 12px;
-    padding: 30px; 
-    display: flex;
-    flex-direction: column;
-    gap: 20px; // Espacio entre secciones
-    align-items: center;
-    justify-content: flex-start;
-    max-width: 500px; // Un poco más ancho que el login por tener más campos
-    width: 90%; 
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-  }
-
-  // Título/Mensaje
-  .frame-20 {
+    border: none;
     width: 100%;
-    padding: 10px 0;
-    
-    .a-n-no-tienes-cuenta-registate {
-      color: $texto-principal;
-      text-align: center;
-      font-family: $h1-font-family;
-      font-size: 30px; 
-      font-weight: $font-weight-base;
-      line-height: 1.2;
-    }
-  }
+    max-width: 800px;
 
-  // Contenedor de Inputs y Botones
-  .frame-12 {
-    width: 100%;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 15px; // Espacio entre los campos
-    align-items: flex-start;
+    .card-body {
+        padding: 30px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
 
-    // Estilo para el contenedor de cada input (Nombre, Apellidos, Email, Contraseña)
-    .frame-13, .frame-25, .frame-26, .frame-27 {
-      display: flex;
-      flex-direction: column; 
-      gap: 8px;
-      width: 100%;
-      height: auto;
-      position: relative;
-
-      .label-field { // Estilo para el label
-        color: $texto-principal;
-        font-family: $body-font-family;
-        font-size: 16px;
-        font-weight: 600;
-        text-align: left;
-        width: 100%;
-      }
-      
-      // Campo de Entrada (Input)
-      .frame-17 {
-        background: $input-bg;
-        border: 2px solid transparent;
-        border-radius: 8px;
-        padding: 12px 15px;
-        width: 100%;
-        height: 45px; 
-        font-family: $body-font-family;
-        font-size: 16px;
-        color: $principal; 
-        transition: border-color 0.3s ease;
-        
-        &:focus {
-            border-color: $principal-de-acento;
-            outline: none;
+        @media (max-width: 768px) {
+            padding: 20px;
+            gap: 15px;
         }
-      }
     }
-  } 
 
-  // Botones Aceptar/Cancelar
-  .frame-24 {
-    padding: 10px 0;
-    display: flex;
-    flex-direction: row;
-    gap: 15px; // Espacio entre los dos botones
-    align-items: center;
-    justify-content: space-between; // Distribuye los botones
-    width: 100%;
-    flex: none;
-
-    // Botón Aceptar (Submit)
-    .frame-23 {
-      background: $principal-de-acento;
-      border: none;
-      border-radius: 30px;
-      padding: 10px 15px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex: 1; // Ambos botones ocupan el 50%
-      height: 50px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-      
-      &:hover {
-          background: darken($principal-de-acento, 10%);
-      }
-
-      .aceptar {
-        color: $texto-principal;
+    .card-title {
+        color: $texto_claro;
+        font-family: $headings-font-family;
+        font-size: 30px;
+        font-weight: 400;
         text-align: center;
-        font-family: $h2-font-family;
-        font-size: 20px;
-        font-weight: $font-weight-base;
-      }
-    }
-    
-    // Botón Cancelar (Enlace)
-    .frame-22 {
-      // Usado como <a> en el HTML para regresar
-      background: $principal-de-acento; 
-      border-radius: 30px;
-      padding: 10px 15px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex: 1; 
-      height: 50px;
-      cursor: pointer;
-      text-decoration: none; // Quita el subrayado del enlace
-      transition: background-color 0.3s ease;
+        margin-bottom: 0;
+        line-height: 1.2;
 
-      &:hover {
-          background: darken($principal-de-acento, 10%);
-      }
-
-      .cancelar {
-        color: $texto-principal;
-        text-align: center;
-        font-family: $h2-font-family;
-        font-size: 20px;
-        font-weight: $font-weight-base;
-      }
+        @media (max-width: 768px) {
+            font-size: 24px;
+        }
     }
-  } 
 }
 
+// ============================================================================
+// FORM CONTROL - Inputs (reemplaza .frame-17)
+// ============================================================================
+.form-control {
+    background: $input_bg;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    padding: 12px 15px;
+    height: 45px;
+    font-family: $font-family-sans-serif;
+    font-size: 16px;
+    color: $primario;
+    transition: border-color 0.3s ease;
 
-// -----------------------------------------------------------------------------
-// Media Queries para Móviles
-// -----------------------------------------------------------------------------
-@media (max-width: 768px) {
-  .registro-pc {
-    padding: 20px;
-    justify-content: flex-start;
-    gap: 20px; 
-  }
-
-  .frame-11 {
-    max-width: 200px;
-  }
-  
-  .registro {
-    padding: 0;
-
-    .frame-9 {
-      max-width: 95%; 
-      padding: 20px;
-      gap: 15px;
+    &:focus {
+        border-color: $resalte;
+        background-color: $input_bg;
+        color: $primario;
+        outline: none;
+        box-shadow: 0 0 0 0.2rem rgba($resalte, 0.25);
     }
 
-    .frame-20 {
-      .a-n-no-tienes-cuenta-registate {
-        font-size: 24px;
-      }
+    &::placeholder {
+        color: rgba($primario, 0.5);
     }
 
-    .frame-12 {
-      gap: 10px; // Reducimos el espacio entre campos
+    @media (max-width: 768px) {
+        height: 40px;
+        padding: 10px 12px;
+        font-size: 15px;
+    }
+}
+
+// ============================================================================
+// FORM LABEL (reemplaza .label-field)
+// ============================================================================
+.form-label {
+    color: $texto_claro;
+    font-family: $font-family-sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: left;
+    margin-bottom: 8px;
+
+    @media (max-width: 768px) {
+        font-size: 15px;
+        margin-bottom: 6px;
+    }
+}
+
+// ============================================================================
+// BUTTON PRIMARY - Botón Log In (reemplaza .frame-23)
+// ============================================================================
+.btn-primary {
+    background: $resalte;
+    border: none;
+    border-radius: 30px;
+    padding: 10px 15px;
+    height: 50px;
+    font-family: $headings-font-family;
+    font-size: 20px;
+    font-weight: 400;
+    color: $texto_claro;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+        background: darken($resalte, 10%);
+        color: $texto_claro;
+        border-color: darken($resalte, 10%);
     }
 
-    .frame-13, .frame-25, .frame-26, .frame-27 {
-        gap: 6px; // Reducimos espacio entre label e input
-        .label-field, .frame-17 {
-            font-size: 14px;
-        }
-        .frame-17 {
-            height: 40px; 
-            padding: 10px 12px;
-        }
+    &:active,
+    &:focus {
+        background: darken($resalte, 10%);
+        color: $texto_claro;
+        border-color: darken($resalte, 10%);
+        box-shadow: none;
     }
-    
-    // Botones en móvil
-    .frame-24 {
-        flex-direction: column; // CRUCIAL: Apilamos los botones verticalmente
-        gap: 10px; // Espacio entre Aceptar y Cancelar apilados
 
-        .frame-23, .frame-22 {
-            width: 100%; // Ocupan todo el ancho
-            flex: none; // Desactivamos el flex: 1 para apilarlos
-            height: 45px;
-            .aceptar, .cancelar {
-                font-size: 18px;
-            }
-        }
+    @media (max-width: 768px) {
+        height: 45px;
+        font-size: 18px;
     }
-  }
+}
+
+// ============================================================================
+// BUTTON OUTLINE SECONDARY - Botón Cancelar (register.php)
+// ============================================================================
+.btn-outline-secondary {
+    color: $resalte;
+    border: 2px solid $resalte;
+    border-radius: 30px;
+    padding: 10px 15px;
+    height: 50px;
+    font-family: $headings-font-family;
+    font-size: 20px;
+    font-weight: 400;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+        background: $resalte;
+        color: $texto_claro;
+        border-color: $resalte;
+    }
+
+    &:active,
+    &:focus {
+        background: $resalte;
+        color: $texto_claro;
+        border-color: $resalte;
+        box-shadow: none;
+    }
+
+    @media (max-width: 768px) {
+        height: 45px;
+        font-size: 18px;
+    }
+}
+
+// ============================================================================
+// LINKS (reemplaza el estilo de .a-n-no-tienes-cuenta-registrate-aqu)
+// ============================================================================
+a {
+    color: $texto_claro;
+    text-decoration: none;
+    transition: color 0.3s ease;
+
+    &:hover {
+        color: lighten($resalte, 15%);
+        text-decoration: underline;
+    }
+}
+
+// ============================================================================
+// UTILIDADES
+// ============================================================================
+
+// Aplicar gap y flex en el contenedor de botones
+.d-grid {
+    gap: 15px;
+
+    @media (max-width: 768px) {
+        gap: 10px;
+    }
+}
+
+// Espaciado en formularios
+.mb-3 {
+    margin-bottom: 15px;
+
+    @media (max-width: 768px) {
+        margin-bottom: 12px;
+    }
+}
+
+.mb-4 {
+    margin-bottom: 20px;
+
+    @media (max-width: 768px) {
+        margin-bottom: 15px;
+    }
 }
