@@ -3,3 +3,5 @@ css
 vendor
 node_modules
 css
+.vscode
+.vscode/settings.json
