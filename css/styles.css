@@ -17007,8 +17007,7 @@ main > .container > .row > .col-12:first-child img {
   border-radius: 12px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
   border: none;
-  width: 100%;
-  max-width: 800px; }
+  max-width: 520px; }
   .card .card-body {
     padding: 30px;
     display: flex;

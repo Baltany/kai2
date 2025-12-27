@@ -20,7 +20,7 @@
                 </div>
 
                 <!-- Register Form Card -->
-                <div class="col-12 col-sm-9 col-md-7 col-lg-5 col-xl-4">
+                <div class="col-12 col-sm-10 col-md-8 col-lg-7 col-xl-5">
                     <div class="card border-0 shadow-lg">
                         <div class="card-body p-5">
                             <!-- Título -->

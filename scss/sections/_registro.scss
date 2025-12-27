@@ -1,11 +1,11 @@
 // ============================================================================
-// LOGIN.SCSS - Personalización de Bootstrap para Login
+// REGISTRO.SCSS - Personalización de Bootstrap para Registro
 // ============================================================================
 // Importa las variables ANTES de usar
 @import '../variables';
 
 // ============================================================================
-// MAIN - Contenedor principal (reemplaza .login-pc)
+// MAIN - Contenedor principal
 // ============================================================================
 main {
     background: $primario;
@@ -41,15 +41,14 @@ main > .container > .row > .col-12:first-child {
 }
 
 // ============================================================================
-// CARD - Contenedor del formulario (reemplaza .frame-9)
+// CARD - Contenedor del formulario (MÁS ANCHO que login para acomodar más campos)
 // ============================================================================
 .card {
     background: $secundario;
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
     border: none;
-    width: 100%;
-    max-width: 800px;
+    max-width: 520px; // Más ancho que login (450px) para acomodar 4 campos
 
     .card-body {
         padding: 30px;
@@ -79,7 +78,7 @@ main > .container > .row > .col-12:first-child {
 }
 
 // ============================================================================
-// FORM CONTROL - Inputs (reemplaza .frame-17)
+// FORM CONTROL - Inputs
 // ============================================================================
 .form-control {
     background: $input_bg;
@@ -112,7 +111,7 @@ main > .container > .row > .col-12:first-child {
 }
 
 // ============================================================================
-// FORM LABEL (reemplaza .label-field)
+// FORM LABEL
 // ============================================================================
 .form-label {
     color: $texto_claro;
@@ -129,7 +128,7 @@ main > .container > .row > .col-12:first-child {
 }
 
 // ============================================================================
-// BUTTON PRIMARY - Botón Log In (reemplaza .frame-23)
+// BUTTON PRIMARY - Botón Aceptar
 // ============================================================================
 .btn-primary {
     background: $resalte;
@@ -168,7 +167,7 @@ main > .container > .row > .col-12:first-child {
 }
 
 // ============================================================================
-// BUTTON OUTLINE SECONDARY - Botón Cancelar (register.php)
+// BUTTON OUTLINE SECONDARY - Botón Cancelar
 // ============================================================================
 .btn-outline-secondary {
     color: $resalte;
@@ -206,7 +205,7 @@ main > .container > .row > .col-12:first-child {
 }
 
 // ============================================================================
-// LINKS (reemplaza el estilo de .a-n-no-tienes-cuenta-registrate-aqu)
+// LINKS
 // ============================================================================
 a {
     color: $texto_claro;
@@ -223,7 +222,7 @@ a {
 // UTILIDADES
 // ============================================================================
 
-// Aplicar gap y flex en el contenedor de botones
+// Aplicar gap en el contenedor de botones (en registro son dos botones apilados)
 .d-grid {
     gap: 15px;
 

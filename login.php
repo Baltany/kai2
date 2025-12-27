@@ -29,7 +29,7 @@
                             </h1>
 
                             <!-- Formulario Login -->
-                            <form method="POST" action="includes/login-process.php" novalidate>
+                            <form method="POST" action="index.php" novalidate>
                                 
                                 <!-- Email Input -->
                                 <div class="mb-3">
