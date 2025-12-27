@@ -12,6 +12,10 @@
 	<main>
 		<?php include("includes/product-card.php");?>
 		<?php include("includes/product-card.php");?>
+		<?php include("includes/product-card.php");?>
+		<?php include("includes/product-card.php");?>
+		<?php include("includes/product-card.php");?>
+		<?php include("includes/product-card.php");?>
 		
 	</main>
 

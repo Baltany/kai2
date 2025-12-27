@@ -17148,430 +17148,260 @@ a {
     .mb-4 {
       margin-bottom: 15px; } }
 
-.zona-de-pago-pc {
-  background: #1c0538;
-  padding: 20px 0;
+body {
+  padding-top: 4.5rem; }
+
+.contenedor-pago {
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%; }
+  .contenedor-pago .row {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 30px;
+    align-items: flex-start; }
+  @media (max-width: 992px) {
+    .contenedor-pago {
+      max-width: 95%; } }
+  @media (max-width: 768px) {
+    .contenedor-pago {
+      max-width: 100%;
+      padding: 0 10px; }
+      .contenedor-pago .row {
+        flex-wrap: wrap;
+        gap: 20px; } }
+
+.zona-pago-main {
+  background-color: #1c0538;
+  min-height: 100vh;
+  padding: 40px 20px; }
+  @media (max-width: 768px) {
+    .zona-pago-main {
+      padding: 20px 10px; } }
+
+.productos-list {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  align-items: center;
-  justify-content: flex-start;
-  height: auto;
-  min-height: 100vh;
-  position: relative;
-  overflow: hidden; }
-  .zona-de-pago-pc, .zona-de-pago-pc * {
-    box-sizing: border-box; }
-  .zona-de-pago-pc .carrito2 {
-    padding: 15px 0;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    align-items: center;
-    justify-content: flex-start;
-    align-self: stretch;
-    flex-shrink: 0;
-    position: relative;
-    overflow: hidden;
-    flex: 1; }
-    .zona-de-pago-pc .carrito2 .frame-9 {
-      padding: 0;
-      display: flex;
-      flex-direction: row;
-      gap: 30px;
-      align-items: flex-start;
-      justify-content: center;
-      width: 100%;
-      max-width: 1000px;
-      height: auto;
-      position: relative;
-      overflow: hidden;
-      /* Base style for all detail rows (Subtotal, Envío, Devolución) */
-      /* Styles for detail text (Subtotal, Shipping, etc.) - Nítido */
-      /* Styles for detail prices/values - Nítido, con énfasis */
-      /* Style for the information row (Devolución) */
-      /* Specific style for the Total row frame (frame-33) - Línea divisoria superior */
-      /* Styles for Total text and price - Más grande (H2) */ }
-      .zona-de-pago-pc .carrito2 .frame-9 .frame-5 {
-        padding: 0;
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-        align-items: center;
-        justify-content: flex-start;
-        flex: 2;
-        position: relative;
-        overflow: hidden;
-        min-width: 380px; }
-      .zona-de-pago-pc .carrito2 .frame-9 .elemento-carrito {
-        background: #5e3a8b;
-        border-radius: 8px;
-        display: flex;
-        flex-direction: row;
-        gap: 15px;
-        align-items: center;
-        justify-content: flex-start;
-        align-self: stretch;
-        flex-shrink: 0;
-        height: 70px;
-        position: relative;
-        overflow: hidden;
-        padding: 6px; }
-        .zona-de-pago-pc .carrito2 .frame-9 .elemento-carrito .imagen {
-          border-radius: 6px;
-          padding: 3px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex-shrink: 0;
-          width: 55px;
-          height: 55px;
-          position: relative;
-          overflow: hidden; }
-          .zona-de-pago-pc .carrito2 .frame-9 .elemento-carrito .imagen .car-tula {
-            border-radius: 4px;
-            align-self: stretch;
-            flex: 1;
-            position: relative;
-            object-fit: cover; }
-        .zona-de-pago-pc .carrito2 .frame-9 .elemento-carrito .texto {
-          padding: 0;
-          display: flex;
-          flex-direction: column;
-          gap: 3px;
-          align-items: flex-start;
-          justify-content: center;
-          flex: 1; }
-          .zona-de-pago-pc .carrito2 .frame-9 .elemento-carrito .texto .titulo {
-            display: flex;
-            flex-direction: row;
-            gap: 10px;
-            align-items: center;
-            justify: space-between;
-            align-self: stretch;
-            height: auto; }
-            .zona-de-pago-pc .carrito2 .frame-9 .elemento-carrito .texto .titulo .producto-1 {
-              font: 400 18px/1 "GasoekOne-Regular", sans-serif;
-              color: #ffffff;
-              text-align: left;
-              flex: 1;
-              height: auto;
-              display: flex;
-              align-items: center;
-              justify-content: flex-start; }
-            .zona-de-pago-pc .carrito2 .frame-9 .elemento-carrito .texto .titulo ._99 {
-              font: 400 18px/1 "GasoekOne-Regular", sans-serif;
-              color: #ffffff;
-              text-align: right;
-              align-self: stretch;
-              display: flex;
-              align-items: center;
-              justify-content: flex-end; }
-          .zona-de-pago-pc .carrito2 .frame-9 .elemento-carrito .texto .descripci-n-o-plataforma {
-            color: #ccc;
-            font-family: "Inter-Regular", sans-serif;
-            font-size: 14px; }
-        .zona-de-pago-pc .carrito2 .frame-9 .elemento-carrito .botones {
-          padding: 3px;
-          display: flex;
-          flex-direction: row;
-          gap: 8px;
-          align-items: center;
-          justify-content: center;
-          flex-shrink: 0;
-          width: 80px;
-          height: auto; }
-          .zona-de-pago-pc .carrito2 .frame-9 .elemento-carrito .botones ._1 {
-            color: #ffffff;
-            text-align: center;
-            font-family: "Raleway-SemiBold", sans-serif;
-            font-size: 16px;
-            line-height: 100%;
-            font-weight: 600;
-            width: auto;
-            height: auto; }
-          .zona-de-pago-pc .carrito2 .frame-9 .elemento-carrito .botones .group-4, .zona-de-pago-pc .carrito2 .frame-9 .elemento-carrito .botones .group-42, .zona-de-pago-pc .carrito2 .frame-9 .elemento-carrito .botones .group-43 {
-            width: 14px;
-            height: 14px;
-            position: relative;
-            overflow: visible;
-            cursor: pointer; }
-            .zona-de-pago-pc .carrito2 .frame-9 .elemento-carrito .botones .group-4:hover, .zona-de-pago-pc .carrito2 .frame-9 .elemento-carrito .botones .group-42:hover, .zona-de-pago-pc .carrito2 .frame-9 .elemento-carrito .botones .group-43:hover {
-              opacity: 0.8; }
-          .zona-de-pago-pc .carrito2 .frame-9 .elemento-carrito .botones .trash-streamline-heroicons-outline,
-          .zona-de-pago-pc .carrito2 .frame-9 .elemento-carrito .botones .trash-streamline-heroicons-outline2,
-          .zona-de-pago-pc .carrito2 .frame-9 .elemento-carrito .botones .trash-streamline-heroicons-outline3 {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 22px;
-            height: 22px;
-            position: relative;
-            overflow: visible;
-            cursor: pointer; }
-            .zona-de-pago-pc .carrito2 .frame-9 .elemento-carrito .botones .trash-streamline-heroicons-outline:hover,
-            .zona-de-pago-pc .carrito2 .frame-9 .elemento-carrito .botones .trash-streamline-heroicons-outline2:hover,
-            .zona-de-pago-pc .carrito2 .frame-9 .elemento-carrito .botones .trash-streamline-heroicons-outline3:hover {
-              opacity: 0.8; }
-      .zona-de-pago-pc .carrito2 .frame-9 .frame-25 {
-        flex: 1;
-        max-width: 320px;
-        align-self: stretch; }
-      .zona-de-pago-pc .carrito2 .frame-9 .frame-26 {
-        max-width: 320px;
-        padding: 20px;
-        /* Amplio */
-        background: #5e3a8b;
-        border-radius: 8px;
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-        /* Amplio */
-        align-items: center;
-        justify-content: flex-start;
-        align-self: stretch; }
-      .zona-de-pago-pc .carrito2 .frame-9 .resumen-del-pedido {
-        /* Título con línea divisoria inferior */
-        color: #ffffff;
-        text-align: left;
-        font: 400 28px "GasoekOne-Regular", sans-serif;
-        width: 100%;
-        height: auto;
-        padding-bottom: 15px;
-        border-bottom: 1px solid #ffffff;
-        /* Línea divisoria */
-        margin-bottom: 5px;
-        display: flex;
-        align-items: center;
-        justify-content: flex-start; }
-      .zona-de-pago-pc .carrito2 .frame-9 .frame-28, .zona-de-pago-pc .carrito2 .frame-9 .frame-29, .zona-de-pago-pc .carrito2 .frame-9 .frame-30 {
-        padding: 0;
-        display: flex;
-        flex-direction: row;
-        gap: 10px;
-        align-items: center;
-        justify-content: space-between;
-        align-self: stretch;
-        flex-shrink: 0;
-        position: relative;
-        overflow: hidden; }
-      .zona-de-pago-pc .carrito2 .frame-9 .subtotal-x-productos,
-      .zona-de-pago-pc .carrito2 .frame-9 .env-o-estimado {
-        color: #ffffff;
-        text-align: left;
-        font: 400 20px "Inter-Regular", sans-serif;
-        flex: 1; }
-      .zona-de-pago-pc .carrito2 .frame-9 ._992, .zona-de-pago-pc .carrito2 .frame-9 .gratuito {
-        color: #ffffff;
-        text-align: right;
-        font: 600 20px "Inter-Regular", sans-serif; }
-      .zona-de-pago-pc .carrito2 .frame-9 .devoluci-n-gratuita-en-30-d-as {
-        color: #ffffff;
-        text-align: center;
-        font: 400 14px/1 "Inter-Regular", sans-serif;
-        font-style: italic;
-        width: 100%;
-        display: flex;
-        justify-content: center; }
-      .zona-de-pago-pc .carrito2 .frame-9 .frame-33 {
-        padding: 0;
-        display: flex;
-        flex-direction: row;
-        gap: 10px;
-        align-items: center;
-        justify-content: space-between;
-        align-self: stretch;
-        flex-shrink: 0;
-        position: relative;
-        overflow: hidden;
-        padding-top: 15px;
-        /* Espacio superior para la línea */
-        margin-top: 10px;
-        border-top: 1px solid #ffffff; }
-      .zona-de-pago-pc .carrito2 .frame-9 .total-del-pedido {
-        color: #ffffff;
-        text-align: left;
-        font: 400 22px "GasoekOne-Regular", sans-serif;
-        flex: 1;
-        height: auto;
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-        /* Overriding old total styles if they exist in the HTML structure */
-        padding-top: 0 !important;
-        border-top: none !important;
-        margin-top: 0 !important; }
-      .zona-de-pago-pc .carrito2 .frame-9 ._993 {
-        /* Total price */
-        color: #ffffff;
-        text-align: right;
-        font: 400 22px "GasoekOne-Regular", sans-serif;
-        width: auto;
-        height: auto;
-        display: flex;
-        align-items: center;
-        justify-content: flex-end; }
-      .zona-de-pago-pc .carrito2 .frame-9 .frame-72 {
-        background: #6f12e0;
-        border-radius: 8px;
-        padding: 10px 15px;
-        /* Restaurado a padding más estándar */
-        height: auto;
-        /* Altura automática en lugar de 50px */
-        margin-top: 25px;
-        /* Restaurado a un margen más grande */
-        transition: background-color 0.3s ease;
-        display: flex;
-        /* Centrado */
-        align-items: center;
-        /* Centrado vertical */
-        justify-content: center;
-        /* Centrado horizontal */ }
-        .zona-de-pago-pc .carrito2 .frame-9 .frame-72:hover {
-          background: #580eb1; }
-        .zona-de-pago-pc .carrito2 .frame-9 .frame-72 .confirmar-pedido {
-          color: #ffffff;
-          font: 400 24px/1 "GasoekOne-Regular", sans-serif;
-          /* Restaurado */
-          cursor: pointer;
-          text-align: center;
-          /* Centrado del texto */ }
+  gap: 12px; }
   @media (max-width: 768px) {
-    .zona-de-pago-pc {
-      padding: 15px 0;
-      gap: 15px; }
-      .zona-de-pago-pc .cabecera {
-        height: 60px;
-        padding: 0 10px; }
-        .zona-de-pago-pc .cabecera .logo {
-          width: 55px;
-          height: 40px; }
-        .zona-de-pago-pc .cabecera .barra-de-b-squeda {
-          height: 40px;
-          padding: 5px 8px; }
-          .zona-de-pago-pc .cabecera .barra-de-b-squeda .desplegable-de-plataformas, .zona-de-pago-pc .cabecera .barra-de-b-squeda .lupa {
-            width: 20px;
-            height: 20px; }
-          .zona-de-pago-pc .cabecera .barra-de-b-squeda .desplegable-plataforma {
-            height: 30px; }
-          .zona-de-pago-pc .cabecera .barra-de-b-squeda .desplegable-plataforma input {
-            font-size: 0.85rem; }
-        .zona-de-pago-pc .cabecera .usuario {
-          height: 40px;
-          padding: 4px 7px; }
-          .zona-de-pago-pc .cabecera .usuario .usuario2, .zona-de-pago-pc .cabecera .usuario .carrito {
-            width: 28px;
-            height: 28px; }
-      .zona-de-pago-pc .carrito2 {
-        padding: 10px;
-        gap: 15px; }
-        .zona-de-pago-pc .carrito2 .frame-9 {
-          flex-direction: column;
-          gap: 25px;
-          max-width: 95%; }
-          .zona-de-pago-pc .carrito2 .frame-9 .frame-5 {
-            width: 100%;
-            gap: 6px;
-            min-width: unset; }
-          .zona-de-pago-pc .carrito2 .frame-9 .elemento-carrito {
-            height: 65px;
-            gap: 10px;
-            padding: 5px; }
-            .zona-de-pago-pc .carrito2 .frame-9 .elemento-carrito .imagen {
-              width: 50px;
-              height: 50px; }
-            .zona-de-pago-pc .carrito2 .frame-9 .elemento-carrito .texto .titulo .producto-1, .zona-de-pago-pc .carrito2 .frame-9 .elemento-carrito .texto .titulo ._99 {
-              font-size: 15px; }
-            .zona-de-pago-pc .carrito2 .frame-9 .elemento-carrito .texto .descripci-n-o-plataforma {
-              font-size: 13px; }
-            .zona-de-pago-pc .carrito2 .frame-9 .elemento-carrito .botones {
-              width: 65px;
-              gap: 4px; }
-              .zona-de-pago-pc .carrito2 .frame-9 .elemento-carrito .botones ._1 {
-                font-size: 14px; }
-              .zona-de-pago-pc .carrito2 .frame-9 .elemento-carrito .botones .group-4, .zona-de-pago-pc .carrito2 .frame-9 .elemento-carrito .botones .group-42, .zona-de-pago-pc .carrito2 .frame-9 .elemento-carrito .botones .group-43 {
-                width: 12px;
-                height: 12px; }
-              .zona-de-pago-pc .carrito2 .frame-9 .elemento-carrito .botones .trash-streamline-heroicons-outline,
-              .zona-de-pago-pc .carrito2 .frame-9 .elemento-carrito .botones .trash-streamline-heroicons-outline2,
-              .zona-de-pago-pc .carrito2 .frame-9 .elemento-carrito .botones .trash-streamline-heroicons-outline3 {
-                width: 20px;
-                height: 20px; }
-          .zona-de-pago-pc .carrito2 .frame-9 .frame-25 {
-            width: 100%;
-            max-width: 100%; }
-          .zona-de-pago-pc .carrito2 .frame-9 .frame-26 {
-            max-width: 100%;
-            width: 100%;
-            padding: 18px;
-            gap: 15px;
-            /* Detalle rows */
-            /* Detail text */
-            /* Detail prices */
-            /* Total row frame */
-            /* Total text and price */ }
-            .zona-de-pago-pc .carrito2 .frame-9 .frame-26 .resumen-del-pedido {
-              font-size: 18px;
-              padding-bottom: 12px;
-              border-bottom: 1px solid #ffffff;
-              /* Línea divisoria */
-              margin-bottom: 4px; }
-            .zona-de-pago-pc .carrito2 .frame-9 .frame-26 .frame-28, .zona-de-pago-pc .carrito2 .frame-9 .frame-26 .frame-29, .zona-de-pago-pc .carrito2 .frame-9 .frame-26 .frame-30 {
-              gap: 8px; }
-            .zona-de-pago-pc .carrito2 .frame-9 .frame-26 .subtotal-x-productos,
-            .zona-de-pago-pc .carrito2 .frame-9 .frame-26 .env-o-estimado {
-              font-size: 16px; }
-            .zona-de-pago-pc .carrito2 .frame-9 .frame-26 ._992, .zona-de-pago-pc .carrito2 .frame-9 .frame-26 .gratuito {
-              font-size: 16px;
-              font-weight: 600; }
-            .zona-de-pago-pc .carrito2 .frame-9 .frame-26 .frame-33 {
-              padding-top: 12px;
-              margin-top: 4px;
-              border-top: 1px solid #ffffff;
-              /* Línea divisoria */ }
-            .zona-de-pago-pc .carrito2 .frame-9 .frame-26 .total-del-pedido {
-              font-size: 18px;
-              padding-top: 0 !important;
-              /* Resetting old conflicting style */
-              border-top: none !important;
-              /* Resetting old conflicting style */
-              margin-top: 0 !important;
-              /* Resetting old conflicting style */ }
-            .zona-de-pago-pc .carrito2 .frame-9 .frame-26 ._993 {
-              font-size: 18px; }
-            .zona-de-pago-pc .carrito2 .frame-9 .frame-26 .frame-72 {
-              height: 45px;
-              margin-top: 15px;
-              display: flex;
-              /* Centrado */
-              align-items: center;
-              /* Centrado vertical */
-              justify-content: center;
-              /* Centrado horizontal */ }
-              .zona-de-pago-pc .carrito2 .frame-9 .frame-26 .frame-72 .confirmar-pedido {
-                font-size: 20px;
-                /* Tamaño un poco más grande para móvil */
-                text-align: center;
-                /* Centrado del texto */ }
-        .zona-de-pago-pc .carrito2 .footer {
-          padding: 8px 10px;
-          gap: 10px;
-          min-height: 40px; }
-          .zona-de-pago-pc .carrito2 .footer .frame-12 {
-            gap: 8px; }
-          .zona-de-pago-pc .carrito2 .footer .con-cenos,
-          .zona-de-pago-pc .carrito2 .footer .t-rminos-y-condiciones,
-          .zona-de-pago-pc .carrito2 .footer .t-rminos-y-condiciones2 {
-            font-size: 11px; }
-          .zona-de-pago-pc .carrito2 .footer .frame-22 {
-            gap: 6px; }
-          .zona-de-pago-pc .carrito2 .footer .icons-8-tik-tok-100-1,
-          .zona-de-pago-pc .carrito2 .footer .icons-8-twitterx-100-1-1,
-          .zona-de-pago-pc .carrito2 .footer .icons-8-instagram-100-1,
-          .zona-de-pago-pc .carrito2 .footer .icons-8-facebook-nuevo-100-1 {
-            width: 22px;
-            height: 22px; } }
+    .productos-list {
+      margin-bottom: 20px; } }
 
+.producto-item {
+  background-color: #5e3a8b;
+  border-radius: 12px;
+  padding: 12px;
+  color: #fffdfa;
+  transition: transform 0.2s ease, box-shadow 0.2s ease; }
+  .producto-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(111, 18, 224, 0.15); }
+  .producto-item .producto-img {
+    width: 55px;
+    height: 55px;
+    object-fit: cover;
+    background-color: #000;
+    flex-shrink: 0; }
+  .producto-item .producto-nombre {
+    font-family: "Gasoek One", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-size: 16px;
+    color: #fffdfa;
+    text-transform: uppercase;
+    font-weight: 400;
+    margin-bottom: 4px; }
+  .producto-item .producto-precio {
+    font-family: "Gasoek One", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-size: 15px;
+    color: #a565f3;
+    font-weight: 700; }
+
+.cantidad-control {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 4px 8px;
+  border-radius: 8px;
+  min-width: 70px;
+  justify-content: center; }
+  .cantidad-control .cantidad-valor {
+    width: 20px;
+    text-align: center;
+    color: #fffdfa;
+    font-weight: 600;
+    font-size: 16px; }
+  .cantidad-control .cantidad-btn {
+    background: none;
+    border: none;
+    color: #fffdfa;
+    cursor: pointer;
+    padding: 0;
+    font-size: 16px;
+    opacity: 0.7;
+    transition: opacity 0.2s ease, color 0.2s ease;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center; }
+    .cantidad-control .cantidad-btn:hover {
+      opacity: 1;
+      color: #6f12e0; }
+    .cantidad-control .cantidad-btn:focus {
+      outline: none; }
+
+.eliminar-btn {
+  background: transparent;
+  border: none;
+  color: rgba(255, 253, 250, 0.6);
+  font-size: 18px;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease; }
+  .eliminar-btn:hover {
+    color: #ff4d4d;
+    background-color: transparent; }
+  .eliminar-btn:focus {
+    outline: none;
+    box-shadow: none; }
+
+.resumen-card {
+  background-color: #5e3a8b;
+  border-radius: 12px;
+  padding: 25px;
+  color: #fffdfa; }
+  @media (max-width: 768px) {
+    .resumen-card {
+      padding: 20px; } }
+
+.resumen-titulo {
+  font-family: "Gasoek One", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-size: 24px;
+  color: #fffdfa;
+  text-transform: uppercase;
+  font-weight: 400;
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgba(255, 253, 250, 0.2);
+  margin-bottom: 20px; }
+  @media (max-width: 768px) {
+    .resumen-titulo {
+      font-size: 20px;
+      padding-bottom: 12px;
+      margin-bottom: 15px; } }
+
+.resumen-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255, 253, 250, 0.1); }
+  .resumen-row.info-row {
+    border-bottom: none;
+    justify-content: center;
+    padding: 10px 0; }
+  .resumen-row.total-row {
+    padding-top: 15px;
+    padding-bottom: 0;
+    border-bottom: none;
+    border-top: 1px solid rgba(255, 253, 250, 0.2);
+    margin-top: 10px; }
+
+.resumen-label {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-size: 16px;
+  color: rgba(255, 253, 250, 0.8);
+  font-weight: 400; }
+  @media (max-width: 768px) {
+    .resumen-label {
+      font-size: 14px; } }
+
+.resumen-valor {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-size: 16px;
+  color: #fffdfa;
+  font-weight: 600; }
+  @media (max-width: 768px) {
+    .resumen-valor {
+      font-size: 14px; } }
+
+.resumen-info {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-size: 14px;
+  color: rgba(255, 253, 250, 0.8);
+  font-style: italic;
+  text-align: center; }
+  @media (max-width: 768px) {
+    .resumen-info {
+      font-size: 12px; } }
+
+.resumen-total {
+  font-family: "Gasoek One", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-size: 20px;
+  color: #fffdfa;
+  font-weight: 400; }
+  @media (max-width: 768px) {
+    .resumen-total {
+      font-size: 18px; } }
+
+.resumen-total-valor {
+  font-family: "Gasoek One", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-size: 20px;
+  color: #fffdfa;
+  font-weight: 700; }
+  @media (max-width: 768px) {
+    .resumen-total-valor {
+      font-size: 18px; } }
+
+.confirmar-btn {
+  background-color: #6f12e0;
+  border: none;
+  border-radius: 50px;
+  font-family: "Gasoek One", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-size: 16px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #fffdfa;
+  padding: 12px 20px;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 15px rgba(111, 18, 224, 0.4); }
+  .confirmar-btn:hover {
+    background-color: #580eb1;
+    box-shadow: 0 6px 20px rgba(111, 18, 224, 0.5);
+    transform: scale(1.02);
+    color: #fffdfa; }
+  .confirmar-btn:focus {
+    box-shadow: 0 0 0 0.2rem rgba(111, 18, 224, 0.25);
+    outline: none; }
+  @media (max-width: 768px) {
+    .confirmar-btn {
+      font-size: 14px;
+      padding: 10px 15px; } }
+
+@media (max-width: 768px) {
+  .container-fluid, .container-sm, .container-md, .container-lg, .container-xl, .container-xxl {
+    padding-left: 0;
+    padding-right: 0; }
+
+  .productos-list {
+    gap: 10px; }
+
+  .producto-item {
+    padding: 10px; }
+    .producto-item .producto-img {
+      width: 50px;
+      height: 50px; }
+    .producto-item .producto-nombre {
+      font-size: 14px; }
+    .producto-item .producto-precio {
+      font-size: 13px; }
+
+  .resumen-card {
+    margin-top: 20px; } }
 .kairos-header {
   width: 100%;
   background: #1c0538;
@@ -17622,7 +17452,7 @@ a {
       padding: 0.55rem 1rem;
       border-radius: 999px;
       background: #fffdfa;
-      color: #333333;
+      color: #0a0f0f;
       font-size: 1rem; }
   .kairos-header .kairos-search-btn {
     background: transparent;
@@ -17677,136 +17507,80 @@ a {
       background: #6f12e0;
       color: #fffdfa; }
 
-.modal-backdrop {
-  display: none;
-  position: fixed;
-  z-index: 1050;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
-  opacity: 0;
-  transition: opacity 0.3s ease; }
-  .modal-backdrop.active {
-    display: block;
-    opacity: 1; }
-    .modal-backdrop.active .modal-content {
-      transform: translateX(0); }
+body {
+  padding-top: 4.5rem; }
 
-.modal-content {
+.offcanvas {
   background-color: #1c0538;
-  position: absolute;
-  right: 0;
-  top: 0;
-  height: 100%;
-  width: 90%;
-  max-width: 450px;
-  box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
-  padding: 25px;
-  box-sizing: border-box;
-  transform: translateX(100%);
-  transition: transform 0.3s ease-out;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between; }
+  width: 450px;
+  box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5); }
+  @media (max-width: 576px) {
+    .offcanvas {
+      width: 100%; } }
 
-.drawer-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-bottom: 20px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  margin-bottom: 20px;
-  flex-shrink: 0; }
+.offcanvas-header {
+  background-color: #1c0538;
+  border-bottom: 1px solid rgba(255, 253, 250, 0.2);
+  padding: 20px 25px; }
+  .offcanvas-header .offcanvas-title {
+    font-family: "Gasoek One", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-size: 28px;
+    color: #fffdfa;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 400; }
+  .offcanvas-header .btn-close {
+    color: #fffdfa;
+    opacity: 0.7;
+    filter: invert(1); }
+    .offcanvas-header .btn-close:hover, .offcanvas-header .btn-close:focus {
+      color: #6f12e0;
+      opacity: 1; }
 
-.drawer-title {
-  font-family: "GasoekOne-Regular", sans-serif;
-  font-size: 28px;
-  color: #ffffff;
-  text-transform: uppercase;
-  letter-spacing: 1px; }
-
-.close-button {
-  color: #ffffff;
-  font-size: 40px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  line-height: 0.8;
-  padding: 0;
-  transition: transform 0.2s; }
-  .close-button:hover {
-    color: #6f12e0;
-    transform: scale(1.1); }
-
-.product-list {
+.offcanvas-body {
+  background-color: #1c0538;
+  padding: 20px 25px;
   flex-grow: 1;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  padding-right: 5px; }
-  .product-list::-webkit-scrollbar {
+  overflow-y: auto; }
+  .offcanvas-body::-webkit-scrollbar {
     width: 5px; }
-  .product-list::-webkit-scrollbar-thumb {
+  .offcanvas-body::-webkit-scrollbar-thumb {
     background-color: #5e3a8b;
     border-radius: 10px; }
 
-.elemento-carrito {
-  background-color: #5e3a8b;
-  border-radius: 12px;
+.product-list {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 15px; }
+
+.list-group-item.elemento-carrito {
+  background-color: #5e3a8b;
+  border: none;
+  border-radius: 12px;
   padding: 12px;
-  gap: 15px;
-  transition: transform 0.2s; }
-  .elemento-carrito:hover {
-    transform: translateY(-2px); }
-  .elemento-carrito .producto-media {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    flex-grow: 1; }
-    .elemento-carrito .producto-media .imagen {
-      width: 70px;
-      height: 70px;
-      overflow: hidden;
-      border-radius: 8px;
-      flex-shrink: 0;
-      background-color: #000; }
-      .elemento-carrito .producto-media .imagen .car-tula {
-        width: 100%;
-        height: 100%;
-        object-fit: cover; }
-    .elemento-carrito .producto-media .texto {
-      display: flex;
-      flex-direction: column;
-      gap: 4px; }
-      .elemento-carrito .producto-media .texto .producto-1 {
-        color: #ffffff;
-        font-family: "GasoekOne-Regular", sans-serif;
-        font-size: 16px;
-        line-height: 1.2;
-        text-transform: uppercase; }
-      .elemento-carrito .producto-media .texto ._99 {
-        color: #a565f3;
-        font-family: "Inter", sans-serif;
-        font-weight: 700;
-        font-size: 15px; }
-  .elemento-carrito .item-actions {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    flex-shrink: 0; }
-    .elemento-carrito .item-actions .trash-icon {
-      cursor: pointer;
-      font-size: 20px;
-      color: rgba(255, 255, 255, 0.6);
-      transition: color 0.2s; }
-      .elemento-carrito .item-actions .trash-icon:hover {
-        color: #ff4d4d; }
+  color: #fffdfa;
+  transition: transform 0.2s ease, box-shadow 0.2s ease; }
+  .list-group-item.elemento-carrito:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(111, 18, 224, 0.15); }
+  .list-group-item.elemento-carrito:last-child {
+    margin-bottom: 0; }
+  .list-group-item.elemento-carrito .producto-title {
+    font-family: "Gasoek One", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-size: 16px;
+    color: #fffdfa;
+    text-transform: uppercase;
+    font-weight: 400; }
+  .list-group-item.elemento-carrito .product-price {
+    font-family: "Gasoek One", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-size: 15px;
+    color: #a565f3;
+    font-weight: 700; }
+  .list-group-item.elemento-carrito .car-tula {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    background-color: #000; }
 
 .item-quantity {
   display: flex;
@@ -17814,99 +17588,141 @@ a {
   gap: 8px;
   background-color: rgba(0, 0, 0, 0.2);
   padding: 4px 8px;
-  border-radius: 8px; }
+  border-radius: 8px;
+  min-width: 70px;
+  justify-content: center; }
   .item-quantity .quantity-display {
     width: 20px;
     text-align: center;
-    color: #ffffff;
+    color: #fffdfa;
     font-weight: 600;
     font-size: 16px; }
-  .item-quantity .quantity-controls {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 2px; }
   .item-quantity .quantity-btn {
     background: none;
     border: none;
-    color: #ffffff;
+    color: #fffdfa;
     cursor: pointer;
     padding: 0;
-    line-height: 0.8;
-    font-size: 10px;
+    font-size: 16px;
     opacity: 0.7;
-    transition: opacity 0.2s; }
+    transition: opacity 0.2s ease, color 0.2s ease;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center; }
     .item-quantity .quantity-btn:hover {
       opacity: 1;
       color: #6f12e0; }
     .item-quantity .quantity-btn:focus {
       outline: none; }
 
-.drawer-footer {
-  padding-top: 20px;
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
-  margin-top: 15px;
+.remove-item-btn {
+  background: transparent;
+  border: none;
+  color: rgba(255, 253, 250, 0.6);
+  font-size: 18px;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease; }
+  .remove-item-btn:hover {
+    color: #ff4d4d;
+    background-color: transparent; }
+  .remove-item-btn:focus {
+    outline: none;
+    box-shadow: none; }
+  .remove-item-btn i {
+    font-size: 18px; }
+
+.offcanvas-footer {
+  background-color: #1c0538;
+  border-top: 1px solid rgba(255, 253, 250, 0.2);
+  padding: 25px;
   flex-shrink: 0; }
-  .drawer-footer .subtotal-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  .offcanvas-footer .subtotal-text {
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-size: 18px;
+    color: rgba(255, 253, 250, 0.8); }
+  .offcanvas-footer .subtotal-price {
+    font-family: "Gasoek One", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-size: 24px;
+    color: #fffdfa;
+    font-weight: 700; }
+  .offcanvas-footer .d-flex {
+    padding: 0 15px;
     margin-bottom: 20px; }
-    .drawer-footer .subtotal-row .subtotal-text {
-      font-family: "Inter", sans-serif;
-      font-size: 18px;
-      color: rgba(255, 255, 255, 0.8); }
-    .drawer-footer .subtotal-row .subtotal-price {
-      font-family: "GasoekOne-Regular", sans-serif;
-      font-size: 24px;
-      color: #ffffff; }
-  .drawer-footer .action-buttons-container {
-    display: flex;
-    flex-direction: column;
+  .offcanvas-footer .d-grid {
     gap: 12px;
-    width: 100%; }
-    .drawer-footer .action-buttons-container .action-button {
-      width: 100%;
-      padding: 15px;
+    padding: 0 15px; }
+    .offcanvas-footer .d-grid .btn {
       border-radius: 50px;
-      border: none;
-      font-family: "GasoekOne-Regular", sans-serif;
-      font-size: 18px;
-      cursor: pointer;
-      text-align: center;
-      text-decoration: none;
-      transition: all 0.2s ease;
+      font-family: "Gasoek One", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+      font-size: 16px;
       text-transform: uppercase;
-      letter-spacing: 1px; }
-      .drawer-footer .action-buttons-container .action-button:hover {
+      letter-spacing: 1px;
+      padding: 12px 20px;
+      font-weight: 400;
+      transition: all 0.2s ease; }
+      .offcanvas-footer .d-grid .btn:hover {
         transform: scale(1.02); }
-      .drawer-footer .action-buttons-container .action-button.comprar {
+      .offcanvas-footer .d-grid .btn.btn-primary {
         background-color: #6f12e0;
-        color: #ffffff;
+        border-color: #6f12e0;
+        color: #fffdfa;
         box-shadow: 0 4px 15px rgba(111, 18, 224, 0.4); }
-      .drawer-footer .action-buttons-container .action-button.eliminar {
-        background: transparent;
-        color: rgba(255, 255, 255, 0.6);
-        border: 2px solid rgba(255, 255, 255, 0.2);
-        font-size: 14px;
-        padding: 12px; }
-        .drawer-footer .action-buttons-container .action-button.eliminar:hover {
+        .offcanvas-footer .d-grid .btn.btn-primary:hover {
+          background-color: #580eb1;
+          border-color: #580eb1;
+          box-shadow: 0 6px 20px rgba(111, 18, 224, 0.5); }
+        .offcanvas-footer .d-grid .btn.btn-primary:focus {
+          box-shadow: 0 0 0 0.2rem rgba(111, 18, 224, 0.25); }
+      .offcanvas-footer .d-grid .btn.btn-outline-secondary {
+        color: rgba(255, 253, 250, 0.6);
+        border-color: rgba(255, 253, 250, 0.2); }
+        .offcanvas-footer .d-grid .btn.btn-outline-secondary:hover {
           background-color: rgba(255, 255, 255, 0.05);
-          color: #ffffff;
-          border-color: #ffffff; }
+          color: #fffdfa;
+          border-color: #fffdfa; }
+        .offcanvas-footer .d-grid .btn.btn-outline-secondary:focus {
+          box-shadow: 0 0 0 0.2rem rgba(255, 253, 250, 0.25); }
 
-@media (max-width: 480px) {
-  .modal-content {
-    width: 100%;
-    max-width: none;
-    border-radius: 0; }
+@media (max-width: 576px) {
+  .offcanvas {
+    width: 100%; }
 
-  .elemento-carrito {
+  .offcanvas-header {
+    padding: 15px 20px; }
+    .offcanvas-header .offcanvas-title {
+      font-size: 24px; }
+
+  .offcanvas-body {
+    padding: 15px 20px; }
+
+  .list-group-item.elemento-carrito {
     padding: 10px; }
-    .elemento-carrito .imagen {
+    .list-group-item.elemento-carrito .car-tula {
       width: 60px;
-      height: 60px; } }
+      height: 60px; }
+    .list-group-item.elemento-carrito .producto-title {
+      font-size: 14px; }
+    .list-group-item.elemento-carrito .product-price {
+      font-size: 13px; }
+
+  .offcanvas-footer {
+    padding: 20px; }
+    .offcanvas-footer .d-flex {
+      padding: 0 10px;
+      margin-bottom: 15px; }
+    .offcanvas-footer .d-grid {
+      padding: 0 10px;
+      gap: 10px; }
+      .offcanvas-footer .d-grid .btn {
+        font-size: 14px;
+        padding: 10px 15px; } }
 .t-rminos-y-condiciones-pc {
   background: var(--principal, #1c0538);
   padding: 0;

@@ -1,99 +1,125 @@
-<div id="cartModal" class="modal-backdrop">
-    <div class="modal-content">
-        
-        <div class="drawer-header">
-            <div class="drawer-title">Tu Carrito</div>
-            <button id="closeCartModal" class="close-button" aria-label="Cerrar carrito">×</button>
-        </div>
+<?php
+// includes/carrito.php - Offcanvas Bootstrap (abre de derecha a izquierda)
+?>
 
-        <!-- Contenedor para los productos con ID para JS -->
+<!-- Offcanvas Carrito (se abre de derecha a izquierda) -->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="cartModal" aria-labelledby="cartModalLabel">
+    <!-- Header -->
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="cartModalLabel">Tu Carrito</h5>
+        <button type="button" id="closeCartModal" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
+    </div>
+
+    <!-- Body - Lista de productos -->
+    <div class="offcanvas-body">
         <div class="product-list" id="productList">
             
-            <!-- Producto de ejemplo 1 -->
-            <div class="elemento-carrito" data-product-id="1" data-price="99">
-                <div class="producto-media">
-                    <div class="imagen">
-                        <!-- Imagen local del usuario -->
-                        <img class="car-tula" src="assets/img/fc26.jpg" alt="EA Sports FC 26">
+            <!-- Producto 1 -->
+            <div class="list-group-item elemento-carrito" data-product-id="1" data-price="99">
+                <div class="d-flex gap-3">
+                    <!-- Imagen -->
+                    <div class="flex-shrink-0">
+                        <img src="assets/img/fc26.jpg" alt="EA Sports FC 26" 
+                             class="car-tula rounded" style="width: 70px; height: 70px; object-fit: cover;">
                     </div>
-                    <div class="texto">
-                        <div class="producto-1">EA Sports FC 26</div>
-                        <div class="_99 product-price">99€</div>
+                    
+                    <!-- Información -->
+                    <div class="flex-grow-1">
+                        <h6 class="mb-1 producto-title">EA Sports FC 26</h6>
+                        <p class="mb-0 product-price">99€</p>
                     </div>
-                </div>
-                <div class="item-actions">
-                    <!-- CONTROL DE CANTIDAD CON FLECHAS (NUEVO) -->
-                    <div class="item-quantity">
-                        <span class="quantity-display" data-quantity>1</span>
-                        <div class="quantity-controls">
-                            <button class="quantity-btn increment-btn" aria-label="Aumentar cantidad">▲</button>
-                            <button class="quantity-btn decrement-btn" aria-label="Disminuir cantidad">▼</button>
+                    
+                    <!-- Acciones: Cantidad + Eliminar -->
+                    <div class="d-flex align-items-center gap-2">
+                        <!-- Control de cantidad -->
+                        <div class="item-quantity">
+                            <button class="quantity-btn decrement-btn" aria-label="Disminuir cantidad">−</button>
+                            <span class="quantity-display" data-quantity>1</span>
+                            <button class="quantity-btn increment-btn" aria-label="Aumentar cantidad">+</button>
                         </div>
+                        
+                        <!-- Botón eliminar -->
+                        <button class="btn btn-sm remove-item-btn" aria-label="Eliminar producto">
+                            <i class="bi bi-trash"></i>
+                        </button>
                     </div>
-                    <!-- FIN CONTROL DE CANTIDAD -->
-                    <div class="trash-icon remove-item-btn">🗑️</div>
                 </div>
             </div>
 
-            <!-- Producto de ejemplo 2 -->
-            <div class="elemento-carrito" data-product-id="2" data-price="49">
-                <div class="producto-media">
-                    <div class="imagen">
-                        <img class="car-tula" src="assets/img/fc26.jpg" alt="God of War">
+            <!-- Producto 2 -->
+            <div class="list-group-item elemento-carrito" data-product-id="2" data-price="49">
+                <div class="d-flex gap-3">
+                    <div class="flex-shrink-0">
+                        <img src="assets/img/fc26.jpg" alt="God of War" 
+                             class="car-tula rounded" style="width: 70px; height: 70px; object-fit: cover;">
                     </div>
-                    <div class="texto">
-                        <div class="producto-1">God of War</div>
-                        <div class="_99 product-price">49€</div>
+                    
+                    <div class="flex-grow-1">
+                        <h6 class="mb-1 producto-title">God of War</h6>
+                        <p class="mb-0 product-price">49€</p>
                     </div>
-                </div>
-                <div class="item-actions">
-                    <div class="item-quantity">
-                        <span class="quantity-display" data-quantity>2</span>
-                        <div class="quantity-controls">
-                            <button class="quantity-btn increment-btn" aria-label="Aumentar cantidad">▲</button>
-                            <button class="quantity-btn decrement-btn" aria-label="Disminuir cantidad">▼</button>
+                    
+                    <div class="d-flex align-items-center gap-2">
+                        <div class="item-quantity">
+                            <button class="quantity-btn decrement-btn" aria-label="Disminuir cantidad">−</button>
+                            <span class="quantity-display" data-quantity>2</span>
+                            <button class="quantity-btn increment-btn" aria-label="Aumentar cantidad">+</button>
                         </div>
+                        
+                        <button class="btn btn-sm remove-item-btn" aria-label="Eliminar producto">
+                            <i class="bi bi-trash"></i>
+                        </button>
                     </div>
-                    <div class="trash-icon remove-item-btn">🗑️</div>
                 </div>
             </div>
 
-            <!-- Producto de ejemplo 3 -->
-            <div class="elemento-carrito" data-product-id="3" data-price="19">
-                <div class="producto-media">
-                    <div class="imagen">
-                        <img class="car-tula" src="assets/img/fc26.jpg" alt="The Witcher 3">
+            <!-- Producto 3 -->
+            <div class="list-group-item elemento-carrito" data-product-id="3" data-price="19">
+                <div class="d-flex gap-3">
+                    <div class="flex-shrink-0">
+                        <img src="assets/img/fc26.jpg" alt="The Witcher 3" 
+                             class="car-tula rounded" style="width: 70px; height: 70px; object-fit: cover;">
                     </div>
-                    <div class="texto">
-                        <div class="producto-1">The Witcher 3</div>
-                        <div class="_99 product-price">19€</div>
+                    
+                    <div class="flex-grow-1">
+                        <h6 class="mb-1 producto-title">The Witcher 3</h6>
+                        <p class="mb-0 product-price">19€</p>
                     </div>
-                </div>
-                <div class="item-actions">
-                    <div class="item-quantity">
-                        <span class="quantity-display" data-quantity>1</span>
-                        <div class="quantity-controls">
-                            <button class="quantity-btn increment-btn" aria-label="Aumentar cantidad">▲</button>
-                            <button class="quantity-btn decrement-btn" aria-label="Disminuir cantidad">▼</button>
+                    
+                    <div class="d-flex align-items-center gap-2">
+                        <div class="item-quantity">
+                            <button class="quantity-btn decrement-btn" aria-label="Disminuir cantidad">−</button>
+                            <span class="quantity-display" data-quantity>1</span>
+                            <button class="quantity-btn increment-btn" aria-label="Aumentar cantidad">+</button>
                         </div>
+                        
+                        <button class="btn btn-sm remove-item-btn" aria-label="Eliminar producto">
+                            <i class="bi bi-trash"></i>
+                        </button>
                     </div>
-                    <div class="trash-icon remove-item-btn">🗑️</div>
                 </div>
             </div>
 
         </div>
-        
-        <!-- Pie del Drawer (Subtotal y Botones) -->
-        <div class="drawer-footer">
-            
-            <div class="subtotal-row">
+    </div>
+
+    <!-- Footer - Subtotal y botones -->
+    <div class="offcanvas-footer">
+        <div class="w-100">
+            <!-- Subtotal -->
+            <div class="d-flex justify-content-between align-items-center mb-3">
                 <span class="subtotal-text">Subtotal:</span>
                 <span class="subtotal-price" id="subtotalPrice">0€</span>
             </div>
 
-            <div class="action-buttons-container">
-                <a class="action-button comprar" href="zonadepago.php">COMPRAR</a>
-                <button class="action-button eliminar" id="removeAllItems">ELIMINAR TODOS</button>
+            <!-- Botones -->
+            <div class="d-grid gap-2">
+                <a href="zonadepago.php" class="btn btn-primary btn-lg fw-bold">
+                    COMPRAR
+                </a>
+                <button type="button" class="btn btn-outline-secondary btn-lg fw-bold" id="removeAllItems">
+                    ELIMINAR TODOS
+                </button>
             </div>
         </div>
     </div>

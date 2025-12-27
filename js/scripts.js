@@ -41,125 +41,105 @@ window.addEventListener('DOMContentLoaded', event => {
 
 });
 
+// ============================================================================
+// CARRITO.JS - Lógica completa del carrito
+// ============================================================================
+
 document.addEventListener('DOMContentLoaded', function() {
-    const modal = document.getElementById('cartModal');
-    // Usamos un selector para encontrar el botón del carrito en el navbar
-    const openButton = document.getElementById('openCartModal'); 
-    const closeButton = document.getElementById('closeCartModal');
+    const cartModalElement = document.getElementById('cartModal');
+    const cartOffcanvas = new bootstrap.Offcanvas(cartModalElement);
     const productList = document.getElementById('productList');
     const subtotalElement = document.getElementById('subtotalPrice');
     const removeAllButton = document.getElementById('removeAllItems');
 
-    // --- Funciones del Drawer ---
-    function openDrawer() {
-        modal.classList.add('active');
-        document.body.style.overflow = 'hidden'; // Evita el scroll de fondo
-    }
-
-    function closeDrawer() {
-        modal.classList.remove('active');
-        // Usamos un pequeño retraso para permitir que termine la animación CSS
-        setTimeout(() => {
-            modal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }, 300);
-    }
-
+    // =========================================================================
+    // 1. ABRIR CARRITO - Busca el botón con ID openCartModal
+    // =========================================================================
+    const openButton = document.getElementById('openCartModal');
     if (openButton) {
-        openButton.addEventListener('click', () => {
-            modal.style.display = 'block'; // Asegura que esté visible antes de la animación
+        openButton.addEventListener('click', function(e) {
+            e.preventDefault();
             updateSubtotal();
-            requestAnimationFrame(openDrawer);
+            cartOffcanvas.show();
         });
     }
 
-    if (closeButton) {
-        closeButton.addEventListener('click', closeDrawer);
-    }
-
-    // Cerrar al hacer clic en el fondo oscuro
-    window.addEventListener('click', function(event) {
-        if (event.target === modal) {
-            closeDrawer();
-        }
-    });
-
-    // Cerrar con tecla ESC
-    document.addEventListener('keydown', function(e) {
-        if ((e.key === "Escape" || e.key === "Esc") && modal && modal.classList.contains('active')) {
-            closeDrawer();
-        }
-    });
-
-
-    // --- Lógica de Cantidad y Carrito ---
-
-    // Función para recalcular el subtotal
+    // =========================================================================
+    // 2. ACTUALIZAR SUBTOTAL
+    // =========================================================================
     function updateSubtotal() {
         let total = 0;
         const items = productList.querySelectorAll('.elemento-carrito');
         
         items.forEach(item => {
-            const price = parseFloat(item.getAttribute('data-price'));
-            // Busca el elemento de cantidad
+            const price = parseFloat(item.getAttribute('data-price')) || 0;
             const quantityDisplay = item.querySelector('[data-quantity]');
-            const quantity = parseInt(quantityDisplay.textContent, 10);
+            const quantity = parseInt(quantityDisplay.textContent) || 1;
             
-            if (!isNaN(price) && !isNaN(quantity)) {
-                total += price * quantity;
-            }
+            total += price * quantity;
         });
 
-        subtotalElement.textContent = `${total}€`;
+        if (subtotalElement) {
+            subtotalElement.textContent = total + '€';
+        }
     }
 
-    // Manejador de eventos delegado para botones de cantidad y eliminar
-    productList.addEventListener('click', function(event) {
-        const target = event.target;
-        const item = target.closest('.elemento-carrito');
-        
-        if (!item) return;
-
-        const quantityDisplay = item.querySelector('[data-quantity]');
-        
-        // Verifica que el display de cantidad exista antes de continuar
-        if (!quantityDisplay) return; 
-        
-        let currentQuantity = parseInt(quantityDisplay.textContent, 10);
-
-        // Aumentar cantidad (▲)
-        if (target.classList.contains('increment-btn')) {
-            currentQuantity++;
-            quantityDisplay.textContent = currentQuantity;
-            updateSubtotal();
-        } 
-        // Disminuir cantidad (▼)
-        else if (target.classList.contains('decrement-btn')) {
-            if (currentQuantity > 1) {
-                currentQuantity--;
-                quantityDisplay.textContent = currentQuantity;
-                updateSubtotal();
-            } else if (currentQuantity === 1) {
-                 // Opción: Al disminuir de 1, eliminar el elemento
-                item.remove();
-                updateSubtotal();
-            }
-        } 
-        // Eliminar producto (🗑️)
-        else if (target.classList.contains('remove-item-btn')) {
-            item.remove();
+    // =========================================================================
+    // 3. INCREMENTAR CANTIDAD (Botón +)
+    // =========================================================================
+    productList.addEventListener('click', function(e) {
+        if (e.target.classList.contains('increment-btn')) {
+            const element = e.target.closest('.elemento-carrito');
+            const quantityDisplay = element.querySelector('[data-quantity]');
+            let quantity = parseInt(quantityDisplay.textContent);
+            quantityDisplay.textContent = quantity + 1;
             updateSubtotal();
         }
     });
 
-    // Eliminar todos los productos
+    // =========================================================================
+    // 4. DECREMENTAR CANTIDAD (Botón -)
+    // =========================================================================
+    productList.addEventListener('click', function(e) {
+        if (e.target.classList.contains('decrement-btn')) {
+            const element = e.target.closest('.elemento-carrito');
+            const quantityDisplay = element.querySelector('[data-quantity]');
+            let quantity = parseInt(quantityDisplay.textContent);
+            
+            if (quantity > 1) {
+                quantityDisplay.textContent = quantity - 1;
+                updateSubtotal();
+            } else {
+                // Si es 1, eliminar el producto
+                element.remove();
+                updateSubtotal();
+            }
+        }
+    });
+
+    // =========================================================================
+    // 5. ELIMINAR PRODUCTO INDIVIDUAL (Botón 🗑️)
+    // =========================================================================
+    productList.addEventListener('click', function(e) {
+        if (e.target.closest('.remove-item-btn')) {
+            const element = e.target.closest('.elemento-carrito');
+            element.remove();
+            updateSubtotal();
+        }
+    });
+
+    // =========================================================================
+    // 6. ELIMINAR TODOS LOS PRODUCTOS
+    // =========================================================================
     if (removeAllButton) {
-        removeAllButton.addEventListener('click', () => {
-            productList.innerHTML = ''; 
+        removeAllButton.addEventListener('click', function() {
+            productList.innerHTML = '';
             updateSubtotal();
         });
     }
 
-    // Inicializar subtotal si hay elementos al cargar
+    // =========================================================================
+    // 7. INICIALIZAR SUBTOTAL
+    // =========================================================================
     updateSubtotal();
 });

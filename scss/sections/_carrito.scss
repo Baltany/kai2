@@ -1,335 +1,342 @@
-// ==========================================================================
-// ESTILOS COMPLETOS DEL CARRITO (ESTRUCTURA + DISEÑO VISUAL)
-// ==========================================================================
+// ============================================================================
+// CARRITO.SCSS - Personalización de Bootstrap Offcanvas para Carrito
+// ============================================================================
+// Importa las variables ANTES de usar
+@import '../variables';
 
-// --- Variables (Asegúrate de que coincidan con las tuyas) ---
-$principal: #1c0538;            // Fondo oscuro
-$secundario: #5e3a8b;           // Fondo de elementos/tarjetas
-$principal-de-acento: #6f12e0;  // Botones y destacados
-$texto-principal: #ffffff;      // Texto blanco
-$font-title: "GasoekOne-Regular", sans-serif;
-$font-body: "Inter", sans-serif;
+// ============================================================================
+// OFFCANVAS - Contenedor principal (abre de derecha a izquierda)
+// ============================================================================
+.offcanvas {
+    background-color: $primario;
+    width: 450px;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
 
-// -------------------------------------------------------------------
-// 1. ESTRUCTURA DEL MODAL (El fondo oscuro y el panel lateral)
-// -------------------------------------------------------------------
+    @media (max-width: 576px) {
+        width: 100%;
+    }
+}
 
-.modal-backdrop {
-    display: none; 
-    position: fixed;
-    z-index: 1050; 
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.6); 
-    opacity: 0;
-    transition: opacity 0.3s ease;
+// ============================================================================
+// OFFCANVAS HEADER - Cabecera del carrito
+// ============================================================================
+.offcanvas-header {
+    background-color: $primario;
+    border-bottom: 1px solid rgba($texto_claro, 0.2);
+    padding: 20px 25px;
 
-    &.active {
-        display: block;
-        opacity: 1;
-        
-        .modal-content {
-            transform: translateX(0); 
+    .offcanvas-title {
+        font-family: $headings-font-family;
+        font-size: 28px;
+        color: $texto_claro;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-weight: 400;
+    }
+
+    .btn-close {
+        color: $texto_claro;
+        opacity: 0.7;
+        filter: invert(1);
+
+        &:hover,
+        &:focus {
+            color: $resalte;
+            opacity: 1;
         }
     }
 }
 
-.modal-content {
-    background-color: $principal; 
-    position: absolute;
-    right: 0;
-    top: 0;
-    height: 100%; 
-    width: 90%;
-    max-width: 450px; 
-    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
-    padding: 25px; // Un poco más de espacio interno
-    box-sizing: border-box;
-    
-    transform: translateX(100%); 
-    transition: transform 0.3s ease-out;
-    
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
+// ============================================================================
+// OFFCANVAS BODY - Contenedor de la lista de productos
+// ============================================================================
+.offcanvas-body {
+    background-color: $primario;
+    padding: 20px 25px;
+    flex-grow: 1;
+    overflow-y: auto;
 
-// -------------------------------------------------------------------
-// 2. CABECERA DEL DRAWER (Título y Botón Cerrar)
-// -------------------------------------------------------------------
-
-.drawer-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-bottom: 20px;
-    border-bottom: 1px solid rgba($texto-principal, 0.2); // Línea sutil
-    margin-bottom: 20px;
-    flex-shrink: 0;
-}
-
-.drawer-title {
-    font-family: $font-title;
-    font-size: 28px;
-    color: $texto-principal;
-    text-transform: uppercase; // Estilo más "fuerte"
-    letter-spacing: 1px;
-}
-
-.close-button {
-    color: $texto-principal;
-    font-size: 40px; // X más grande y fácil de clicar
-    background: none;
-    border: none;
-    cursor: pointer;
-    line-height: 0.8;
-    padding: 0;
-    transition: transform 0.2s;
-
-    &:hover {
-        color: $principal-de-acento;
-        transform: scale(1.1);
-    }
-}
-
-// -------------------------------------------------------------------
-// 3. LISTA DE PRODUCTOS
-// -------------------------------------------------------------------
-
-.product-list {
-    flex-grow: 1; 
-    overflow-y: auto; 
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    padding-right: 5px;
-    
-    // Scrollbar personalizada para que se vea integrada
+    // Scrollbar personalizada
     &::-webkit-scrollbar {
         width: 5px;
     }
+
     &::-webkit-scrollbar-thumb {
         background-color: $secundario;
         border-radius: 10px;
     }
 }
 
-.elemento-carrito {
-    background-color: $secundario; // Fondo de la tarjeta de producto
-    border-radius: 12px; // Bordes redondeados modernos
+// ============================================================================
+// PRODUCT LIST - Lista de productos
+// ============================================================================
+.product-list {
     display: flex;
-    align-items: center;
-    justify-content: space-between; // Separa info de acciones
-    padding: 12px;
+    flex-direction: column;
     gap: 15px;
-    transition: transform 0.2s;
+}
+
+// ============================================================================
+// ELEMENTO CARRITO - Producto individual
+// ============================================================================
+.list-group-item.elemento-carrito {
+    background-color: $secundario;
+    border: none;
+    border-radius: 12px;
+    padding: 12px;
+    color: $texto_claro;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 
     &:hover {
-        transform: translateY(-2px); // Pequeño efecto al pasar el ratón
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba($resalte, 0.15);
     }
 
-    // Parte Izquierda: Imagen + Textos
-    .producto-media {
-        display: flex;
-        align-items: center;
-        gap: 15px;
-        flex-grow: 1;
-        
-        .imagen {
-            width: 70px; // Imagen un poco más grande
-            height: 70px;
-            overflow: hidden;
-            border-radius: 8px;
-            flex-shrink: 0;
-            background-color: #000; // Fondo por si la imagen es transparente
-            
-            .car-tula {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-            }
-        }
-
-        .texto {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-            
-            .producto-1 {
-                color: $texto-principal;
-                font-family: $font-title;
-                font-size: 16px;
-                line-height: 1.2;
-                text-transform: uppercase;
-            }
-            
-            ._99 {
-                color: lighten($principal-de-acento, 20%); // Precio destacado
-                font-family: $font-body;
-                font-weight: 700;
-                font-size: 15px;
-            }
-        }
+    &:last-child {
+        margin-bottom: 0;
     }
 
-    // Parte Derecha: Cantidad + Eliminar
-    .item-actions {
-        display: flex;
-        align-items: center;
-        gap: 15px;
-        flex-shrink: 0;
-        
-        .trash-icon {
-            cursor: pointer;
-            font-size: 20px;
-            color: rgba($texto-principal, 0.6); // Grisáceo por defecto
-            transition: color 0.2s;
-            
-            &:hover { 
-                color: #ff4d4d; // Rojo al pasar el ratón
-            }
-        }
+    // ====== TÍTULO DEL PRODUCTO ======
+    .producto-title {
+        font-family: $headings-font-family;
+        font-size: 16px;
+        color: $texto_claro;
+        text-transform: uppercase;
+        font-weight: 400;
+    }
+
+    // ====== PRECIO ======
+    .product-price {
+        font-family: $headings-font-family;
+        font-size: 15px;
+        color: lighten($resalte, 20%);
+        font-weight: 700;
+    }
+
+    // ====== IMAGEN ======
+    .car-tula {
+        width: 70px;
+        height: 70px;
+        object-fit: cover;
+        background-color: #000;
     }
 }
 
-// --- CONTROL DE CANTIDAD (Estilizado) ---
+// ============================================================================
+// CONTROL DE CANTIDAD
+// ============================================================================
 .item-quantity {
     display: flex;
     align-items: center;
     gap: 8px;
-    background-color: rgba(0,0,0, 0.2); // Fondo oscuro para el control
+    background-color: rgba(0, 0, 0, 0.2);
     padding: 4px 8px;
     border-radius: 8px;
-    
+    min-width: 70px;
+    justify-content: center;
+
     .quantity-display {
         width: 20px;
         text-align: center;
-        color: $texto-principal;
+        color: $texto_claro;
         font-weight: 600;
         font-size: 16px;
-    }
-
-    .quantity-controls {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 2px;
     }
 
     .quantity-btn {
         background: none;
         border: none;
-        color: $texto-principal;
+        color: $texto_claro;
         cursor: pointer;
         padding: 0;
-        line-height: 0.8;
-        font-size: 10px;
+        font-size: 16px;
         opacity: 0.7;
-        transition: opacity 0.2s;
+        transition: opacity 0.2s ease, color 0.2s ease;
+        width: 20px;
+        height: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
         &:hover {
             opacity: 1;
-            color: $principal-de-acento;
+            color: $resalte;
         }
+
         &:focus {
             outline: none;
         }
     }
 }
 
-// -------------------------------------------------------------------
-// 4. PIE DEL DRAWER (Subtotal y Botones)
-// -------------------------------------------------------------------
+// ============================================================================
+// BOTÓN ELIMINAR PRODUCTO
+// ============================================================================
+.remove-item-btn {
+    background: transparent;
+    border: none;
+    color: rgba($texto_claro, 0.6);
+    font-size: 18px;
+    padding: 0;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s ease;
 
-.drawer-footer {
-    padding-top: 20px;
-    border-top: 1px solid rgba($texto-principal, 0.2);
-    margin-top: 15px;
-    flex-shrink: 0;
-
-    .subtotal-row {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 20px;
-        
-        .subtotal-text {
-            font-family: $font-body;
-            font-size: 18px;
-            color: rgba($texto-principal, 0.8);
-        }
-        
-        .subtotal-price {
-            font-family: $font-title;
-            font-size: 24px;
-            color: $texto-principal;
-        }
+    &:hover {
+        color: #ff4d4d;
+        background-color: transparent;
     }
 
-    .action-buttons-container {
-        display: flex;
-        flex-direction: column;
-        gap: 12px; // Espacio entre botones
-        width: 100%;
+    &:focus {
+        outline: none;
+        box-shadow: none;
+    }
 
-        .action-button {
-            width: 100%;
-            padding: 15px;
-            border-radius: 50px; // Botones muy redondeados (estilo moderno)
-            border: none;
-            font-family: $font-title;
-            font-size: 18px;
-            cursor: pointer;
-            text-align: center;
-            text-decoration: none;
-            transition: all 0.2s ease;
+    i {
+        font-size: 18px;
+    }
+}
+
+// ============================================================================
+// OFFCANVAS FOOTER - Pie con subtotal y botones CON MÁS PADDING
+// ============================================================================
+.offcanvas-footer {
+    background-color: $primario;
+    border-top: 1px solid rgba($texto_claro, 0.2);
+    padding: 25px;
+    flex-shrink: 0;
+
+    // ====== SUBTOTAL ======
+    .subtotal-text {
+        font-family: $font-family-sans-serif;
+        font-size: 18px;
+        color: rgba($texto_claro, 0.8);
+    }
+
+    .subtotal-price {
+        font-family: $headings-font-family;
+        font-size: 24px;
+        color: $texto_claro;
+        font-weight: 700;
+    }
+
+    // Contenedor de subtotal - MÁS PADDING LATERAL
+    .d-flex {
+        padding: 0 15px;
+        margin-bottom: 20px;
+    }
+
+    // ====== BOTONES - MÁS PADDING LATERAL ======
+    .d-grid {
+        gap: 12px;
+        padding: 0 15px;
+
+        .btn {
+            border-radius: 50px;
+            font-family: $headings-font-family;
+            font-size: 16px;
             text-transform: uppercase;
             letter-spacing: 1px;
-            
-            &:hover { 
-                transform: scale(1.02); // Efecto pop al pasar ratón
+            padding: 12px 20px;
+            font-weight: 400;
+            transition: all 0.2s ease;
+
+            &:hover {
+                transform: scale(1.02);
             }
-            
-            &.comprar {
-                background-color: $principal-de-acento;
-                color: $texto-principal;
-                box-shadow: 0 4px 15px rgba($principal-de-acento, 0.4); // Sombra brillante
+
+            &.btn-primary {
+                background-color: $resalte;
+                border-color: $resalte;
+                color: $texto_claro;
+                box-shadow: 0 4px 15px rgba($resalte, 0.4);
+
+                &:hover {
+                    background-color: darken($resalte, 10%);
+                    border-color: darken($resalte, 10%);
+                    box-shadow: 0 6px 20px rgba($resalte, 0.5);
+                }
+
+                &:focus {
+                    box-shadow: 0 0 0 0.2rem rgba($resalte, 0.25);
+                }
             }
-            
-            &.eliminar {
-                background: transparent;
-                color: rgba($texto-principal, 0.6);
-                border: 2px solid rgba($texto-principal, 0.2);
-                font-size: 14px;
-                padding: 12px;
-                
+
+            &.btn-outline-secondary {
+                color: rgba($texto_claro, 0.6);
+                border-color: rgba($texto_claro, 0.2);
+
                 &:hover {
                     background-color: rgba(255, 255, 255, 0.05);
-                    color: $texto-principal;
-                    border-color: $texto-principal;
+                    color: $texto_claro;
+                    border-color: $texto_claro;
+                }
+
+                &:focus {
+                    box-shadow: 0 0 0 0.2rem rgba($texto_claro, 0.25);
                 }
             }
         }
     }
 }
 
-// --- Media Queries para Móviles Pequeños ---
-@media (max-width: 480px) {
-    .modal-content {
-        width: 100%; // Pantalla completa
-        max-width: none;
-        border-radius: 0; // Sin bordes redondeados en full screen
+// ============================================================================
+// RESPONSIVE - Móviles
+// ============================================================================
+
+@media (max-width: 576px) {
+    .offcanvas {
+        width: 100%;
     }
-    
-    .elemento-carrito {
+
+    .offcanvas-header {
+        padding: 15px 20px;
+
+        .offcanvas-title {
+            font-size: 24px;
+        }
+    }
+
+    .offcanvas-body {
+        padding: 15px 20px;
+    }
+
+    .list-group-item.elemento-carrito {
         padding: 10px;
-        
-        .imagen {
+
+        .car-tula {
             width: 60px;
             height: 60px;
+        }
+
+        .producto-title {
+            font-size: 14px;
+        }
+
+        .product-price {
+            font-size: 13px;
+        }
+    }
+
+    .offcanvas-footer {
+        padding: 20px;
+
+        .d-flex {
+            padding: 0 10px;
+            margin-bottom: 15px;
+        }
+
+        .d-grid {
+            padding: 0 10px;
+            gap: 10px;
+
+            .btn {
+                font-size: 14px;
+                padding: 10px 15px;
+            }
         }
     }
 }
