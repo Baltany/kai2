@@ -17723,63 +17723,63 @@ body {
       .offcanvas-footer .d-grid .btn {
         font-size: 14px;
         padding: 10px 15px; } }
-.t-rminos-y-condiciones-pc {
-  background: var(--principal, #1c0538);
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  min-height: 100vh;
-  height: auto;
-  position: relative;
-  overflow-x: hidden; }
-  .t-rminos-y-condiciones-pc, .t-rminos-y-condiciones-pc * {
-    box-sizing: border-box; }
-  .t-rminos-y-condiciones-pc .condiciones-generales-de-venta {
-    background: var(--principal, #1c0538);
-    padding: 20px 20%;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    align-items: center;
-    justify-content: flex-start;
-    align-self: stretch;
-    flex-shrink: 0;
-    height: auto;
-    margin: 0 auto; }
-    .t-rminos-y-condiciones-pc .condiciones-generales-de-venta .t-tulo {
-      color: var(--texto-principal, #ffffff);
-      text-align: center;
-      font-family: var(--h1-font-family, "GasoekOne-Regular", sans-serif);
-      font-size: 32px;
-      font-weight: 400;
-      position: relative;
-      align-self: stretch;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 10px; }
-    .t-rminos-y-condiciones-pc .condiciones-generales-de-venta .texto {
-      color: var(--texto-principal, #ffffff);
-      text-align: left;
-      font-family: var(--body-text-1-font-family, "Inter-Regular", sans-serif);
-      font-size: 16px;
-      font-weight: 300;
-      line-height: 1.6;
-      position: relative;
-      align-self: stretch;
-      display: block; }
+body {
+  padding-top: 4.5rem; }
 
-@media (max-width: 1024px) {
-  .t-rminos-y-condiciones-pc .condiciones-generales-de-venta {
-    padding: 20px 10%; } }
-@media (max-width: 768px) {
-  .t-rminos-y-condiciones-pc .condiciones-generales-de-venta {
-    padding: 20px 20px; }
-    .t-rminos-y-condiciones-pc .condiciones-generales-de-venta .t-tulo {
-      font-size: 24px; }
-    .t-rminos-y-condiciones-pc .condiciones-generales-de-venta .texto {
-      font-size: 14px; } }
+.terminos-main {
+  background-color: #1c0538;
+  min-height: 100vh;
+  padding: 60px 20px; }
+  @media (max-width: 768px) {
+    .terminos-main {
+      padding: 40px 20px; } }
+  @media (max-width: 576px) {
+    .terminos-main {
+      padding: 30px 15px; } }
+
+.terminos-titulo {
+  font-family: "Gasoek One", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-size: 36px;
+  color: #fffdfa;
+  text-transform: uppercase;
+  font-weight: 400;
+  padding-bottom: 30px;
+  border-bottom: 2px solid rgba(255, 253, 250, 0.2);
+  margin-bottom: 40px;
+  line-height: 1.3; }
+  @media (max-width: 768px) {
+    .terminos-titulo {
+      font-size: 28px;
+      padding-bottom: 20px;
+      margin-bottom: 30px; } }
+  @media (max-width: 576px) {
+    .terminos-titulo {
+      font-size: 22px;
+      padding-bottom: 15px;
+      margin-bottom: 20px; } }
+
+.terminos-contenido {
+  color: #fffdfa;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-size: 16px;
+  line-height: 1.8; }
+  @media (max-width: 768px) {
+    .terminos-contenido {
+      font-size: 15px;
+      line-height: 1.7; } }
+  @media (max-width: 576px) {
+    .terminos-contenido {
+      font-size: 14px;
+      line-height: 1.6; } }
+  .terminos-contenido p {
+    margin-bottom: 25px;
+    color: rgba(255, 253, 250, 0.95);
+    text-align: justify; }
+    @media (max-width: 768px) {
+      .terminos-contenido p {
+        margin-bottom: 20px;
+        text-align: left; } }
+    .terminos-contenido p:last-child {
+      margin-bottom: 0; }
 
 /*# sourceMappingURL=styles.css.map */
