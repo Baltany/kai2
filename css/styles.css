@@ -17791,6 +17791,109 @@ body {
       .offcanvas-footer .d-grid .btn {
         font-size: 14px;
         padding: 10px 15px; } }
+.plataformas-main {
+  background: #1c0538;
+  min-height: calc(100vh - $navbar-height);
+  padding: calc($spacer * 3) 0; }
+
+.plataformas-wrapper {
+  border: 3px dotted rgba(111, 18, 224, 0.6);
+  padding: calc($spacer * 2); }
+  @media (max-width: 768px) {
+    .plataformas-wrapper {
+      padding: 1rem; } }
+
+.plataformas-header {
+  border: 3px dotted rgba(111, 18, 224, 0.6);
+  padding: calc($spacer * 1.5) 1rem;
+  margin-bottom: calc($spacer * 3); }
+  .plataformas-header h1, .plataformas-header .h1 {
+    color: #fffdfa;
+    font-family: "Gasoek One", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-weight: 400;
+    font-size: calc($font-size-base * 1.5);
+    letter-spacing: 3px;
+    text-align: center;
+    margin: 0; }
+    @media (max-width: 768px) {
+      .plataformas-header h1, .plataformas-header .h1 {
+        font-size: calc($font-size-base * 1.2);
+        letter-spacing: 2px; } }
+
+.plataformas-grid {
+  border: 3px dotted rgba(111, 18, 224, 0.6);
+  padding: calc($spacer * 2); }
+  @media (max-width: 768px) {
+    .plataformas-grid {
+      padding: 1rem; } }
+
+.platform-card {
+  display: block;
+  text-decoration: none;
+  border: 4px solid #6f12e0;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 20px rgba(111, 18, 224, 0.4); }
+  .platform-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 30px rgba(111, 18, 224, 0.8);
+    border-color: #974ef1; }
+    .platform-card:hover .platform-content {
+      transform: scale(1.03); }
+  .platform-card .platform-content {
+    aspect-ratio: 16 / 9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: calc($spacer * 3);
+    transition: transform 0.3s ease;
+    position: relative; }
+    @media (max-width: 768px) {
+      .platform-card .platform-content {
+        aspect-ratio: 2 / 1;
+        padding: calc($spacer * 2); } }
+  .platform-card .platform-logo {
+    max-width: 60%;
+    max-height: 60%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 6px 12px rgba(10, 15, 15, 0.6)); }
+    @media (max-width: 768px) {
+      .platform-card .platform-logo {
+        max-width: 50%;
+        max-height: 50%; } }
+  .platform-card .platform-label {
+    background: #6f12e0;
+    color: #fffdfa;
+    text-align: center;
+    padding: calc($spacer * 0.8);
+    font-weight: 700;
+    font-size: calc($font-size-base * 1);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-family: "Gasoek One", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; }
+    @media (max-width: 768px) {
+      .platform-card .platform-label {
+        font-size: calc($font-size-base * 0.85);
+        padding: calc($spacer * 0.6);
+        letter-spacing: 1.5px; } }
+  .platform-card.playstation .platform-content {
+    background: linear-gradient(135deg, #003087 0%, #0044a0 100%); }
+  .platform-card.nintendo .platform-content {
+    background: linear-gradient(135deg, #e60012 0%, #ff0015 100%); }
+  .platform-card.xbox .platform-content {
+    background: linear-gradient(135deg, #107c10 0%, #0e9b0e 100%); }
+  .platform-card.steam .platform-content {
+    background: linear-gradient(135deg, #1b2838 0%, #2a475e 100%); }
+
+@media (max-width: 768px) {
+  .plataformas-main {
+    padding: calc($spacer * 2) 0; }
+
+  .plataformas-header {
+    margin-bottom: calc($spacer * 2); } }
 body {
   padding-top: 4.5rem; }
 

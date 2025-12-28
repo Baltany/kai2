@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kairos - Tienda de Productos Digitales</title>
+    <title>Plataformas - Kairos</title>
     <?php include("includes/head-tag-contents.php"); ?>
 </head>
 <body>
@@ -15,57 +15,83 @@
     </header>
 
     <!-- Main Content -->
-    <main>
-        <!-- Banner/Hero Section -->
-        <section class="hero-banner">
-            <img src="assets/img/banner-hero.jpg" 
-                 onerror="this.src='https://placehold.co/1200x400/6f12e0/ffffff?text=Banner+Kairos'" 
-                 alt="Banner Kairos"
-                 class="banner-img">
-        </section>
+    <main class="plataformas-main">
+        <div class="container">
+            <!-- Contenedor principal con borde punteado -->
+            <div class="plataformas-wrapper">
+                
+                <!-- Título de Plataformas con borde -->
+                <div class="plataformas-header">
+                    <h1>PLATAFORMAS</h1>
+                </div>
 
-        <!-- Productos Grid -->
-        <section class="productos-section">
-            <div class="container-fluid">
-                <div class="row g-5 justify-content-center">
-                    <!-- Producto 1 -->
-                    <div class="col-12 col-sm-4 col-lg-3">
-                        <?php include("includes/product-card.php"); ?>
-                    </div>
+                <!-- Grid de Plataformas -->
+                <div class="plataformas-grid">
+                    <div class="row g-2">
+                        <!-- PlayStation -->
+                        <div class="col-12 col-md-6">
+                            <a href="playstation.php" class="platform-card playstation">
+                                <div class="platform-content">
+                                    <img src="assets/img/pslogo.png" 
+                                         alt="PlayStation"
+                                         class="platform-logo"
+                                         onerror="this.src='https://placehold.co/300x200/003087/ffffff?text=PS'">
+                                </div>
+                                <div class="platform-label">
+                                    PLAYSTATION
+                                </div>
+                            </a>
+                        </div>
 
-                    <!-- Producto 2 -->
-                    <div class="col-12 col-sm-4 col-lg-3">
-                        <?php include("includes/product-card.php"); ?>
-                    </div>
+                        <!-- Nintendo -->
+                        <div class="col-12 col-md-6">
+                            <a href="nintendo.php" class="platform-card nintendo">
+                                <div class="platform-content">
+                                    <img src="assets/img/nintendo.png" 
+                                         alt="Nintendo"
+                                         class="platform-logo"
+                                         onerror="this.src='https://placehold.co/300x200/e60012/ffffff?text=Nintendo'">
+                                </div>
+                                <div class="platform-label">
+                                    NINTENDO
+                                </div>
+                            </a>
+                        </div>
 
-                    <!-- Producto 3 -->
-                    <div class="col-12 col-sm-4 col-lg-3">
-                        <?php include("includes/product-card.php"); ?>
-                    </div>
+                        <!-- Xbox -->
+                        <div class="col-12 col-md-6">
+                            <a href="xbox.php" class="platform-card xbox">
+                                <div class="platform-content">
+                                    <img src="assets/img/xbox.jpg" 
+                                         alt="Xbox"
+                                         class="platform-logo"
+                                         onerror="this.src='https://placehold.co/300x200/107c10/ffffff?text=Xbox'">
+                                </div>
+                                <div class="platform-label">
+                                    XBOX
+                                </div>
+                            </a>
+                        </div>
 
-                    <!-- Producto 4 -->
-                    <div class="col-12 col-sm-4 col-lg-3">
-                        <?php include("includes/product-card.php"); ?>
-                    </div>
-
-                    <!-- Producto 5 -->
-                    <div class="col-12 col-sm-4 col-lg-3">
-                        <?php include("includes/product-card.php"); ?>
-                    </div>
-
-                    <!-- Producto 6 -->
-                    <div class="col-12 col-sm-4 col-lg-3">
-                        <?php include("includes/product-card.php"); ?>
-                    </div>                    
-					<div class="col-12 col-sm-4 col-lg-3">
-                        <?php include("includes/product-card.php"); ?>
-                    </div>
-					<div class="col-12 col-sm-4 col-lg-3">
-                        <?php include("includes/product-card.php"); ?>
+                        <!-- Steam -->
+                        <div class="col-12 col-md-6">
+                            <a href="steam.php" class="platform-card steam">
+                                <div class="platform-content">
+                                    <img src="assets/img/steam.png" 
+                                         alt="Steam"
+                                         class="platform-logo"
+                                         onerror="this.src='https://placehold.co/300x200/171a21/66c0f4?text=Steam'">
+                                </div>
+                                <div class="platform-label">
+                                    STEAM
+                                </div>
+                            </a>
+                        </div>
                     </div>
                 </div>
+
             </div>
-        </section>
+        </div>
     </main>
 
     <!-- Footer -->
