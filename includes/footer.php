@@ -4,7 +4,7 @@
         <!-- Enlaces -->
         <div class="kairos-footer-links">
             <a href="#">Conócenos</a>
-            <a href="#">Términos y Condiciones</a>
+            <a href="terminoscondiciones.php">Términos y Condiciones</a>
             <a href="#">Soporte</a>
         </div>
 

@@ -20,7 +20,7 @@
                     <li><a class="dropdown-item" href="playstation.php">PlayStation</a></li>
                     <li><a class="dropdown-item" href="xbox.php">Xbox</a></li>
                     <li><a class="dropdown-item" href="nintendo.php">Nintendo</a></li>
-                    <li><a class="dropdown-item" href="otros.php">Otros</a></li>
+                    <li><a class="dropdown-item" href="plataformas.php">Otros</a></li>
                 </ul>
             </div>
 
@@ -35,7 +35,7 @@
 
         <!-- Barra pequeña: usuario + carrito -->
         <div class="kairos-actions-bar">
-            <button class="kairos-action-btn" type="button">
+            <button class="kairos-action-btn" type="button" onclick="window.location.href='login.php'">
                 <i class="fas fa-user"></i>
             </button>
             <button class="kairos-action-btn" type="button" id="openCartModal" title="Carrito">

@@ -1,10 +1,13 @@
-<?php include("includes/a_config.php"); ?>
+<?php 
+// ARCHIVO: xbox.php
+include("includes/a_config.php"); 
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kairos - Tienda de Productos Digitales</title>
+    <title>Xbox - Kairos</title>
     <?php include("includes/head-tag-contents.php"); ?>
 </head>
 <body>
@@ -19,8 +22,8 @@
         <!-- Banner/Hero Section -->
         <section class="hero-banner">
             <img src="assets/img/banner-hero.jpg" 
-                 onerror="this.src='https://placehold.co/1200x400/6f12e0/ffffff?text=Banner+Kairos'" 
-                 alt="Banner Kairos"
+                 onerror="this.src='https://placehold.co/1200x400/6f12e0/ffffff?text=Banner+Xbox'" 
+                 alt="Banner Xbox"
                  class="banner-img">
         </section>
 
@@ -31,11 +34,11 @@
                     <!-- Producto 1 -->
                     <div class="col-12 col-sm-4 col-lg-3">
                         <?php 
-                        $platformImage = 'assets/img/fc26.jpg';
-                        $productImage = 'assets/img/fc26.jpg';
-                        $discount = '-30%';
-                        $price = '39.99€';
-                        $platformName = 'Steam';
+                        $platformImage = 'assets/img/steam.png';
+                        $productImage = 'assets/img/steam.png';
+                        $discount = '-20%';
+                        $price = '59.99€';
+                        $platformName = 'Xbox';
                         include("includes/product-card.php"); 
                         ?>
                     </div>
@@ -43,11 +46,11 @@
                     <!-- Producto 2 -->
                     <div class="col-12 col-sm-4 col-lg-3">
                         <?php 
-                        $platformImage = 'assets/img/fc26.jpg';
-                        $productImage = 'assets/img/fc26.jpg';
-                        $discount = '-30%';
-                        $price = '39.99€';
-                        $platformName = 'Steam';
+                        $platformImage = 'assets/img/steam.png';
+                        $productImage = 'assets/img/steam.png';
+                        $discount = '-20%';
+                        $price = '59.99€';
+                        $platformName = 'Xbox';
                         include("includes/product-card.php"); 
                         ?>
                     </div>
@@ -55,11 +58,11 @@
                     <!-- Producto 3 -->
                     <div class="col-12 col-sm-4 col-lg-3">
                         <?php 
-                        $platformImage = 'assets/img/fc26.jpg';
-                        $productImage = 'assets/img/fc26.jpg';
-                        $discount = '-30%';
-                        $price = '39.99€';
-                        $platformName = 'Steam';
+                        $platformImage = 'assets/img/steam.png';
+                        $productImage = 'assets/img/steam.png';
+                        $discount = '-20%';
+                        $price = '59.99€';
+                        $platformName = 'Xbox';
                         include("includes/product-card.php"); 
                         ?>
                     </div>
@@ -67,11 +70,11 @@
                     <!-- Producto 4 -->
                     <div class="col-12 col-sm-4 col-lg-3">
                         <?php 
-                        $platformImage = 'assets/img/fc26.jpg';
-                        $productImage = 'assets/img/fc26.jpg';
-                        $discount = '-30%';
-                        $price = '39.99€';
-                        $platformName = 'Steam';
+                        $platformImage = 'assets/img/steam.png';
+                        $productImage = 'assets/img/steam.png';
+                        $discount = '-20%';
+                        $price = '59.99€';
+                        $platformName = 'Xbox';
                         include("includes/product-card.php"); 
                         ?>
                     </div>
@@ -79,11 +82,11 @@
                     <!-- Producto 5 -->
                     <div class="col-12 col-sm-4 col-lg-3">
                         <?php 
-                        $platformImage = 'assets/img/fc26.jpg';
-                        $productImage = 'assets/img/fc26.jpg';
-                        $discount = '-30%';
-                        $price = '39.99€';
-                        $platformName = 'Steam';
+                        $platformImage = 'assets/img/steam.png';
+                        $productImage = 'assets/img/steam.png';
+                        $discount = '-20%';
+                        $price = '59.99€';
+                        $platformName = 'Xbox';
                         include("includes/product-card.php"); 
                         ?>
                     </div>
@@ -91,11 +94,11 @@
                     <!-- Producto 6 -->
                     <div class="col-12 col-sm-4 col-lg-3">
                         <?php 
-                        $platformImage = 'assets/img/fc26.jpg';
-                        $productImage = 'assets/img/fc26.jpg';
-                        $discount = '-30%';
-                        $price = '39.99€';
-                        $platformName = 'Steam';
+                        $platformImage = 'assets/img/steam.png';
+                        $productImage = 'assets/img/steam.png';
+                        $discount = '-20%';
+                        $price = '59.99€';
+                        $platformName = 'Xbox';
                         include("includes/product-card.php"); 
                         ?>
                     </div>
@@ -103,11 +106,11 @@
                     <!-- Producto 7 -->
                     <div class="col-12 col-sm-4 col-lg-3">
                         <?php 
-                        $platformImage = 'assets/img/fc26.jpg';
-                        $productImage = 'assets/img/fc26.jpg';
-                        $discount = '-30%';
-                        $price = '39.99€';
-                        $platformName = 'Steam';
+                        $platformImage = 'assets/img/steam.png';
+                        $productImage = 'assets/img/steam.png';
+                        $discount = '-20%';
+                        $price = '59.99€';
+                        $platformName = 'Xbox';
                         include("includes/product-card.php"); 
                         ?>
                     </div>
@@ -115,11 +118,11 @@
                     <!-- Producto 8 -->
                     <div class="col-12 col-sm-4 col-lg-3">
                         <?php 
-                        $platformImage = 'assets/img/fc26.jpg';
-                        $productImage = 'assets/img/fc26.jpg';
-                        $discount = '-30%';
-                        $price = '39.99€';
-                        $platformName = 'Steam';
+                        $platformImage = 'assets/img/steam.png';
+                        $productImage = 'assets/img/steam.png';
+                        $discount = '-20%';
+                        $price = '59.99€';
+                        $platformName = 'Xbox';
                         include("includes/product-card.php"); 
                         ?>
                     </div>

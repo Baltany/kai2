@@ -1,20 +1,36 @@
+<?php
+// Variables por defecto si no se pasan desde la página
+$platform = $platform ?? 'steam';
+$platformImage = $platformImage ?? 'assets/img/platforms/steam.png';
+$productImage = $productImage ?? 'assets/img/products/default.png';
+$discount = $discount ?? '-30%';
+$price = $price ?? '39.99€';
+$platformName = $platformName ?? 'Steam';
+?>
+
 <div class="product-card">
     <div class="product-card-inner">
         <div class="product-card-media">
+            <!-- Logo de la plataforma -->
             <div class="product-card-platform">
-                <img src="assets/img/platforms/steam.png" alt="Steam">
+                <img src="<?php echo $platformImage; ?>" alt="<?php echo $platformName; ?>">
             </div>
+            
+            <!-- Descuento -->
             <div class="product-card-discount">
-                -30%
+                <?php echo $discount; ?>
             </div>
+            
+            <!-- Imagen del producto -->
             <img class="product-card-cover"
-                 src="assets/img/fc26.jpg"
-                 alt="EA Sports FC 26">
+                 src="<?php echo $productImage; ?>"
+                 onerror="this.src='https://placehold.co/200x200/5e3a8b/ffffff?text=<?php echo $platformName; ?>'"
+                 alt="Producto <?php echo $platformName; ?>">
         </div>
 
         <div class="product-card-bottom">
             <div class="product-card-price">
-                39.99€
+                <?php echo $price; ?>
             </div>
             <a class="product-card-button" href="details.php">
                 AÑADIR AL CARRITO
