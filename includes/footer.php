@@ -3,9 +3,10 @@
 
         <!-- Enlaces -->
         <div class="kairos-footer-links">
-            <a href="#">Conócenos</a>
+            <a href="conocenos.php">Conócenos</a>
             <a href="terminoscondiciones.php">Términos y Condiciones</a>
-            <a href="#">Soporte</a>
+            <a href="trabaja.php">Trabaja con nosotros</a>
+            <a href="soporte.php">Soporte</a>
         </div>
 
         <!-- Iconos sociales -->

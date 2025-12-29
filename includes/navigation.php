@@ -38,6 +38,15 @@
             <button class="kairos-action-btn" type="button" onclick="window.location.href='login.php'">
                 <i class="fas fa-user"></i>
             </button>
+            <a class="kairos-action-btn" href="wishlist.php">
+                <i class="fas fa-star"></i>
+            </a>
+            <a class="kairos-action-btn" href="recibos.php">
+                <i class="fas fa-receipt"></i>
+            </a>
+            <a class="kairos-action-btn" href="devoluciones.php">
+                <i class="fas fa-box-open"></i>
+            </a>
             <button class="kairos-action-btn" type="button" id="openCartModal" title="Carrito">
                 <i class="fas fa-shopping-cart"></i>
             </button>

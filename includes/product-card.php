@@ -32,7 +32,7 @@ $platformName = $platformName ?? 'Steam';
             <div class="product-card-price">
                 <?php echo $price; ?>
             </div>
-            <a class="product-card-button" href="details.php">
+            <a class="product-card-button" href="detalles.php">
                 AÑADIR AL CARRITO
             </a>
         </div>
