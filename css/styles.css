@@ -18437,10 +18437,15 @@ body {
     .devoluciones-main {
       padding: 2rem 0 3rem 0; } }
   .devoluciones-main .container {
-    max-width: 900px; }
+    max-width: 100%;
+    padding: 3rem 0 5rem 0;
+    padding-left: 3rem;
+    padding-right: 3rem; }
     @media (max-width: 768px) {
       .devoluciones-main .container {
-        max-width: 100%; } }
+        max-width: 100%;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem; } }
 
 .devoluciones-title {
   font-family: "Gasoek One", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";

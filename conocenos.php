@@ -31,7 +31,7 @@
                 <!-- IMAGEN -->
                 <div class="col-12 col-md-3"> <!-- ✅ 3 columnas para la imagen -->
                     <div class="conocenos-placeholder">
-                        <img src="assets/img/placeholder-historia.jpg" 
+                        <img src="assets/img/placeholder.png" 
                              alt="Historia" 
                              onerror="this.src='https://placehold.co/250x300/1c0538/ffffff?text=PLACEHOLDER+DE+ANUNCIO'">
                     </div>
@@ -48,7 +48,7 @@
                 <!-- IMAGEN -->
                 <div class="col-12 col-md-3">
                     <div class="conocenos-placeholder">
-                        <img src="assets/img/placeholder-claves.jpg" 
+                        <img src="assets/img/placeholder.png" 
                              alt="Claves" 
                              onerror="this.src='https://placehold.co/250x300/1c0538/ffffff?text=PLACEHOLDER+DE+ANUNCIO'">
                     </div>

@@ -18,7 +18,7 @@
     <main>
         <!-- Banner/Hero Section -->
         <section class="hero-banner">
-            <img src="assets/img/banner-hero.jpg" 
+            <img src="assets/img/placeholder.png" 
                  onerror="this.src='https://placehold.co/1200x400/6f12e0/ffffff?text=Banner+Kairos'" 
                  alt="Banner Kairos"
                  class="banner-img">
