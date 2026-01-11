@@ -149,7 +149,7 @@
 
         <!-- Canvas donde se dibuja el juego con Canvas + JavaScript -->
         <div id="canvas-container">
-            <canvas id="miCanvas" width="800" height="400"></canvas>
+            <canvas id="miCanvas" width="1000" height="500"></canvas>
         </div>
 
         <!-- Botones de control -->

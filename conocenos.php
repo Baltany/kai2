@@ -79,7 +79,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="text-center">
-                        <a href="afiliacion.php" class="btn conocenos-join-btn">UNIRSE</a>
+                        <a class="btn conocenos-join-btn">UNIRSE</a>
                     </div>
                 </div>
             </div>

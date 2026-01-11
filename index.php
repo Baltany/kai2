@@ -144,6 +144,22 @@ src="https://www.youtube.com/embed/QdBZY2fkU-0?autoplay=1&mute=1&l?autoplay=1&mu
             </div>
         </section>
 
+        <!-- Sección del Juego Interactivo -->
+        <section class="juego-section">
+            <div class="container-fluid">
+                <h2 class="juego-titulo">🎮 Juega y Diviértete 🎮</h2>
+                <p class="juego-descripcion">Atrapa los videojuegos que caen y demuestra tus habilidades</p>
+                
+                <div class="juego-iframe-container">
+                    <iframe class="juego-iframe" 
+                        src="juegoRa3/juego.php" 
+                        title="Juego Tienda de Videojuegos"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture">
+                    </iframe>
+                </div>
+            </div>
+        </section>
+
         <!-- Sección Ubicación -->
         <section class="ubicacion-section">
             <div class="ubicacion-contenedor">
