@@ -18,11 +18,29 @@
     <main>
         <!-- Banner/Hero Section -->
         <section class="hero-banner">
-            <img src="assets/img/placeholder.png" 
-                 onerror="this.src='https://placehold.co/1200x400/6f12e0/ffffff?text=Banner+Nintendo'" 
-                 alt="Banner Nintendo"
-                 class="banner-img">
+            <!-- Contenedor del video de YouTube -->
+            <div class="banner-video-container">
+                <!-- Video de YouTube responsive tipo Steam -->
+                <iframe class="banner-youtube" 
+src="https://www.youtube.com/embed/1BU4VXofbQk?autoplay=1&mute=1"                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen
+                    title="Kairos - Tienda de Videojuegos">
+                </iframe>
+
+                <!-- Overlay oscuro para mejorar legibilidad del contenido -->
+                <div class="banner-overlay"></div>
+
+                <!-- Contenido sobre el video (estilo Steam) -->
+                <div class="banner-content">
+                    <div class="banner-text">
+                        <h1 class="banner-title">KAIROS</h1>
+                        <p class="banner-subtitle">Tu tienda de videojuegos favorita</p>
+                    </div>
+                </div>
+            </div>
         </section>
+
 
         <!-- Productos Grid -->
         <section class="productos-section">

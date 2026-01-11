@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego - Tienda de Videojuegos</title>
+    <style>
+        /* Estilos generales de la página */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .contenedor {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            max-width: 900px;
+            width: 100%;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+
+        .info {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .stat {
+            background: #f0f0f0;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            color: #333;
+            min-width: 150px;
+            text-align: center;
+        }
+
+        .stat span {
+            color: #667eea;
+            font-size: 20px;
+        }
+
+        /* Contenedor del canvas */
+        #canvas-container {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        canvas {
+            border: 3px solid #667eea;
+            border-radius: 10px;
+            background: linear-gradient(to bottom, #87CEEB, #E0F6FF);
+            display: block;
+        }
+
+        /* Botones */
+        .controles {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 12px 30px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-inicio {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-inicio:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-pausa {
+            background: #f39c12;
+            color: white;
+        }
+
+        .btn-pausa:hover {
+            background: #e67e22;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(243, 156, 18, 0.4);
+        }
+
+        .instrucciones {
+            background: #f9f9f9;
+            padding: 15px;
+            border-left: 4px solid #667eea;
+            margin-top: 20px;
+            border-radius: 5px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .instrucciones h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .instrucciones p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="contenedor">
+        <h1>🎮 Juego de la Tienda de Videojuegos 🎮</h1>
+        
+        <!-- Estadísticas del juego -->
+        <div class="info">
+            <div class="stat">Puntuación: <span id="puntuacion">0</span></div>
+            <div class="stat">Juegos Vendidos: <span id="vendidos">0</span></div>
+            <div class="stat">Vidas: <span id="vidas">3</span></div>
+            <div class="stat">Tiempo: <span id="tiempo">0</span>s</div>
+        </div>
+
+        <!-- Canvas donde se dibuja el juego con Canvas + JavaScript -->
+        <div id="canvas-container">
+            <canvas id="miCanvas" width="800" height="400"></canvas>
+        </div>
+
+        <!-- Botones de control -->
+        <div class="controles">
+            <button class="btn-inicio" onclick="iniciarJuego()">Iniciar Juego</button>
+            <button class="btn-pausa" onclick="pausarReanudar()">Pausar</button>
+            <button class="btn-inicio" onclick="reiniciarJuego()">Reiniciar</button>
+        </div>
+
+        <!-- Instrucciones -->
+        <div class="instrucciones">
+            <h3>📋 Instrucciones:</h3>
+            <p><strong>Objetivo:</strong> Atrapa los videojuegos que caen usando el carrito para venderlos.</p>
+            <p><strong>Controles:</strong> Usa las teclas FLECHA IZQUIERDA y FLECHA DERECHA para mover el carrito.</p>
+            <p><strong>Puntos:</strong> Cada juego atrapado = 10 puntos. Si se te cae un juego, pierdes 1 vida.</p>
+            <p><strong>Fin del juego:</strong> Cuando pierdas las 3 vidas, el juego termina.</p>
+        </div>
+    </div>
+
+    <script>
+        // ===== OBTENER ELEMENTOS DEL DOM =====
+        // Accedemos al canvas y su contexto 2D para dibujar
+        const canvas = document.getElementById('miCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        // Elementos para mostrar estadísticas
+        const puntuacionEl = document.getElementById('puntuacion');
+        const vendidosEl = document.getElementById('vendidos');
+        const vidasEl = document.getElementById('vidas');
+        const tiempoEl = document.getElementById('tiempo');
+
+        // ===== VARIABLES DEL JUEGO =====
+        let juegoActivo = false;        // Si el juego está en ejecución
+        let juegoPausado = false;       // Si el juego está pausado
+        let puntuacion = 0;             // Puntuación actual
+        let vendidos = 0;               // Cantidad de juegos vendidos
+        let vidas = 3;                  // Vidas restantes
+        let tiempo = 0;                 // Tiempo en frames
+        let velocidadJuegos = 2;        // Velocidad de caída de los juegos
+
+        // ===== OBJETO DEL CARRITO (donde el jugador atrapa los juegos) =====
+        const carrito = {
+            x: canvas.width / 2 - 40,   // Posición X (centrado)
+            y: canvas.height - 60,       // Posición Y (abajo del canvas)
+            ancho: 80,                   // Ancho del carrito
+            alto: 40,                    // Alto del carrito
+            velocidad: 5                 // Velocidad de movimiento
+        };
+
+        // ===== ARRAY PARA ALMACENAR LOS JUEGOS QUE CAEN =====
+        let juegos = [];
+
+        // ===== OBJETO PARA CONTROLAR LAS TECLAS PRESIONADAS =====
+        let teclas = {
+            izquierda: false,   // Flecha izquierda presionada
+            derecha: false      // Flecha derecha presionada
+        };
+
+        // ===== EVENTOS DE TECLADO =====
+        // Cuando el usuario presiona una tecla
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') teclas.izquierda = true;
+            if (e.key === 'ArrowRight') teclas.derecha = true;
+        });
+
+        // Cuando el usuario suelta una tecla
+        document.addEventListener('keyup', (e) => {
+            if (e.key === 'ArrowLeft') teclas.izquierda = false;
+            if (e.key === 'ArrowRight') teclas.derecha = false;
+        });
+
+        // ===== FUNCIÓN PARA MOVER EL CARRITO =====
+        function moverCarrito() {
+            // Mover a la izquierda si se presiona la flecha izquierda
+            if (teclas.izquierda && carrito.x > 0) {
+                carrito.x -= carrito.velocidad;
+            }
+
+            // Mover a la derecha si se presiona la flecha derecha
+            if (teclas.derecha && carrito.x + carrito.ancho < canvas.width) {
+                carrito.x += carrito.velocidad;
+            }
+
+            // Evitar que el carrito salga del canvas
+            if (carrito.x < 0) carrito.x = 0;
+            if (carrito.x + carrito.ancho > canvas.width) carrito.x = canvas.width - carrito.ancho;
+        }
+
+        // ===== FUNCIÓN PARA DIBUJAR EL CARRITO EN EL CANVAS =====
+        function dibujarCarrito() {
+            // Dibujar el cuerpo del carrito (rectángulo rojo)
+            ctx.fillStyle = '#FF6B6B';
+            ctx.fillRect(carrito.x, carrito.y, carrito.ancho, carrito.alto);
+
+            // Dibujar el borde del carrito (línea negra)
+            ctx.strokeStyle = '#CC5555';
+            ctx.lineWidth = 2;
+            ctx.strokeRect(carrito.x, carrito.y, carrito.ancho, carrito.alto);
+
+            // Dibujar las ruedas (círculos negros pequeños)
+            ctx.fillStyle = '#333';
+            // Rueda izquierda
+            ctx.beginPath();
+            ctx.arc(carrito.x + 15, carrito.y + carrito.alto, 5, 0, Math.PI * 2);
+            ctx.fill();
+            // Rueda derecha
+            ctx.beginPath();
+            ctx.arc(carrito.x + carrito.ancho - 15, carrito.y + carrito.alto, 5, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        // ===== FUNCIÓN PARA CREAR UN NUEVO JUEGO QUE CAE =====
+        function crearJuego() {
+            // Crear un objeto que representa un videojuego cayendo
+            const nuevoJuego = {
+                x: Math.random() * (canvas.width - 30),  // Posición X aleatoria
+                y: -30,                                   // Comienza fuera del canvas (arriba)
+                ancho: 30,                                // Ancho del juego
+                alto: 30,                                 // Alto del juego
+                velocidad: velocidadJuegos               // Velocidad de caída
+            };
+
+            // Añadir el nuevo juego al array
+            juegos.push(nuevoJuego);
+        }
+
+        // ===== FUNCIÓN PARA DIBUJAR LOS JUEGOS QUE CAEN =====
+        function dibujarJuegos() {
+            for (let juego of juegos) {
+                // Dibujar un cuadrado turquesa para representar el juego
+                ctx.fillStyle = '#4ECDC4';
+                ctx.fillRect(juego.x, juego.y, juego.ancho, juego.alto);
+
+                // Dibujar el borde del juego
+                ctx.strokeStyle = '#2BA89F';
+                ctx.lineWidth = 2;
+                ctx.strokeRect(juego.x, juego.y, juego.ancho, juego.alto);
+
+                // Dibujar un emoji de joystick dentro del juego
+                ctx.font = '18px Arial';
+                ctx.fillText('🎮', juego.x + 5, juego.y + 23);
+            }
+        }
+
+        // ===== FUNCIÓN PARA ACTUALIZAR LA POSICIÓN DE LOS JUEGOS =====
+        function actualizarJuegos() {
+            // Recorrer los juegos en orden inverso para poder eliminarlos sin problemas
+            for (let i = juegos.length - 1; i >= 0; i--) {
+                const juego = juegos[i];
+
+                // Hacer que el juego caiga (aumentar su posición Y)
+                juego.y += juego.velocidad;
+
+                // ===== COMPROBAR SI EL JUEGO HA SIDO ATRAPADO =====
+                // Detectar colisión entre el juego y el carrito
+                if (
+                    juego.x < carrito.x + carrito.ancho &&
+                    juego.x + juego.ancho > carrito.x &&
+                    juego.y < carrito.y + carrito.alto &&
+                    juego.y + juego.alto > carrito.y
+                ) {
+                    // El juego fue atrapado correctamente
+                    puntuacion += 10;           // Añadir 10 puntos
+                    vendidos++;                 // Incrementar contador de vendidos
+                    puntuacionEl.textContent = puntuacion;
+                    vendidosEl.textContent = vendidos;
+
+                    // Eliminar el juego del array
+                    juegos.splice(i, 1);
+                    continue;
+                }
+
+                // ===== COMPROBAR SI EL JUEGO SALIÓ DEL CANVAS SIN SER ATRAPADO =====
+                // Si el juego ha pasado la parte inferior del canvas
+                if (juego.y > canvas.height) {
+                    vidas--;                    // Perder una vida
+                    vidasEl.textContent = vidas;
+
+                    // Eliminar el juego del array
+                    juegos.splice(i, 1);
+
+                    // Si no quedan vidas, terminar el juego
+                    if (vidas <= 0) {
+                        terminarJuego();
+                    }
+                }
+            }
+        }
+
+        // ===== FUNCIÓN PRINCIPAL DEL BUCLE DEL JUEGO =====
+        // Se ejecuta 60 veces por segundo usando requestAnimationFrame
+        function actualizarJuego() {
+            // Limpiar el canvas (borrar todo lo anterior dibujado)
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Si el juego NO está pausado
+            if (!juegoPausado) {
+                // Actualizar física
+                moverCarrito();
+                actualizarJuegos();
+
+                // Crear nuevos juegos aleatoriamente (2% de probabilidad cada frame)
+                if (Math.random() < 0.02) {
+                    crearJuego();
+                }
+
+                // Aumentar la dificultad cada 5 segundos
+                if (tiempo % 300 === 0 && tiempo > 0) {
+                    velocidadJuegos += 0.5;
+                }
+
+                // Incrementar el contador de tiempo
+                tiempo++;
+                tiempoEl.textContent = Math.floor(tiempo / 60);
+            }
+
+            // Dibujar todos los elementos en el canvas
+            dibujarCarrito();
+            dibujarJuegos();
+
+            // Si el juego está pausado, mostrar un mensaje
+            if (juegoPausado) {
+                // Fondo semi-transparente
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                // Texto "PAUSADO"
+                ctx.fillStyle = 'white';
+                ctx.font = 'bold 50px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText('PAUSADO', canvas.width / 2, canvas.height / 2);
+                ctx.textAlign = 'left';
+            }
+
+            // Continuar el bucle si el juego está activo
+            if (juegoActivo) {
+                requestAnimationFrame(actualizarJuego);
+            }
+        }
+
+        // ===== FUNCIÓN PARA INICIAR EL JUEGO =====
+        function iniciarJuego() {
+            if (!juegoActivo) {
+                juegoActivo = true;
+                juegoPausado = false;
+                actualizarJuego();
+            }
+        }
+
+        // ===== FUNCIÓN PARA PAUSAR/REANUDAR EL JUEGO =====
+        function pausarReanudar() {
+            if (juegoActivo) {
+                juegoPausado = !juegoPausado;
+            }
+        }
+
+        // ===== FUNCIÓN PARA REINICIAR EL JUEGO =====
+        function reiniciarJuego() {
+            juegoActivo = false;
+            juegoPausado = false;
+            puntuacion = 0;
+            vendidos = 0;
+            vidas = 3;
+            tiempo = 0;
+            velocidadJuegos = 2;
+
+            // Limpiar el array de juegos
+            juegos = [];
+
+            // Resetear posición del carrito
+            carrito.x = canvas.width / 2 - 40;
+            carrito.y = canvas.height - 60;
+
+            // Actualizar estadísticas en la pantalla
+            puntuacionEl.textContent = puntuacion;
+            vendidosEl.textContent = vendidos;
+            vidasEl.textContent = vidas;
+            tiempoEl.textContent = tiempo;
+
+            // Limpiar y redibujar el canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            dibujarCarrito();
+        }
+
+        // ===== FUNCIÓN PARA TERMINAR EL JUEGO =====
+        function terminarJuego() {
+            juegoActivo = false;
+
+            // Dibujar fondo semi-transparente
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Dibujar texto "GAME OVER"
+            ctx.fillStyle = 'white';
+            ctx.font = 'bold 50px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('¡GAME OVER!', canvas.width / 2, canvas.height / 2 - 40);
+
+            // Dibujar puntuación final
+            ctx.font = '25px Arial';
+            ctx.fillText('Puntuación Final: ' + puntuacion, canvas.width / 2, canvas.height / 2 + 20);
+            ctx.textAlign = 'left';
+        }
+
+        // ===== INICIALIZAR CUANDO CARGA LA PÁGINA =====
+        window.addEventListener('load', () => {
+            // Limpiar el canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            // Dibujar el carrito en la posición inicial
+            dibujarCarrito();
+        });
+    </script>
+</body>
+</html>

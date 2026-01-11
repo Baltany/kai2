@@ -2,7 +2,7 @@
 	switch ($_SERVER["SCRIPT_NAME"]) {
 		case "/index.php":
 			$CURRENT_PAGE = "index"; 
-			$PAGE_TITLE = "Kairos - Tu página de claves";
+			$PAGE_TITLE = "Index";
 			break;
 		case "/conocenos.php":
 			$CURRENT_PAGE = "conocenos"; 
@@ -22,23 +22,23 @@
 			break;
 		case "/steam.php":
 			$CURRENT_PAGE = "steam"; 
-			$PAGE_TITLE = "Kairos - Tu página de claves";
+			$PAGE_TITLE = "Steam";
 			break;
 		case "/playstation.php":
 			$CURRENT_PAGE = "playstation"; 
-			$PAGE_TITLE = "Kairos - Tu página de claves";
+			$PAGE_TITLE = "Playstation";
 			break;
 		case "/xbox.php":
 			$CURRENT_PAGE = "xbox"; 
-			$PAGE_TITLE = "Kairos - Tu página de claves";
+			$PAGE_TITLE = "Xbox";
 			break;
 		case "/nintendo.php":
 			$CURRENT_PAGE = "nintendo"; 
-			$PAGE_TITLE = "Kairos - Tu página de claves";
+			$PAGE_TITLE = "Nintendo";
 			break;
 		case "/otros.php":
 			$CURRENT_PAGE = "otros"; 
-			$PAGE_TITLE = "Kairos - Tu página de claves";
+			$PAGE_TITLE = "Otros";
 			break;
 		case "/soporte.php":
 			$CURRENT_PAGE = "soporte"; 
@@ -54,11 +54,11 @@
 			break;
 		case "/login.php":
 			$CURRENT_PAGE = "login"; 
-			$PAGE_TITLE = "Kairos - Tu página de claves";
+			$PAGE_TITLE = "Login";
 			break;
 		case "/registro.php":
 			$CURRENT_PAGE = "registro"; 
-			$PAGE_TITLE = "Kairos - Tu página de claves";
+			$PAGE_TITLE = "Registro";
 			break;
 		case "/carrito.php":
 			$CURRENT_PAGE = "carrito"; 
@@ -67,6 +67,10 @@
 		case "/zona_pago.php":
 			$CURRENT_PAGE = "zona_pago"; 
 			$PAGE_TITLE = "Zona de Pago";
+			break;		
+		case "/terninoslegales.php":
+			$CURRENT_PAGE = "terninoslegales"; 
+			$PAGE_TITLE = "Terminos legales";
 			break;
 		default:
 			$CURRENT_PAGE = "index";
