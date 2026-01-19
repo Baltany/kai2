@@ -7,6 +7,7 @@
             <a href="terminoscondiciones.php">Términos y Condiciones</a>
             <a href="trabaja.php">Trabaja con nosotros</a>
             <a href="soporte.php">Soporte</a>
+            <a href="terninoslegales.php">Terminos Legales</a>
         </div>
 
         <!-- Iconos sociales -->
