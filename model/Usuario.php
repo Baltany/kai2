@@ -1,19 +1,46 @@
 <?php
 class Usuario{
-    private $id_usuario;
+    private $id;
     private $username;
     private $password;
-    private $telf;
+    private $nombre;
+    private $apellidos;
+    private $correo;
+    private $fecha_nacimiento;
+    private $codigo_postal;
+    private $telefono;
     private $rol;
 
+    private $fecha_creacion;
+    private $activo;
 
-    public function __construct($id_usuario="",$password="",$username="",$telf="",$rol="mecanico") {
-        $this->id_usuario=$id_usuario;
-        $this->password=$password;
-        $this->username=$username;
-        $this->telf=$telf;
-        $this->rol=$rol;
 
+    public function __construct(
+        $username = "",
+        $password = "",
+        $nombre = "",
+        $apellidos = "",
+        $correo = "",
+        $fecha_nacimiento = "",
+        $codigo_postal = "",
+        $telefono = "",
+        $rol = 3,
+        $id = "",
+        $fecha_creacion = "",
+        $activo = true
+    ) {
+        $this->id = $id;
+        $this->username = $username;
+        $this->password = $password;
+        $this->nombre = $nombre;
+        $this->apellidos = $apellidos;
+        $this->correo = $correo;
+        $this->fecha_nacimiento = $fecha_nacimiento;
+        $this->codigo_postal = $codigo_postal;
+        $this->telefono = $telefono;
+        $this->rol = $rol;
+        $this->fecha_creacion = $fecha_creacion;
+        $this->activo = $activo;
     }
 
     public function __get(string $name): mixed {
@@ -24,16 +51,7 @@ class Usuario{
         $this->$name=$value;
     }
     
-    public function esAdmin(): bool {
-        return $this->rol === 'admin';
-    }
     
-    public function esMecanico(): bool {
-        return $this->rol === 'mecanico';
-    }
-    
-
-
 
 }
 

@@ -16856,29 +16856,49 @@ main > .container > .row > .col-12:first-child img {
       .card .card-title {
         font-size: 24px; } }
 
-.form-control {
-  background: var(--bs-body-bg);
-  border: 2px solid transparent;
-  border-radius: 8px;
-  padding: 12px 15px;
-  height: 45px;
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  font-size: 16px;
-  color: #1c0538;
-  transition: border-color 0.3s ease; }
-  .form-control:focus {
-    border-color: #6f12e0;
-    background-color: var(--bs-body-bg);
-    color: #1c0538;
-    outline: none;
-    box-shadow: 0 0 0 0.2rem rgba(111, 18, 224, 0.25); }
-  .form-control::placeholder {
-    color: rgba(28, 5, 56, 0.5); }
+.form-control,
+.form-control-lg {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border: 2px solid rgba(255, 253, 250, 0.3) !important;
+  border-radius: 8px !important;
+  padding: 12px 15px !important;
+  height: 45px !important;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
+  font-size: 16px !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  transition: border-color 0.3s ease !important; }
+  .form-control:focus,
+  .form-control-lg:focus {
+    border-color: #6f12e0 !important;
+    background-color: rgba(255, 255, 255, 0.2) !important;
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+    outline: none !important;
+    box-shadow: 0 0 0 0.2rem rgba(111, 18, 224, 0.25) !important; }
+  .form-control::placeholder,
+  .form-control-lg::placeholder {
+    color: rgba(255, 255, 255, 0.6) !important;
+    opacity: 1 !important; }
+  .form-control:-webkit-autofill, .form-control:-webkit-autofill:hover, .form-control:-webkit-autofill:focus,
+  .form-control-lg:-webkit-autofill,
+  .form-control-lg:-webkit-autofill:hover,
+  .form-control-lg:-webkit-autofill:focus {
+    -webkit-text-fill-color: #ffffff !important;
+    -webkit-box-shadow: 0 0 0px 1000px rgba(255, 255, 255, 0.15) inset !important;
+    transition: background-color 5000s ease-in-out 0s !important; }
   @media (max-width: 768px) {
-    .form-control {
-      height: 40px;
-      padding: 10px 12px;
-      font-size: 15px; } }
+    .form-control,
+    .form-control-lg {
+      height: 40px !important;
+      padding: 10px 12px !important;
+      font-size: 15px !important; } }
+
+.invalid-feedback {
+  color: #ff6b6b !important;
+  font-size: 14px;
+  margin-top: 5px;
+  display: block !important; }
 
 .form-label {
   color: #fffdfa;

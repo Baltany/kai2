@@ -1,4 +1,37 @@
-<?php include("includes/a_config.php"); ?>
+<?php 
+session_start();
+include("includes/a_config.php");
+
+// Si ya está logueado, redirige al index
+if (isset($_SESSION['usuario_id'])) {
+    header("Location: index.php");
+    exit();
+}
+
+$error = '';
+$exito = '';
+
+// Si el formulario se envía
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    require_once "../model/Conexion.php";
+    require_once "../model/Usuario.php";
+    require_once "../controller/UsuarioController.php";
+    
+    $controller = new UsuarioController();
+    
+    $username = $_POST['email'] ?? '';
+    $password = $_POST['password'] ?? '';
+    
+    $resultado = $controller->login($username, $password);
+    
+    if ($resultado['success']) {
+        $exito = $resultado['message'];
+        header("refresh:1;url=index.php");
+    } else {
+        $error = $resultado['message'];
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -28,21 +61,38 @@
                                 ¡Bienvenido a Kairos!
                             </h1>
 
+                            <!-- Mostrar Error -->
+                            <?php if ($error): ?>
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    <strong>❌ Error:</strong> <?php echo htmlspecialchars($error); ?>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            <?php endif; ?>
+
+                            <!-- Mostrar Éxito -->
+                            <?php if ($exito): ?>
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <strong>✅ Éxito:</strong> <?php echo htmlspecialchars($exito); ?> Redirigiendo...
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            <?php endif; ?>
+
                             <!-- Formulario Login -->
-                            <form method="POST" action="index.php" novalidate>
+                            <form method="POST" action="" novalidate>
                                 
-                                <!-- Email Input -->
+                                <!-- Email/Username Input -->
                                 <div class="mb-3">
-                                    <label for="email" class="form-label fw-500">Email</label>
+                                    <label for="email" class="form-label fw-500">Email o Usuario</label>
                                     <input 
-                                        type="email" 
+                                        type="text" 
                                         id="email" 
                                         name="email"
                                         class="form-control form-control-lg" 
-                                        placeholder="correo@ejemplo.com" 
+                                        placeholder="correo@ejemplo.com o usuario_nombre" 
+                                        value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email']) : ''; ?>"
                                         required />
                                     <div class="invalid-feedback d-block" style="display: none;">
-                                        Por favor introduce un email válido.
+                                        Por favor introduce un email o usuario válido.
                                     </div>
                                 </div>
 
@@ -78,6 +128,16 @@
                                     </p>
                                 </div>
                             </form>
+
+                            <!-- Divider -->
+                            <hr class="my-4">
+
+                            <!-- Google OAuth (para después) -->
+                            <div class="d-grid gap-2">
+                                <button type="button" class="btn btn-outline-secondary btn-lg" onclick="alert('Google OAuth - Próximamente')">
+                                    🔵 Iniciar con Google
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -85,5 +145,7 @@
         </div>
     </main>
 
+    <?php include("includes/footer.php"); ?>
+    <script src="js/scripts.js"></script>
 </body>
 </html>
