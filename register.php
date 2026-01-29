@@ -1,22 +1,64 @@
-<?php include("includes/a_config.php"); ?>
+<?php 
+session_start();
+include("includes/a_config.php");
+
+// Si ya está logueado, redirige al index
+if (isset($_SESSION['usuario_id'])) {
+    header("Location: index.php");
+    exit();
+}
+
+$error = '';
+$exito = '';
+
+// Si el formulario se envía
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    require_once __DIR__ . "/model/Conexion.php";
+    require_once __DIR__ . "/model/Usuario.php";
+    require_once __DIR__ . "/controller/UsuarioController.php";
+    
+    $controller = new UsuarioController();
+    
+    $datos = [
+        'username' => $_POST['username'] ?? '',
+        'password' => $_POST['password'] ?? '',
+        'nombre' => $_POST['nombre'] ?? '',
+        'apellidos' => $_POST['apellidos'] ?? '',
+        'correo' => $_POST['email'] ?? '',
+        'fecha_nacimiento' => $_POST['fecha_nacimiento'] ?? '',
+        'codigo_postal' => $_POST['codigo_postal'] ?? '',
+        'telefono' => $_POST['telefono'] ?? ''
+    ];
+    
+    $resultado = $controller->registrar($datos);
+    
+    if ($resultado['success']) {
+        $exito = $resultado['message'];
+        // Limpiar formulario
+        $_POST = [];
+    } else {
+        $error = $resultado['message'];
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro - Kairos</title>
     <?php include("includes/head-tag-contents.php"); ?>
 </head>
+
 <body>
     <main class="d-flex align-items-center justify-content-center min-vh-100">
         <div class="container">
             <div class="row justify-content-center">
                 <!-- Logo -->
                 <div class="col-12 text-center mb-5">
-                    <img class="img-fluid" style="max-width: 150px; height: auto;" 
-                         src="assets/img/kairos.png" 
-                         onerror="this.src='https://placehold.co/150x50/1c0538/ffffff?text=Kairos'" 
-                         alt="Kairos Logo"/>
+                    <img class="img-fluid" style="max-width: 150px; height: auto;" src="assets/img/kairos.png"
+                        onerror="this.src='https://placehold.co/150x50/1c0538/ffffff?text=Kairos'" alt="Kairos Logo" />
                 </div>
 
                 <!-- Register Form Card -->
@@ -31,73 +73,114 @@
                                 Crea tu cuenta rellenando el formulario
                             </p>
 
+                            <!-- Mostrar Error -->
+                            <?php if ($error): ?>
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <strong>❌ Error:</strong> <?php echo htmlspecialchars($error); ?>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
+                            <?php endif; ?>
+
+                            <!-- Mostrar Éxito -->
+                            <?php if ($exito): ?>
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong>✅ Éxito:</strong> <?php echo htmlspecialchars($exito); ?>
+                                <p class="mt-2 mb-0">Redirigiendo a login en 2 segundos...</p>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
+                            <script>
+                            setTimeout(() => {
+                                window.location.href = 'login.php';
+                            }, 2000);
+                            </script>
+                            <?php endif; ?>
+
                             <!-- Formulario Registro -->
-                            <form method="POST" action="includes/register-process.php" novalidate>
-                                
+                            <form method="POST" action="" novalidate>
+
+                                <!-- Username Input -->
+                                <div class="mb-3">
+                                    <label for="username" class="form-label fw-500">Nombre de Usuario</label>
+                                    <input type="text" id="username" name="username"
+                                        class="form-control form-control-lg" placeholder="usuario_nombre"
+                                        value="<?php echo isset($_POST['username']) ? htmlspecialchars($_POST['username']) : ''; ?>"
+                                        required />
+                                    <small class="text-muted">Alfanumérico y guion bajo, 3-50 caracteres</small>
+                                </div>
+
                                 <!-- Nombre Input -->
                                 <div class="mb-3">
                                     <label for="nombre" class="form-label fw-500">Nombre</label>
-                                    <input 
-                                        type="text" 
-                                        id="nombre" 
-                                        name="nombre"
-                                        class="form-control form-control-lg" 
-                                        placeholder="Tu nombre" 
+                                    <input type="text" id="nombre" name="nombre" class="form-control form-control-lg"
+                                        placeholder="Tu nombre"
+                                        value="<?php echo isset($_POST['nombre']) ? htmlspecialchars($_POST['nombre']) : ''; ?>"
                                         required />
-                                    <div class="invalid-feedback d-block" style="display: none;">
-                                        El nombre es obligatorio.
-                                    </div>
                                 </div>
 
                                 <!-- Apellidos Input -->
                                 <div class="mb-3">
                                     <label for="apellidos" class="form-label fw-500">Apellidos</label>
-                                    <input 
-                                        type="text" 
-                                        id="apellidos" 
-                                        name="apellidos"
-                                        class="form-control form-control-lg" 
-                                        placeholder="Tus apellidos" 
+                                    <input type="text" id="apellidos" name="apellidos"
+                                        class="form-control form-control-lg" placeholder="Tus apellidos"
+                                        value="<?php echo isset($_POST['apellidos']) ? htmlspecialchars($_POST['apellidos']) : ''; ?>"
                                         required />
-                                    <div class="invalid-feedback d-block" style="display: none;">
-                                        Los apellidos son obligatorios.
-                                    </div>
                                 </div>
 
                                 <!-- Email Input -->
                                 <div class="mb-3">
                                     <label for="email" class="form-label fw-500">Email</label>
-                                    <input 
-                                        type="email" 
-                                        id="email" 
-                                        name="email"
-                                        class="form-control form-control-lg" 
-                                        placeholder="correo@ejemplo.com" 
+                                    <input type="email" id="email" name="email" class="form-control form-control-lg"
+                                        placeholder="correo@ejemplo.com"
+                                        value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email']) : ''; ?>"
                                         required />
-                                    <div class="invalid-feedback d-block" style="display: none;">
-                                        Por favor introduce un email válido.
-                                    </div>
+                                </div>
+
+                                <!-- Fecha Nacimiento Input -->
+                                <div class="mb-3">
+                                    <label for="fecha_nacimiento" class="form-label fw-500">Fecha de Nacimiento</label>
+                                    <input type="date" id="fecha_nacimiento" name="fecha_nacimiento"
+                                        class="form-control form-control-lg"
+                                        value="<?php echo isset($_POST['fecha_nacimiento']) ? htmlspecialchars($_POST['fecha_nacimiento']) : ''; ?>"
+                                        required />
+                                    <small class="text-muted">Debes ser mayor de 18 años</small>
+                                </div>
+
+                                <!-- Codigo Postal Input -->
+                                <div class="mb-3">
+                                    <label for="codigo_postal" class="form-label fw-500">Código Postal</label>
+                                    <input type="text" id="codigo_postal" name="codigo_postal"
+                                        class="form-control form-control-lg" placeholder="28001"
+                                        value="<?php echo isset($_POST['codigo_postal']) ? htmlspecialchars($_POST['codigo_postal']) : ''; ?>"
+                                        maxlength="5" required />
+                                    <small class="text-muted">5 dígitos</small>
+                                </div>
+
+                                <!-- Teléfono Input -->
+                                <div class="mb-3">
+                                    <label for="telefono" class="form-label fw-500">Teléfono</label>
+                                    <input type="text" id="telefono" name="telefono"
+                                        class="form-control form-control-lg" placeholder="600000000"
+                                        value="<?php echo isset($_POST['telefono']) ? htmlspecialchars($_POST['telefono']) : ''; ?>"
+                                        maxlength="9" required />
+                                    <small class="text-muted">9 dígitos</small>
                                 </div>
 
                                 <!-- Password Input -->
                                 <div class="mb-4">
                                     <label for="password" class="form-label fw-500">Contraseña</label>
-                                    <input 
-                                        type="password" 
-                                        id="password" 
-                                        name="password"
-                                        class="form-control form-control-lg" 
-                                        placeholder="Crea una contraseña segura" 
+                                    <input type="password" id="password" name="password"
+                                        class="form-control form-control-lg" placeholder="Crea una contraseña segura"
                                         required />
-                                    <div class="invalid-feedback d-block" style="display: none;">
-                                        La contraseña es obligatoria.
-                                    </div>
+                                    <small class="text-muted">Mínimo 8 caracteres: minúscula, mayúscula, número y
+                                        carácter especial (@$!%*?&)</small>
                                 </div>
 
                                 <!-- Buttons Row -->
                                 <div class="d-grid gap-2 mb-3">
                                     <button type="submit" class="btn btn-primary btn-lg fw-bold">
-                                        Aceptar
+                                        Registrarse
                                     </button>
                                     <a href="login.php" class="btn btn-outline-secondary btn-lg fw-bold">
                                         Cancelar
@@ -107,7 +190,7 @@
                                 <!-- Login Link -->
                                 <div class="text-center">
                                     <p class="small mb-0">
-                                        ¿Ya tienes cuenta? 
+                                        ¿Ya tienes cuenta?
                                         <a href="login.php" class="text-primary text-decoration-none fw-bold">
                                             Inicia sesión aquí
                                         </a>
@@ -123,4 +206,5 @@
 
     <script src="js/scripts.js"></script>
 </body>
+
 </html>
