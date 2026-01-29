@@ -1,6 +1,7 @@
 <?php
-require_once "../model/Conexion.php";
-require_once "../model/Usuario.php";
+require_once __DIR__ . "/../model/Conexion.php";
+require_once __DIR__ . "/../model/Usuario.php";
+
 class UsuarioController {
     private $conexion;
 

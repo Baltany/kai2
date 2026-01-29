@@ -2,7 +2,6 @@
 session_start();
 include("includes/a_config.php");
 
-// Si ya está logueado, redirige al index
 if (isset($_SESSION['usuario_id'])) {
     header("Location: index.php");
     exit();
@@ -10,12 +9,13 @@ if (isset($_SESSION['usuario_id'])) {
 
 $error = '';
 $exito = '';
+$resultado = null;
 
 // Si el formulario se envía
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    require_once "../model/Conexion.php";
-    require_once "../model/Usuario.php";
-    require_once "../controller/UsuarioController.php";
+    require_once __DIR__ . "/model/Conexion.php";
+    require_once __DIR__ . "/model/Usuario.php";
+    require_once __DIR__ . "/controller/UsuarioController.php";
     
     $controller = new UsuarioController();
     
@@ -31,25 +31,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $error = $resultado['message'];
     }
 }
+
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Kairos</title>
     <?php include("includes/head-tag-contents.php"); ?>
 </head>
+
 <body>
     <main class="d-flex align-items-center justify-content-center min-vh-100">
         <div class="container">
             <div class="row justify-content-center">
                 <!-- Logo -->
                 <div class="col-12 text-center mb-5">
-                    <img class="img-fluid" style="max-width: 150px; height: auto;" 
-                         src="assets/img/kairos.png" 
-                         onerror="this.src='https://placehold.co/150x50/1c0538/ffffff?text=Kairos'" 
-                         alt="Kairos Logo"/>
+                    <img class="img-fluid" style="max-width: 150px; height: auto;" src="assets/img/kairos.png"
+                        onerror="this.src='https://placehold.co/150x50/1c0538/ffffff?text=Kairos'" alt="Kairos Logo" />
                 </div>
 
                 <!-- Login Form Card -->
@@ -63,32 +65,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                             <!-- Mostrar Error -->
                             <?php if ($error): ?>
-                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                    <strong>❌ Error:</strong> <?php echo htmlspecialchars($error); ?>
-                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                </div>
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <strong>❌ Error:</strong> <?php echo htmlspecialchars($error); ?>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
                             <?php endif; ?>
 
                             <!-- Mostrar Éxito -->
                             <?php if ($exito): ?>
-                                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                    <strong>✅ Éxito:</strong> <?php echo htmlspecialchars($exito); ?> Redirigiendo...
-                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                </div>
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong>✅ Éxito:</strong> <?php echo htmlspecialchars($exito); ?> Redirigiendo...
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
                             <?php endif; ?>
 
                             <!-- Formulario Login -->
                             <form method="POST" action="" novalidate>
-                                
+
                                 <!-- Email/Username Input -->
                                 <div class="mb-3">
                                     <label for="email" class="form-label fw-500">Email o Usuario</label>
-                                    <input 
-                                        type="text" 
-                                        id="email" 
-                                        name="email"
-                                        class="form-control form-control-lg" 
-                                        placeholder="correo@ejemplo.com o usuario_nombre" 
+                                    <input type="text" id="email" name="email" class="form-control form-control-lg"
+                                        placeholder="correo@ejemplo.com o usuario_nombre"
                                         value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email']) : ''; ?>"
                                         required />
                                     <div class="invalid-feedback d-block" style="display: none;">
@@ -99,13 +99,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 <!-- Password Input -->
                                 <div class="mb-4">
                                     <label for="password" class="form-label fw-500">Contraseña</label>
-                                    <input 
-                                        type="password" 
-                                        id="password" 
-                                        name="password"
-                                        class="form-control form-control-lg" 
-                                        placeholder="••••••••" 
-                                        required />
+                                    <input type="password" id="password" name="password"
+                                        class="form-control form-control-lg" placeholder="••••••••" required />
                                     <div class="invalid-feedback d-block" style="display: none;">
                                         Por favor introduce tu contraseña.
                                     </div>
@@ -113,7 +108,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                                 <!-- Login Button -->
                                 <div class="d-grid gap-2 mb-4">
-                                    <button type="submit" class="btn btn-primary btn-lg fw-bold">
+                                    <button type="submit" class="btn btn-primary btn-lg fw-bold" name="enviar"
+                                        id="enviar">
                                         Iniciar Sesión
                                     </button>
                                 </div>
@@ -121,7 +117,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 <!-- Register Link -->
                                 <div class="text-center">
                                     <p class="mb-0">
-                                        ¿Aún no tienes cuenta? 
+                                        ¿Aún no tienes cuenta?
                                         <a href="register.php" class="text-primary text-decoration-none fw-bold">
                                             Regístrate aquí
                                         </a>
@@ -134,7 +130,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                             <!-- Google OAuth (para después) -->
                             <div class="d-grid gap-2">
-                                <button type="button" class="btn btn-outline-secondary btn-lg" onclick="alert('Google OAuth - Próximamente')">
+                                <button type="button" class="btn btn-outline-secondary btn-lg"
+                                    onclick="alert('Google OAuth - Próximamente')">
                                     🔵 Iniciar con Google
                                 </button>
                             </div>
@@ -148,4 +145,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php include("includes/footer.php"); ?>
     <script src="js/scripts.js"></script>
 </body>
+
 </html>
