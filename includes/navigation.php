@@ -9,9 +9,8 @@
         <!-- Barra grande: menú + buscador + lupa -->
         <div class="kairos-bar">
             <div class="kairos-menu-wrapper dropdown">
-                <button class="kairos-menu-btn dropdown-toggle" type="button"
-                        id="kairosMenuDropdown"
-                        data-bs-toggle="dropdown" aria-expanded="false">
+                <button class="kairos-menu-btn dropdown-toggle" type="button" id="kairosMenuDropdown"
+                    data-bs-toggle="dropdown" aria-expanded="false">
                     <i class="fas fa-bars"></i>
                 </button>
 
@@ -38,6 +37,9 @@
             <button class="kairos-action-btn" type="button" onclick="window.location.href='login.php'">
                 <i class="fas fa-user"></i>
             </button>
+            <a class="kairos-action-btn" href="logout.php">
+                <i class="bi bi-box-arrow-right"></i>
+            </a>
             <a class="kairos-action-btn" href="wishlist.php">
                 <i class="fas fa-star"></i>
             </a>
