@@ -6,6 +6,8 @@ $productImage = $productImage ?? 'assets/img/products/default.png';
 $discount = $discount ?? '-30%';
 $price = $price ?? '39.99€';
 $platformName = $platformName ?? 'Steam';
+$productName = $productName ?? 'Producto'; // AÑADIDO
+$productId = $productId ?? '#'; // AÑADIDO
 ?>
 
 <div class="product-card">
@@ -15,24 +17,23 @@ $platformName = $platformName ?? 'Steam';
             <div class="product-card-platform">
                 <img src="<?php echo $platformImage; ?>" alt="<?php echo $platformName; ?>">
             </div>
-            
+
             <!-- Descuento -->
             <div class="product-card-discount">
                 <?php echo $discount; ?>
             </div>
-            
+
             <!-- Imagen del producto -->
-            <img class="product-card-cover"
-                 src="<?php echo $productImage; ?>"
-                 onerror="this.src='https://placehold.co/200x200/5e3a8b/ffffff?text=<?php echo $platformName; ?>'"
-                 alt="Producto <?php echo $platformName; ?>">
+            <img class="product-card-cover" src="<?php echo $productImage; ?>"
+                onerror="this.src='https://placehold.co/200x200/5e3a8b/ffffff?text=<?php echo urlencode($productName); ?>'"
+                alt="<?php echo $productName; ?>">
         </div>
 
         <div class="product-card-bottom">
             <div class="product-card-price">
                 <?php echo $price; ?>
             </div>
-            <a class="product-card-button" href="detalles.php">
+            <a class="product-card-button" href="detalles.php?id=<?php echo $productId; ?>">
                 AÑADIR AL CARRITO
             </a>
         </div>

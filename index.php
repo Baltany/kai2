@@ -1,9 +1,28 @@
-<?php include("includes/a_config.php"); ?>
-<?php include("includes/a_config.php");
+<?php 
+include("includes/a_config.php"); 
 require_once __DIR__ . "/controller/ProductoController.php";
 
 $productoController = new ProductoController();
-$productos = $productoController->obtenerTodos();
+
+// Detectar si hay un filtro de plataforma
+$platformId = isset($_GET['platform']) ? (int)$_GET['platform'] : null;
+
+// Si hay plataforma seleccionada, obtener esos productos. Si no, obtener todos
+if ($platformId) {
+    $productos = $productoController->obtenerPorPlataforma($platformId);
+    // Obtener nombre de la plataforma para el título
+    $plataformas = $productoController->obtenerPlataformas();
+    $nombrePlataforma = '';
+    foreach ($plataformas as $plat) {
+        if ($plat['id'] == $platformId) {
+            $nombrePlataforma = $plat['nombre'];
+            break;
+        }
+    }
+} else {
+    $productos = $productoController->obtenerTodos();
+    $nombrePlataforma = '';
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -95,6 +114,14 @@ $productos = $productoController->obtenerTodos();
         <!-- Productos Grid -->
         <section class="productos-section">
             <div class="container-fluid">
+                <!-- Título si hay filtro activo -->
+                <?php if ($nombrePlataforma): ?>
+                <div class="filtro-activo-header">
+                    <h2 class="filtro-titulo">Juegos de <?php echo htmlspecialchars($nombrePlataforma); ?></h2>
+                    <a href="index.php" class="btn-volver">← Volver a todos los productos</a>
+                </div>
+                <?php endif; ?>
+
                 <div class="row g-5 justify-content-center">
                     <?php 
                     if (!empty($productos)) {
@@ -117,12 +144,13 @@ $productos = $productoController->obtenerTodos();
                     <?php
                         }
                     } else {
-                        echo '<div class="col-12 text-center"><p>No hay productos disponibles</p></div>';
+                        echo '<div class="col-12 text-center"><p class="no-productos">No hay productos disponibles</p></div>';
                     }
                     ?>
                 </div>
             </div>
         </section>
+
 
 
         <!-- Sección del Juego Interactivo -->

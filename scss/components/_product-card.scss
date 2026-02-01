@@ -4,11 +4,12 @@
     border-radius: 2rem;
     padding: 0.6rem;
     width: 100%;
-    max-width: 20rem;
+    // max-width: 20rem;
     max-height: 300rem;
     color: $texto_claro;
     font-family: $font-family-sans-serif;
     margin-top: 1rem;
+
     .product-card-inner {
         background: $primario;
         border-radius: 1.7rem;
@@ -93,22 +94,30 @@
 
     .product-card-price {
         border-radius: 1.3rem 1.3rem 0 0;
-        border-bottom-width: 0.25rem;
+        border-bottom: 0.25rem solid darken($resalte, 15%);
         padding: 0.5rem 0.75rem;
         font-size: 1.6rem;
     }
 
     .product-card-button {
         border-radius: 0 0 1.3rem 1.3rem;
-        border-top-width: 0.25rem;
+        border-top: 0.25rem solid darken($resalte, 15%);
         padding: 0.5rem 0.75rem;
         font-size: 1.05rem;
         text-transform: uppercase;
         letter-spacing: 0.06em;
         cursor: pointer;
         text-decoration: none;
+        display: block;
+        transition: all 0.3s ease;
+
         &:hover {
             filter: brightness(1.05);
+            transform: translateY(-2px);
+        }
+
+        &:active {
+            transform: translateY(0);
         }
     }
 }
