@@ -85,6 +85,29 @@ class ProductoController {
         }
     }
 
+    /**
+ * Obtener géneros de un producto específico
+ */
+public function obtenerGenerosProducto($idProducto) {
+    try {
+        $sql = "SELECT g.id, g.nombre 
+                FROM genero g
+                INNER JOIN producto_genero pg ON g.id = pg.id_genero
+                WHERE pg.id_producto = :id_producto
+                ORDER BY g.nombre ASC";
+        
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->bindParam(':id_producto', $idProducto, PDO::PARAM_INT);
+        $stmt->execute();
+        
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (Exception $e) {
+        error_log("Error en obtenerGenerosProducto: " . $e->getMessage());
+        return [];
+    }
+}
+
+
     // ============================================
     // CALCULAR PRECIO CON DESCUENTO
     // ============================================

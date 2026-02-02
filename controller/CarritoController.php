@@ -276,7 +276,7 @@ class CarritoController {
                 return false;
             }
             
-            $sql = "SELECT id FROM carrito_producto 
+            $sql = "SELECT id_carrito FROM carrito_producto 
                     WHERE id_carrito = :id_carrito AND id_producto = :id_producto";
             $stmt = $this->conexion->prepare($sql);
             $stmt->bindParam(':id_carrito', $idCarrito, PDO::PARAM_INT);

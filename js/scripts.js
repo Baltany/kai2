@@ -43,16 +43,14 @@ window.addEventListener('DOMContentLoaded', event => {
 // ============================================================================
 // CARRITO.JS - Solo abre/cierra modal y maneja botón agregar
 // ============================================================================
-
 document.addEventListener('DOMContentLoaded', function() {
     const cartModalElement = document.getElementById('cartModal');
     const productList = document.getElementById('productList');
     const subtotalElement = document.getElementById('subtotalPrice');
-    const removeAllButton = document.getElementById('removeAllItems');
-
+    
     // Inicializar offcanvas
     const cartOffcanvas = new bootstrap.Offcanvas(cartModalElement);
-
+    
     // =========================================================================
     // 1. ABRIR CARRITO - Busca el botón con ID openCartModal
     // =========================================================================
@@ -64,9 +62,9 @@ document.addEventListener('DOMContentLoaded', function() {
             cartOffcanvas.show();
         });
     }
-
+    
     // =========================================================================
-    // 2. ACTUALIZAR SUBTOTAL (basado en datos-precio y cantidad)
+    // 2. ACTUALIZAR SUBTOTAL (basado en data-price y cantidad)
     // =========================================================================
     function updateSubtotal() {
         let total = 0;
@@ -76,54 +74,112 @@ document.addEventListener('DOMContentLoaded', function() {
             const price = parseFloat(item.getAttribute('data-price')) || 0;
             const quantityDisplay = item.querySelector('[data-quantity]');
             const quantity = parseInt(quantityDisplay.textContent) || 1;
-            
             total += price * quantity;
         });
-
+        
         if (subtotalElement) {
             subtotalElement.textContent = total.toFixed(2) + '€';
         }
     }
-
+    
     // =========================================================================
-    // 3. AGREGAR PRODUCTO AL CARRITO (desde product-card)
+    // 3. AGREGAR PRODUCTO AL CARRITO (desde product-card y detalle)
     // =========================================================================
+    
+    // Función para agregar al carrito con AJAX
+    function agregarAlCarrito(productId, productName, buttonElement) {
+        // Crear formulario
+        const formData = new FormData();
+        formData.append('accion', 'agregar');
+        formData.append('producto_id', productId);
+        
+        // Deshabilitar botón mientras se procesa
+        const originalText = buttonElement.innerHTML;
+        buttonElement.disabled = true;
+        buttonElement.innerHTML = '<i class="bi bi-hourglass-split"></i> Agregando...';
+        
+        // Enviar petición AJAX
+        fetch('carrito-acciones.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => {
+            if (response.ok) {
+                // Éxito - Mostrar feedback
+                buttonElement.innerHTML = '<i class="bi bi-check-circle"></i> ¡Agregado!';
+                buttonElement.classList.add('btn-success');
+                buttonElement.classList.remove('btn-primary');
+                
+                // Mostrar notificación
+                mostrarNotificacion('Producto agregado al carrito', 'success');
+                
+                // Recargar página después de 1 segundo para actualizar el carrito
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1000);
+            } else {
+                throw new Error('Error al agregar producto');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            buttonElement.innerHTML = originalText;
+            buttonElement.disabled = false;
+            mostrarNotificacion('Error al agregar el producto', 'danger');
+        });
+    }
+    
+    // Evento para botones en product-card
     document.addEventListener('click', function(e) {
-        if (e.target.closest('.product-card-button')) {
+        const button = e.target.closest('.btn-add-to-cart');
+        if (button) {
             e.preventDefault();
+            const productId = button.getAttribute('data-product-id');
+            const productName = button.getAttribute('data-product-name') || 'Producto';
             
-            const button = e.target.closest('.product-card-button');
-            const href = button.getAttribute('href');
-            const productId = href.split('=')[1];
-            
-            // Crear formulario invisible y enviarlo
-            const form = document.createElement('form');
-            form.method = 'POST';
-            form.action = 'carrito-acciones.php';
-            
-            const accionInput = document.createElement('input');
-            accionInput.type = 'hidden';
-            accionInput.name = 'accion';
-            accionInput.value = 'agregar';
-            
-            const idInput = document.createElement('input');
-            idInput.type = 'hidden';
-            idInput.name = 'producto_id';
-            idInput.value = productId;
-            
-            form.appendChild(accionInput);
-            form.appendChild(idInput);
-            document.body.appendChild(form);
-            form.submit();
+            agregarAlCarrito(productId, productName, button);
         }
     });
-
+    
+    // Evento para botón en página de detalle
+    document.addEventListener('click', function(e) {
+        const button = e.target.closest('.btn-add-to-cart-detalle');
+        if (button) {
+            e.preventDefault();
+            const productId = button.getAttribute('data-product-id');
+            const productName = button.getAttribute('data-product-name') || 'Producto';
+            
+            agregarAlCarrito(productId, productName, button);
+        }
+    });
+    
     // =========================================================================
-    // 7. INICIALIZAR SUBTOTAL AL CARGAR
+    // 4. FUNCIÓN PARA MOSTRAR NOTIFICACIONES (Toast)
+    // =========================================================================
+    function mostrarNotificacion(mensaje, tipo = 'success') {
+        // Crear elemento de notificación
+        const notificacion = document.createElement('div');
+        notificacion.className = `alert alert-${tipo} alert-dismissible fade show position-fixed top-0 start-50 translate-middle-x mt-3`;
+        notificacion.style.zIndex = '9999';
+        notificacion.style.minWidth = '300px';
+        notificacion.innerHTML = `
+            ${mensaje}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        `;
+        
+        document.body.appendChild(notificacion);
+        
+        // Auto-eliminar después de 3 segundos
+        setTimeout(() => {
+            notificacion.remove();
+        }, 3000);
+    }
+    
+    // =========================================================================
+    // 5. INICIALIZAR SUBTOTAL AL CARGAR
     // =========================================================================
     updateSubtotal();
 });
-
 
 
 // ===== CONTROLES DEL VIDEO =====
