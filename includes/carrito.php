@@ -108,7 +108,7 @@ if ($idUsuario) {
 
             <!-- Botones -->
             <div class="d-grid gap-2">
-                <a href="zona_pago.php" class="btn btn-primary btn-lg fw-bold">
+                <a href="zonadepago.php" class="btn btn-primary btn-lg fw-bold">
                     COMPRAR
                 </a>
 

@@ -132,7 +132,7 @@ $generosTexto = !empty($generosProducto) ? implode(', ', array_column($generosPr
                                 <button class="details-add-btn" style="background: #10b981; cursor: default;" disabled>
                                     ✓ YA ESTÁ EN TU CARRITO
                                 </button>
-                                <a href="zona_pago.php" class="btn btn-primary w-100 mt-2">
+                                <a href="zonadepago.php" class="btn btn-primary w-100 mt-2">
                                     IR AL CARRITO
                                 </a>
                                 <?php else: ?>
