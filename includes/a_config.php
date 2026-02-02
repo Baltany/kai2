@@ -1,4 +1,7 @@
 <?php
+
+session_start();
+
 	switch ($_SERVER["SCRIPT_NAME"]) {
 		case "/index.php":
 			$CURRENT_PAGE = "index"; 

@@ -40,17 +40,18 @@ window.addEventListener('DOMContentLoaded', event => {
     });
 
 });
-
 // ============================================================================
-// CARRITO.JS - Lógica completa del carrito
+// CARRITO.JS - Solo abre/cierra modal y maneja botón agregar
 // ============================================================================
 
 document.addEventListener('DOMContentLoaded', function() {
     const cartModalElement = document.getElementById('cartModal');
-    const cartOffcanvas = new bootstrap.Offcanvas(cartModalElement);
     const productList = document.getElementById('productList');
     const subtotalElement = document.getElementById('subtotalPrice');
     const removeAllButton = document.getElementById('removeAllItems');
+
+    // Inicializar offcanvas
+    const cartOffcanvas = new bootstrap.Offcanvas(cartModalElement);
 
     // =========================================================================
     // 1. ABRIR CARRITO - Busca el botón con ID openCartModal
@@ -65,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // =========================================================================
-    // 2. ACTUALIZAR SUBTOTAL
+    // 2. ACTUALIZAR SUBTOTAL (basado en datos-precio y cantidad)
     // =========================================================================
     function updateSubtotal() {
         let total = 0;
@@ -80,70 +81,48 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         if (subtotalElement) {
-            subtotalElement.textContent = total + '€';
+            subtotalElement.textContent = total.toFixed(2) + '€';
         }
     }
 
     // =========================================================================
-    // 3. INCREMENTAR CANTIDAD (Botón +)
+    // 3. AGREGAR PRODUCTO AL CARRITO (desde product-card)
     // =========================================================================
-    productList.addEventListener('click', function(e) {
-        if (e.target.classList.contains('increment-btn')) {
-            const element = e.target.closest('.elemento-carrito');
-            const quantityDisplay = element.querySelector('[data-quantity]');
-            let quantity = parseInt(quantityDisplay.textContent);
-            quantityDisplay.textContent = quantity + 1;
-            updateSubtotal();
-        }
-    });
-
-    // =========================================================================
-    // 4. DECREMENTAR CANTIDAD (Botón -)
-    // =========================================================================
-    productList.addEventListener('click', function(e) {
-        if (e.target.classList.contains('decrement-btn')) {
-            const element = e.target.closest('.elemento-carrito');
-            const quantityDisplay = element.querySelector('[data-quantity]');
-            let quantity = parseInt(quantityDisplay.textContent);
+    document.addEventListener('click', function(e) {
+        if (e.target.closest('.product-card-button')) {
+            e.preventDefault();
             
-            if (quantity > 1) {
-                quantityDisplay.textContent = quantity - 1;
-                updateSubtotal();
-            } else {
-                // Si es 1, eliminar el producto
-                element.remove();
-                updateSubtotal();
-            }
+            const button = e.target.closest('.product-card-button');
+            const href = button.getAttribute('href');
+            const productId = href.split('=')[1];
+            
+            // Crear formulario invisible y enviarlo
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = 'carrito-acciones.php';
+            
+            const accionInput = document.createElement('input');
+            accionInput.type = 'hidden';
+            accionInput.name = 'accion';
+            accionInput.value = 'agregar';
+            
+            const idInput = document.createElement('input');
+            idInput.type = 'hidden';
+            idInput.name = 'producto_id';
+            idInput.value = productId;
+            
+            form.appendChild(accionInput);
+            form.appendChild(idInput);
+            document.body.appendChild(form);
+            form.submit();
         }
     });
 
     // =========================================================================
-    // 5. ELIMINAR PRODUCTO INDIVIDUAL (Botón 🗑️)
-    // =========================================================================
-    productList.addEventListener('click', function(e) {
-        if (e.target.closest('.remove-item-btn')) {
-            const element = e.target.closest('.elemento-carrito');
-            element.remove();
-            updateSubtotal();
-        }
-    });
-
-    // =========================================================================
-    // 6. ELIMINAR TODOS LOS PRODUCTOS
-    // =========================================================================
-    if (removeAllButton) {
-        removeAllButton.addEventListener('click', function() {
-            productList.innerHTML = '';
-            updateSubtotal();
-        });
-    }
-
-    // =========================================================================
-    // 7. INICIALIZAR SUBTOTAL
+    // 7. INICIALIZAR SUBTOTAL AL CARGAR
     // =========================================================================
     updateSubtotal();
 });
-
 
 
 
