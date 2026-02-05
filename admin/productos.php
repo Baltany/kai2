@@ -4,9 +4,9 @@ require_once __DIR__ . "/../controller/ProductoController.php";
 
 $controller = new ProductoController();
 
-// Verificar que sea administrador
-if (!isset($_SESSION['rol']) || $_SESSION['rol'] != 1) {
-    header("Location: index.php");
+// Verificar que sea administrador y trabajador
+if (!isset($_SESSION['rol']) || ($_SESSION['rol'] != 1 && $_SESSION['rol'] != 2)) {
+    header("Location: ../index.php");
     exit();
 }
 

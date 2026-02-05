@@ -10,7 +10,11 @@ $usuarioController = new UsuarioController();
 
 // Verificar que sea administrador
 if (!isset($_SESSION['rol']) || $_SESSION['rol'] != 1) {
-    header("Location: index.php");
+    if (isset($_SESSION['rol']) && $_SESSION['rol'] == 2) {
+        header("Location: productos.php");
+        exit();
+    }
+    header("Location: ../index.php");
     exit();
 }
 
