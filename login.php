@@ -1,6 +1,7 @@
 <?php 
 session_start();
 include("includes/a_config.php");
+require_once __DIR__ . "/config_oauth.php"; // Configuración OAuth y reCAPTCHA
 
 if (isset($_SESSION['usuario_id'])) {
     // Si ya está logueado, redirigir según su rol
@@ -20,45 +21,74 @@ if (isset($_SESSION['usuario_id'])) {
     exit();
 }
 
+// Verificar si hay cookie de "Remember Me"
+require_once __DIR__ . "/model/Conexion.php";
+require_once __DIR__ . "/model/Usuario.php";
+require_once __DIR__ . "/controller/UsuarioController.php";
+$controller = new UsuarioController();
+
+if ($controller->validarRememberMe()) {
+    // Auto-login exitoso, redirigir según rol
+    $rol = $_SESSION['rol'] ?? 3;
+    switch ($rol) {
+        case 1:
+            header("Location: /admin/usuarios.php");
+            exit;
+        case 2:
+            header("Location: /admin/productos.php");
+            exit;
+        case 3:
+        default:
+            header("Location: /index.php");
+            exit;
+    }
+}
+
 $error = '';
 $exito = '';
 $resultado = null;
 
 // Si el formulario se envía
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    require_once __DIR__ . "/model/Conexion.php";
-    require_once __DIR__ . "/model/Usuario.php";
-    require_once __DIR__ . "/controller/UsuarioController.php";
-    
-    $controller = new UsuarioController();
-    
     $username = $_POST['email'] ?? '';
     $password = $_POST['password'] ?? '';
+    $rememberMe = isset($_POST['remember_me']);
+    $recaptchaResponse = $_POST['g-recaptcha-response'] ?? '';
     
-    $resultado = $controller->login($username, $password);
-    
-    if ($resultado['success']) {
-        $exito = $resultado['message'];
-        
-        // Redirigir según el rol del usuario
-        $rol = $_SESSION['rol'] ?? 3;
-        
-        switch ($rol) {
-            case 1: // Administrador
-                header("Location: /admin/usuarios.php");
-                exit;
-            case 2: // Trabajador
-                header("Location: /admin/productos.php");
-                exit;
-            case 3: // Cliente
-                header("Location: /index.php");                
-            default:
-                header("Location: /index.php");
-                exit;
-        }
-
+    // Verificar reCAPTCHA
+    if (!$controller->verificarRecaptcha($recaptchaResponse)) {
+        $error = "Por favor completa el reCAPTCHA";
     } else {
-        $error = $resultado['message'];
+        $resultado = $controller->login($username, $password);
+        
+        if ($resultado['success']) {
+            $exito = $resultado['message'];
+            
+            // Crear cookie "Remember Me" si está marcado
+            if ($rememberMe) {
+                $controller->crearRememberMe($_SESSION['usuario_id']);
+            }
+            
+            // Redirigir según el rol del usuario
+            $rol = $_SESSION['rol'] ?? 3;
+            
+            switch ($rol) {
+                case 1: // Administrador
+                    header("Location: /admin/usuarios.php");
+                    exit;
+                case 2: // Trabajador
+                    header("Location: /admin/productos.php");
+                    exit;
+                case 3: // Cliente
+                    header("Location: /index.php");                
+                default:
+                    header("Location: /index.php");
+                    exit;
+            }
+
+        } else {
+            $error = $resultado['message'];
+        }
     }
 }
 
@@ -72,6 +102,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Kairos</title>
     <?php include("includes/head-tag-contents.php"); ?>
+    <!-- Google OAuth -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <!-- reCAPTCHA v2 -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 
 <body>
@@ -136,6 +170,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     </div>
                                 </div>
 
+                                <!-- Remember Me Checkbox -->
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" class="form-check-input" id="remember_me" name="remember_me">
+                                    <label class="form-check-label" for="remember_me">
+                                        Recordarme (30 días)
+                                    </label>
+                                </div>
+
+                                <!-- reCAPTCHA v2 -->
+                                <div class="mb-4 d-flex justify-content-center">
+                                    <div class="g-recaptcha" data-sitekey="<?php echo RECAPTCHA_SITE_KEY; ?>"></div>
+                                </div>
+
                                 <!-- Login Button -->
                                 <div class="d-grid gap-2 mb-4">
                                     <button type="submit" class="btn btn-primary btn-lg fw-bold" name="enviar"
@@ -158,12 +205,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <!-- Divider -->
                             <hr class="my-4">
 
-                            <!-- Google OAuth (para después) -->
+                            <!-- Google OAuth Button -->
                             <div class="d-grid gap-2">
-                                <button type="button" class="btn btn-outline-secondary btn-lg"
-                                    onclick="alert('Google OAuth - Próximamente')">
-                                    🔵 Iniciar con Google
-                                </button>
+                                <div id="g_id_onload" data-client_id="<?php echo GOOGLE_CLIENT_ID; ?>"
+                                    data-callback="handleGoogleLogin" data-auto_prompt="false">
+                                </div>
+                                <div class="g_id_signin" data-type="standard" data-size="large" data-theme="outline"
+                                    data-text="signin_with" data-shape="rectangular" data-logo_alignment="left"
+                                    data-width="100%">
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -174,6 +224,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <?php include("includes/footer.php"); ?>
     <script src="js/scripts.js"></script>
+
+    <!-- Google OAuth Callback Handler -->
+    <script>
+    function handleGoogleLogin(response) {
+        // Enviar el token JWT a login_google.php
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = 'login_google.php';
+
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'credential';
+        input.value = response.credential;
+
+        form.appendChild(input);
+        document.body.appendChild(form);
+        form.submit();
+    }
+    </script>
 </body>
 
 </html>

@@ -1,6 +1,7 @@
 <?php 
 session_start();
 include("includes/a_config.php");
+require_once __DIR__ . "/config_oauth.php"; // Configuración OAuth y reCAPTCHA
 
 // Si ya está logueado, redirige al index
 if (isset($_SESSION['usuario_id'])) {
@@ -19,25 +20,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     $controller = new UsuarioController();
     
-    $datos = [
-        'username' => $_POST['username'] ?? '',
-        'password' => $_POST['password'] ?? '',
-        'nombre' => $_POST['nombre'] ?? '',
-        'apellidos' => $_POST['apellidos'] ?? '',
-        'correo' => $_POST['email'] ?? '',
-        'fecha_nacimiento' => $_POST['fecha_nacimiento'] ?? '',
-        'codigo_postal' => $_POST['codigo_postal'] ?? '',
-        'telefono' => $_POST['telefono'] ?? ''
-    ];
+    $recaptchaResponse = $_POST['g-recaptcha-response'] ?? '';
     
-    $resultado = $controller->registrar($datos);
-    
-    if ($resultado['success']) {
-        $exito = $resultado['message'];
-        // Limpiar formulario
-        $_POST = [];
+    // Verificar reCAPTCHA
+    if (!$controller->verificarRecaptcha($recaptchaResponse)) {
+        $error = "Por favor completa el reCAPTCHA";
     } else {
-        $error = $resultado['message'];
+        $datos = [
+            'username' => $_POST['username'] ?? '',
+            'password' => $_POST['password'] ?? '',
+            'nombre' => $_POST['nombre'] ?? '',
+            'apellidos' => $_POST['apellidos'] ?? '',
+            'correo' => $_POST['email'] ?? '',
+            'fecha_nacimiento' => $_POST['fecha_nacimiento'] ?? '',
+            'codigo_postal' => $_POST['codigo_postal'] ?? '',
+            'telefono' => $_POST['telefono'] ?? ''
+        ];
+        
+        $resultado = $controller->registrar($datos);
+        
+        if ($resultado['success']) {
+            $exito = $resultado['message'];
+            // Limpiar formulario
+            $_POST = [];
+        } else {
+            $error = $resultado['message'];
+        }
     }
 }
 ?>
@@ -49,6 +57,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro - Kairos</title>
     <?php include("includes/head-tag-contents.php"); ?>
+    <!-- reCAPTCHA v2 -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 
 <body>
@@ -175,6 +185,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         required />
                                     <small class="text-muted">Mínimo 8 caracteres: minúscula, mayúscula, número y
                                         carácter especial (@$!%*?&)</small>
+                                </div>
+
+                                <!-- reCAPTCHA v2 -->
+                                <div class="mb-4 d-flex justify-content-center">
+                                    <div class="g-recaptcha" data-sitekey="<?php echo RECAPTCHA_SITE_KEY; ?>"></div>
                                 </div>
 
                                 <!-- Buttons Row -->

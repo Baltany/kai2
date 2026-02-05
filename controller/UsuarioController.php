@@ -1,6 +1,8 @@
 <?php
 require_once __DIR__ . "/../model/Conexion.php";
 require_once __DIR__ . "/../model/Usuario.php";
+require_once __DIR__ . "/../config_oauth.php";
+
 
 class UsuarioController {
     private $conexion;
@@ -236,9 +238,147 @@ class UsuarioController {
     // LOGOUT
     // ============================================
     public function logout() {
-        session_start();
+        // Borrar cookie de remember me si existe
+        if (isset($_COOKIE[COOKIE_NAME])) {
+            setcookie(COOKIE_NAME, '', time() - 3600, '/', '', true, true);
+            
+            // Eliminar token de BD
+            if (isset($_SESSION['usuario_id'])) {
+                try {
+                    $sql = "UPDATE usuario SET remember_token = NULL WHERE id = :id";
+                    $stmt = $this->conexion->prepare($sql);
+                    $stmt->bindParam(':id', $_SESSION['usuario_id'], PDO::PARAM_INT);
+                    $stmt->execute();
+                } catch (Exception $e) {
+                    // Silencioso
+                }
+            }
+        }
+
+        // Destruir todas las variables de sesión
+        $_SESSION = [];
+
+        // Si se desea destruir la sesión completamente, borrar también la cookie de sesión
+        if (ini_get("session.use_cookies")) {
+            $params = session_get_cookie_params();
+            setcookie(session_name(), '', time() - 42000,
+                $params["path"], $params["domain"],
+                $params["secure"], $params["httponly"]
+            );
+        }
+
+        // Finalmente, destruir la sesión
         session_destroy();
         return ["success" => true, "message" => "Sesión cerrada"];
+    }
+
+    // ============================================
+    // REMEMBER ME - CREAR COOKIE
+    // ============================================
+    public function crearRememberMe($usuario_id) {
+        try {
+            // Generar token único
+            $token = bin2hex(random_bytes(32));
+            $hashedToken = password_hash($token, PASSWORD_BCRYPT);
+            
+            // Guardar token en BD
+            $sql = "UPDATE usuario SET remember_token = :token WHERE id = :id";
+            $stmt = $this->conexion->prepare($sql);
+            $stmt->bindParam(':token', $hashedToken, PDO::PARAM_STR);
+            $stmt->bindParam(':id', $usuario_id, PDO::PARAM_INT);
+            $stmt->execute();
+            
+            // Crear cookie (httponly y secure)
+            setcookie(COOKIE_NAME, $usuario_id . ':' . $token, time() + COOKIE_EXPIRY, '/', '', true, true);
+            
+            return true;
+        } catch (Exception $e) {
+            return false;
+        }
+    }
+
+    // ============================================
+    // REMEMBER ME - VALIDAR COOKIE Y AUTO-LOGIN
+    // ============================================
+    public function validarRememberMe() {
+        if (!isset($_COOKIE[COOKIE_NAME])) {
+            return false;
+        }
+
+        try {
+            $cookie = $_COOKIE[COOKIE_NAME];
+            $parts = explode(':', $cookie, 2);
+            
+            if (count($parts) !== 2) {
+                return false;
+            }
+            
+            list($usuario_id, $token) = $parts;
+            
+            // Buscar usuario
+            $sql = "SELECT * FROM usuario WHERE id = :id AND activo = 1";
+            $stmt = $this->conexion->prepare($sql);
+            $stmt->bindParam(':id', $usuario_id, PDO::PARAM_INT);
+            $stmt->execute();
+            
+            if ($stmt->rowCount() === 0) {
+                return false;
+            }
+            
+            $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+            
+            // Verificar token
+            if (empty($usuario['remember_token']) || !password_verify($token, $usuario['remember_token'])) {
+                return false;
+            }
+            
+            // Auto-login exitoso
+            $_SESSION['usuario_id'] = $usuario['id'];
+            $_SESSION['username'] = $usuario['username'];
+            $_SESSION['rol'] = $usuario['rol'];
+            $_SESSION['nombre'] = $usuario['nombre'];
+            $_SESSION['correo'] = $usuario['correo'];
+            
+            // Renovar cookie
+            $this->crearRememberMe($usuario_id);
+            
+            return true;
+            
+        } catch (Exception $e) {
+            return false;
+        }
+    }
+
+    // ============================================
+    // VERIFICAR RECAPTCHA
+    // ============================================
+    public function verificarRecaptcha($recaptchaResponse) {
+        if (empty($recaptchaResponse)) {
+            return false;
+        }
+
+        $data = [
+            'secret' => RECAPTCHA_SECRET_KEY,
+            'response' => $recaptchaResponse
+        ];
+
+        $options = [
+            'http' => [
+                'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+                'method'  => 'POST',
+                'content' => http_build_query($data)
+            ]
+        ];
+
+        $context  = stream_context_create($options);
+        $result = file_get_contents('https://www.google.com/recaptcha/api/siteverify', false, $context);
+        
+        if ($result === false) {
+            return false;
+        }
+
+        $resultJson = json_decode($result);
+        return $resultJson->success ?? false;
     }
 
     // ============================================
