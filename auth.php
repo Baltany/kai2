@@ -19,9 +19,33 @@ try {
         case 'login':
             $username = $_POST['username'] ?? '';
             $password = $_POST['password'] ?? '';
+            
             $response = $controller->login($username, $password);
+            
+            // Si el login fue exitoso, añadir información del rol y redirección
+            if ($response['success']) {
+                $rol = $_SESSION['rol'] ?? 3;
+                
+                // Determinar URL de redirección según rol
+                switch ($rol) {
+                    case 1: // Administrador
+                        $redirectUrl = 'admin-usuarios.php';
+                        break;
+                    case 2: // Trabajador
+                        $redirectUrl = 'admin-productos.php';
+                        break;
+                    case 3: // Cliente
+                    default:
+                        $redirectUrl = 'index.php';
+                        break;
+                }
+                
+                $response['rol'] = $rol;
+                $response['rol_nombre'] = $rol == 1 ? 'Administrador' : ($rol == 2 ? 'Trabajador' : 'Cliente');
+                $response['redirect'] = $redirectUrl;
+            }
             break;
-
+        
         // ============================================
         // REGISTRO
         // ============================================
@@ -36,34 +60,67 @@ try {
                 'codigo_postal' => $_POST['codigo_postal'] ?? '',
                 'telefono' => $_POST['telefono'] ?? ''
             ];
+            
             $response = $controller->registrar($datos);
             break;
-
+        
         // ============================================
         // GOOGLE OAUTH LOGIN
         // ============================================
         case 'loginGoogle':
             $googleToken = $_POST['token'] ?? '';
+            
             $response = $controller->loginGoogle($googleToken);
+            
+            // Si el login fue exitoso, añadir información del rol y redirección
+            if ($response['success']) {
+                $rol = $_SESSION['rol'] ?? 3;
+                
+                // Determinar URL de redirección según rol
+                switch ($rol) {
+                    case 1: // Administrador
+                        $redirectUrl = 'admin-usuarios.php';
+                        break;
+                    case 2: // Trabajador
+                        $redirectUrl = 'admin-productos.php';
+                        break;
+                    case 3: // Cliente
+                    default:
+                        $redirectUrl = 'index.php';
+                        break;
+                }
+                
+                $response['rol'] = $rol;
+                $response['rol_nombre'] = $rol == 1 ? 'Administrador' : ($rol == 2 ? 'Trabajador' : 'Cliente');
+                $response['redirect'] = $redirectUrl;
+            }
             break;
-
+        
         // ============================================
         // LOGOUT
         // ============================================
         case 'logout':
             $response = $controller->logout();
             break;
-
+        
         // ============================================
         // VERIFICAR SESIÓN
         // ============================================
         case 'verificarSesion':
             if ($controller->verificarSesion()) {
                 $usuario = $controller->usuarioActual();
+                
+                // Añadir información del rol
+                $rol = $_SESSION['rol'] ?? 3;
+                $esAdmin = ($rol == 1 || $rol == 2);
+                
                 $response = [
                     "success" => true,
                     "logueado" => true,
-                    "usuario" => $usuario
+                    "usuario" => $usuario,
+                    "rol" => $rol,
+                    "rol_nombre" => $rol == 1 ? 'Administrador' : ($rol == 2 ? 'Trabajador' : 'Cliente'),
+                    "es_admin" => $esAdmin
                 ];
             } else {
                 $response = [
@@ -72,16 +129,23 @@ try {
                 ];
             }
             break;
-
+        
         // ============================================
         // OBTENER USUARIO ACTUAL
         // ============================================
         case 'obtenerUsuario':
             $usuario = $controller->usuarioActual();
+            
             if ($usuario) {
+                $rol = $_SESSION['rol'] ?? 3;
+                $esAdmin = ($rol == 1 || $rol == 2);
+                
                 $response = [
                     "success" => true,
-                    "usuario" => $usuario
+                    "usuario" => $usuario,
+                    "rol" => $rol,
+                    "rol_nombre" => $rol == 1 ? 'Administrador' : ($rol == 2 ? 'Trabajador' : 'Cliente'),
+                    "es_admin" => $esAdmin
                 ];
             } else {
                 $response = [
@@ -90,11 +154,11 @@ try {
                 ];
             }
             break;
-
+        
         default:
             $response = ["success" => false, "message" => "Acción no encontrada"];
     }
-
+    
 } catch (Exception $e) {
     $response = ["success" => false, "message" => "Error: " . $e->getMessage()];
 }

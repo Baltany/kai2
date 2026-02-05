@@ -3,7 +3,19 @@ session_start();
 include("includes/a_config.php");
 
 if (isset($_SESSION['usuario_id'])) {
-    header("Location: index.php");
+    // Si ya está logueado, redirigir según su rol
+    switch ($_SESSION['rol']) {
+        case 1: // Administrador
+            header("Location: admin-usuarios.php");
+            break;
+        case 2: // Trabajador
+            header("Location: admin-productos.php"); // o donde quieras que vayan los trabajadores
+            break;
+        case 3: // Cliente
+        default:
+            header("Location: index.php");
+            break;
+    }
     exit();
 }
 
@@ -26,7 +38,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     if ($resultado['success']) {
         $exito = $resultado['message'];
-        header("refresh:1;url=index.php");
+        
+        // Redirigir según el rol del usuario
+        $rol = $_SESSION['rol'] ?? 3;
+        
+        switch ($rol) {
+            case 1: // Administrador
+                header("Location: /admin/usuarios.php");
+                exit;
+            case 2: // Trabajador
+                header("Location: /admin/productos.php");
+                exit;
+            case 3: // Cliente
+            default:
+                header("Location: /index.php");
+                exit;
+        }
+
     } else {
         $error = $resultado['message'];
     }

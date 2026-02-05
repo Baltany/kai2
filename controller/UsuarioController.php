@@ -276,6 +276,191 @@ class UsuarioController {
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
+    // Métodos adicionales para UsuarioController.php
+// Agregar estos métodos a la clase UsuarioController existente
+
+    // ============================================
+    // OBTENER TODOS LOS USUARIOS (ADMIN)
+    // ============================================
+    public function obtenerTodosUsuarios() {
+        try {
+            $sql = "SELECT u.*, r.nombre as rol_nombre 
+                    FROM usuario u
+                    LEFT JOIN rol r ON u.rol = r.id
+                    ORDER BY u.id DESC";
+            $stmt = $this->conexion->prepare($sql);
+            $stmt->execute();
+            
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (Exception $e) {
+            return [];
+        }
+    }
+
+    // ============================================
+    // OBTENER ROLES
+    // ============================================
+    public function obtenerRoles() {
+        try {
+            $sql = "SELECT * FROM rol ORDER BY id";
+            $stmt = $this->conexion->prepare($sql);
+            $stmt->execute();
+            
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (Exception $e) {
+            return [];
+        }
+    }
+
+    // ============================================
+    // ACTUALIZAR USUARIO (ADMIN)
+    // ============================================
+    public function actualizarUsuario($datos) {
+        try {
+            // Validar que el ID esté presente
+            if (empty($datos['id'])) {
+                return ["success" => false, "message" => "ID de usuario requerido"];
+            }
+
+            // Si se proporciona nueva contraseña, validarla y hashearla
+            if (!empty($datos['password'])) {
+                if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/', $datos['password'])) {
+                    return ["success" => false, "message" => "Contraseña debe tener: minúscula, mayúscula, número, carácter especial y 8+ caracteres"];
+                }
+                $passwordHasheada = password_hash($datos['password'], PASSWORD_BCRYPT);
+                $actualizarPassword = true;
+            } else {
+                $actualizarPassword = false;
+            }
+
+            // Validar email
+            if (!filter_var($datos['correo'], FILTER_VALIDATE_EMAIL)) {
+                return ["success" => false, "message" => "Email no válido"];
+            }
+
+            // Validar teléfono
+            if (!preg_match('/^\d{9}$/', $datos['telefono'])) {
+                return ["success" => false, "message" => "Teléfono debe tener 9 dígitos"];
+            }
+
+            // Validar código postal
+            if (!preg_match('/^\d{5}$/', $datos['codigo_postal'])) {
+                return ["success" => false, "message" => "Código postal debe tener 5 dígitos"];
+            }
+
+            // Verificar si username o email ya existen en otro usuario
+            $sql = "SELECT id FROM usuario WHERE (username = :username OR correo = :correo) AND id != :id";
+            $stmt = $this->conexion->prepare($sql);
+            $stmt->bindParam(':username', $datos['username'], PDO::PARAM_STR);
+            $stmt->bindParam(':correo', $datos['correo'], PDO::PARAM_STR);
+            $stmt->bindParam(':id', $datos['id'], PDO::PARAM_INT);
+            $stmt->execute();
+            
+            if ($stmt->rowCount() > 0) {
+                return ["success" => false, "message" => "Username o email ya existe"];
+            }
+
+            // Actualizar usuario
+            if ($actualizarPassword) {
+                $sql = "UPDATE usuario SET 
+                        username = :username,
+                        password = :password,
+                        nombre = :nombre,
+                        apellidos = :apellidos,
+                        correo = :correo,
+                        fecha_nacimiento = :fecha_nacimiento,
+                        codigo_postal = :codigo_postal,
+                        telefono = :telefono,
+                        rol = :rol
+                        WHERE id = :id";
+                $stmt = $this->conexion->prepare($sql);
+                $stmt->bindParam(':password', $passwordHasheada, PDO::PARAM_STR);
+            } else {
+                $sql = "UPDATE usuario SET 
+                        username = :username,
+                        nombre = :nombre,
+                        apellidos = :apellidos,
+                        correo = :correo,
+                        fecha_nacimiento = :fecha_nacimiento,
+                        codigo_postal = :codigo_postal,
+                        telefono = :telefono,
+                        rol = :rol
+                        WHERE id = :id";
+                $stmt = $this->conexion->prepare($sql);
+            }
+
+            $stmt->bindParam(':username', $datos['username'], PDO::PARAM_STR);
+            $stmt->bindParam(':nombre', $datos['nombre'], PDO::PARAM_STR);
+            $stmt->bindParam(':apellidos', $datos['apellidos'], PDO::PARAM_STR);
+            $stmt->bindParam(':correo', $datos['correo'], PDO::PARAM_STR);
+            $stmt->bindParam(':fecha_nacimiento', $datos['fecha_nacimiento'], PDO::PARAM_STR);
+            $stmt->bindParam(':codigo_postal', $datos['codigo_postal'], PDO::PARAM_STR);
+            $stmt->bindParam(':telefono', $datos['telefono'], PDO::PARAM_STR);
+            $stmt->bindParam(':rol', $datos['rol'], PDO::PARAM_INT);
+            $stmt->bindParam(':id', $datos['id'], PDO::PARAM_INT);
+
+            if ($stmt->execute()) {
+                return ["success" => true, "message" => "Usuario actualizado correctamente"];
+            } else {
+                return ["success" => false, "message" => "Error al actualizar usuario"];
+            }
+
+        } catch (Exception $e) {
+            return ["success" => false, "message" => "Error: " . $e->getMessage()];
+        }
+    }
+
+    // ============================================
+    // ELIMINAR USUARIO (ADMIN)
+    // ============================================
+    public function eliminarUsuario($id) {
+        try {
+            // No permitir eliminar al admin principal
+            if ($id == 1) {
+                return ["success" => false, "message" => "No se puede eliminar el administrador principal"];
+            }
+
+            $sql = "DELETE FROM usuario WHERE id = :id";
+            $stmt = $this->conexion->prepare($sql);
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+
+            if ($stmt->execute()) {
+                return ["success" => true, "message" => "Usuario eliminado correctamente"];
+            } else {
+                return ["success" => false, "message" => "Error al eliminar usuario"];
+            }
+
+        } catch (Exception $e) {
+            return ["success" => false, "message" => "Error: " . $e->getMessage()];
+        }
+    }
+
+    // ============================================
+    // ACTIVAR/DESACTIVAR USUARIO
+    // ============================================
+    public function toggleActivo($id) {
+        try {
+            // No permitir desactivar al admin principal
+            if ($id == 1) {
+                return ["success" => false, "message" => "No se puede desactivar el administrador principal"];
+            }
+
+            $sql = "UPDATE usuario SET activo = NOT activo WHERE id = :id";
+            $stmt = $this->conexion->prepare($sql);
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+
+            if ($stmt->execute()) {
+                return ["success" => true, "message" => "Estado del usuario actualizado"];
+            } else {
+                return ["success" => false, "message" => "Error al cambiar estado"];
+            }
+
+        } catch (Exception $e) {
+            return ["success" => false, "message" => "Error: " . $e->getMessage()];
+        }
+    }
+
+
 }
 
 ?>

@@ -1,0 +1,609 @@
+//
+// Admin Panel Styles - Con menú sencillo
+//
+
+// Menú de navegación sencillo
+.admin-menu {
+    background: linear-gradient(135deg, $primario 0%, darken($primario, 5%) 100%);
+    border-bottom: 2px solid $resalte;
+    padding: 0;
+    margin: 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+
+    .menu-container {
+        display: flex;
+        gap: 0;
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0;
+    }
+
+    .menu-link {
+        flex: 1;
+        padding: 1rem 1.5rem;
+        color: $texto_claro;
+        text-decoration: none;
+        border-right: 1px solid rgba($resalte, 0.2);
+        transition: all 0.3s ease;
+        text-align: center;
+        font-weight: 500;
+        display: block;
+
+        &:last-child {
+            border-right: none;
+        }
+
+        &:hover {
+            background: rgba($resalte, 0.1);
+            color: $resalte;
+        }
+
+        &.active {
+            background: rgba($resalte, 0.2);
+            color: $resalte;
+            border-bottom: 3px solid $resalte;
+            margin-bottom: -3px;
+        }
+    }
+}
+
+//
+// Admin Panel Styles
+//
+
+.admin-panel {
+    background: linear-gradient(135deg, $primario 0%, darken($primario, 5%) 100%);
+    min-height: calc(100vh - 60px);
+    padding: 2rem 0;
+
+    .container {
+        max-width: 1400px;
+    }
+}
+
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: rgba($secundario, 0.3);
+    border-radius: 12px;
+    border: 1px solid rgba($resalte, 0.2);
+
+    h1 {
+        color: $texto_claro;
+        font-size: 2rem;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+
+        i {
+            color: $resalte;
+        }
+    }
+
+    .btn {
+        background: $resalte;
+        border: none;
+        color: $texto_claro;
+        padding: 0.75rem 1.5rem;
+        font-weight: 600;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+
+        &:hover {
+            background: lighten($resalte, 10%);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba($resalte, 0.4);
+        }
+
+        i {
+            margin-right: 0.5rem;
+        }
+    }
+}
+
+.admin-content {
+    background: rgba($primario, 0.6);
+    border-radius: 12px;
+    padding: 2rem;
+    border: 1px solid rgba($resalte, 0.2);
+    backdrop-filter: blur(10px);
+}
+
+// Tabla de administración
+.admin-table {
+    width: 100%;
+    background: rgba($secundario, 0.2);
+    border-radius: 8px;
+    overflow: hidden;
+    border-collapse: separate;
+    border-spacing: 0;
+
+    thead {
+        background: linear-gradient(135deg, $secundario 0%, darken($secundario, 10%) 100%);
+        
+        tr th {
+            padding: 1rem;
+            color: $texto_claro;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.875rem;
+            letter-spacing: 0.5px;
+            border-bottom: 2px solid $resalte;
+            text-align: left;
+
+            &:first-child {
+                border-top-left-radius: 8px;
+            }
+
+            &:last-child {
+                border-top-right-radius: 8px;
+            }
+        }
+    }
+
+    tbody {
+        tr {
+            background: rgba($primario, 0.4);
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba($resalte, 0.1);
+
+            &:hover {
+                background: rgba($secundario, 0.3);
+                transform: scale(1.01);
+            }
+
+            &:last-child {
+                border-bottom: none;
+            }
+
+            td {
+                padding: 1rem;
+                color: $texto_claro;
+                vertical-align: middle;
+
+                &:first-child {
+                    font-weight: 600;
+                }
+            }
+        }
+    }
+
+    // Thumbnail de producto
+    .product-thumbnail {
+        width: 60px;
+        height: 80px;
+        object-fit: cover;
+        border-radius: 6px;
+        border: 2px solid $resalte;
+    }
+
+    // Información de usuario
+    .user-info,
+    .product-info {
+        strong {
+            color: $texto_claro;
+            font-size: 0.95rem;
+        }
+
+        small {
+            font-size: 0.85rem;
+            color: rgba($texto_claro, 0.7);
+        }
+    }
+
+    // Preview de comentario
+    .comentario-preview {
+        max-width: 300px;
+        line-height: 1.4;
+        font-size: 0.9rem;
+        color: rgba($texto_claro, 0.9);
+    }
+
+    // Estrellas de valoración
+    .rating-display {
+        display: flex;
+        align-items: center;
+
+        i {
+            font-size: 1.1rem;
+            margin-right: 2px;
+        }
+
+        span {
+            margin-left: 0.5rem;
+            font-weight: 600;
+            color: $texto_claro;
+        }
+    }
+}
+
+// Botones de acción
+.action-buttons {
+    display: flex;
+    gap: 0.5rem;
+
+    .btn {
+        padding: 0.5rem 0.75rem;
+        border: none;
+        border-radius: 6px;
+        transition: all 0.3s ease;
+
+        &:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        i {
+            font-size: 1rem;
+        }
+    }
+
+    .btn-info {
+        background: #17a2b8;
+        color: white;
+
+        &:hover {
+            background: #138496;
+        }
+    }
+
+    .btn-warning {
+        background: #ffc107;
+        color: #000;
+
+        &:hover {
+            background: #e0a800;
+        }
+    }
+
+    .btn-danger {
+        background: #dc3545;
+        color: white;
+
+        &:hover {
+            background: #c82333;
+        }
+    }
+
+    .btn-primary {
+        background: $resalte;
+        color: white;
+
+        &:hover {
+            background: lighten($resalte, 10%);
+        }
+    }
+}
+
+// Sección de filtros
+.filters-section {
+    background: rgba($secundario, 0.2);
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid rgba($resalte, 0.2);
+
+    .form-label {
+        color: $texto_claro;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+    }
+
+    .form-select {
+        background: rgba($primario, 0.6);
+        color: $texto_claro;
+        border: 1px solid rgba($resalte, 0.3);
+        border-radius: 6px;
+        padding: 0.75rem;
+
+        &:focus {
+            border-color: $resalte;
+            box-shadow: 0 0 0 0.2rem rgba($resalte, 0.25);
+            background: rgba($primario, 0.8);
+        }
+
+        option {
+            background: $primario;
+            color: $texto_claro;
+        }
+    }
+}
+
+// Modales
+.modal {
+    .modal-content {
+        background: linear-gradient(135deg, $primario 0%, darken($primario, 5%) 100%);
+        border: 2px solid $resalte;
+        border-radius: 12px;
+    }
+
+    .modal-header {
+        background: linear-gradient(135deg, $secundario 0%, darken($secundario, 10%) 100%);
+        border-bottom: 2px solid $resalte;
+        border-radius: 12px 12px 0 0;
+
+        .modal-title {
+            color: $texto_claro;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+
+            i {
+                color: $resalte;
+            }
+        }
+
+        .btn-close {
+            filter: invert(1) grayscale(100%) brightness(200%);
+        }
+    }
+
+    .modal-body {
+        padding: 2rem;
+
+        .form-label {
+            color: $texto_claro;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-control,
+        .form-select {
+            background: rgba($secundario, 0.3);
+            color: $texto_claro;
+            border: 1px solid rgba($resalte, 0.3);
+            border-radius: 6px;
+
+            &:focus {
+                background: rgba($secundario, 0.5);
+                border-color: $resalte;
+                color: $texto_claro;
+                box-shadow: 0 0 0 0.2rem rgba($resalte, 0.25);
+            }
+
+            &::placeholder {
+                color: rgba($texto_claro, 0.5);
+            }
+        }
+
+        .text-muted {
+            color: rgba($texto_claro, 0.6) !important;
+        }
+    }
+
+    .modal-footer {
+        background: rgba($secundario, 0.2);
+        border-top: 1px solid rgba($resalte, 0.2);
+        border-radius: 0 0 12px 12px;
+
+        .btn-secondary {
+            background: rgba($texto_oscuro, 0.5);
+            border: 1px solid rgba($texto_claro, 0.2);
+            color: $texto_claro;
+
+            &:hover {
+                background: rgba($texto_oscuro, 0.7);
+            }
+        }
+
+        .btn-primary {
+            background: $resalte;
+            border: none;
+            color: $texto_claro;
+
+            &:hover {
+                background: lighten($resalte, 10%);
+            }
+        }
+    }
+}
+
+// Checkboxes de géneros
+.generos-checkbox {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 1rem;
+    background: rgba($secundario, 0.2);
+    border-radius: 8px;
+    border: 1px solid rgba($resalte, 0.2);
+
+    .form-check {
+        margin: 0;
+
+        .form-check-input {
+            background-color: rgba($primario, 0.6);
+            border: 2px solid rgba($resalte, 0.5);
+            cursor: pointer;
+
+            &:checked {
+                background-color: $resalte;
+                border-color: $resalte;
+            }
+
+            &:focus {
+                box-shadow: 0 0 0 0.2rem rgba($resalte, 0.25);
+            }
+        }
+
+        .form-check-label {
+            color: $texto_claro;
+            cursor: pointer;
+            user-select: none;
+        }
+    }
+}
+
+// Sistema de puntuación con estrellas
+.rating-input {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    padding: 1rem;
+    background: rgba($secundario, 0.2);
+    border-radius: 8px;
+    border: 1px solid rgba($resalte, 0.2);
+
+    input[type="radio"] {
+        display: none;
+    }
+
+    label {
+        cursor: pointer;
+        font-size: 2rem;
+        color: rgba($texto_claro, 0.3);
+        transition: all 0.2s ease;
+
+        &:hover,
+        &:hover ~ label {
+            color: #ffc107;
+            transform: scale(1.1);
+        }
+    }
+
+    input[type="radio"]:checked ~ label {
+        color: #ffc107;
+    }
+}
+
+// Badges personalizados
+.badge {
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    
+    &.bg-danger {
+        background: linear-gradient(135deg, #dc3545 0%, #c82333 100%) !important;
+    }
+    
+    &.bg-warning {
+        background: linear-gradient(135deg, #ffc107 0%, #e0a800 100%) !important;
+        color: #000 !important;
+    }
+    
+    &.bg-info {
+        background: linear-gradient(135deg, #17a2b8 0%, #138496 100%) !important;
+    }
+    
+    &.bg-success {
+        background: linear-gradient(135deg, #28a745 0%, #218838 100%) !important;
+    }
+    
+    &.bg-secondary {
+        background: linear-gradient(135deg, #6c757d 0%, #5a6268 100%) !important;
+    }
+}
+
+// Alertas
+.alert {
+    border-radius: 8px;
+    border: 2px solid;
+    font-weight: 500;
+
+    &.alert-success {
+        background: rgba(#28a745, 0.2);
+        border-color: #28a745;
+        color: lighten(#28a745, 30%);
+    }
+
+    &.alert-danger {
+        background: rgba(#dc3545, 0.2);
+        border-color: #dc3545;
+        color: lighten(#dc3545, 30%);
+    }
+
+    &.alert-info {
+        background: rgba(#17a2b8, 0.2);
+        border-color: #17a2b8;
+        color: lighten(#17a2b8, 30%);
+
+        strong {
+            color: $texto_claro;
+        }
+    }
+}
+
+// Responsive
+@media (max-width: 768px) {
+    .admin-header {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+
+        h1 {
+            font-size: 1.5rem;
+        }
+    }
+
+    .admin-menu {
+        .menu-container {
+            flex-wrap: wrap;
+        }
+
+        .menu-link {
+            flex: 1 1 33.333%;
+            border-right: 1px solid rgba($resalte, 0.2);
+            padding: 0.75rem 1rem;
+
+            &:nth-child(3n) {
+                border-right: none;
+            }
+        }
+    }
+
+    .admin-table {
+        font-size: 0.875rem;
+
+        thead tr th,
+        tbody tr td {
+            padding: 0.75rem 0.5rem;
+        }
+
+        .product-thumbnail {
+            width: 50px;
+            height: 70px;
+        }
+    }
+
+    .action-buttons {
+        flex-direction: column;
+
+        .btn {
+            width: 100%;
+        }
+    }
+
+    .filters-section {
+        .row > div {
+            margin-bottom: 1rem;
+        }
+    }
+}
+
+@media (max-width: 576px) {
+    .admin-content {
+        padding: 1rem;
+    }
+
+    .table-responsive {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .admin-table {
+        min-width: 800px;
+    }
+
+    .admin-menu {
+        .menu-link {
+            padding: 0.75rem 0.5rem;
+            font-size: 0.9rem;
+        }
+    }
+}

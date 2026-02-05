@@ -75,8 +75,26 @@ session_start();
 			$CURRENT_PAGE = "terninoslegales"; 
 			$PAGE_TITLE = "Terminos legales";
 			break;
+		// ============================================
+		// RUTAS DE ADMINISTRACIÓN
+		// ============================================
+		case "/admin/usuarios.php":
+			$CURRENT_PAGE = "usuarios"; 
+			$PAGE_TITLE = "Administrar Usuarios - Panel Admin";
+			break;
+
+		case "/admin/productos.php":
+			$CURRENT_PAGE = "productos"; 
+			$PAGE_TITLE = "Administrar Productos - Panel Admin";
+			break;
+
+		case "/admin/valoraciones.php":
+			$CURRENT_PAGE = "valoraciones"; 
+			$PAGE_TITLE = "Administrar Valoraciones - Panel Admin";
+			break;
+
 		default:
 			$CURRENT_PAGE = "index";
 			$PAGE_TITLE = "Kairos - Tu página de claves";
-	}
+		}
 ?>
