@@ -62,6 +62,8 @@ $modos = $controller->obtenerTodosModos();
             <a href="productos.php" class="menu-link active">Productos</a>
             <a href="usuarios.php" class="menu-link">Usuarios</a>
             <a href="valoraciones.php" class="menu-link">Valoraciones</a>
+            <a href="../logout.php" class="menu-link active">Logout</a>
+
         </div>
     </nav>
 
