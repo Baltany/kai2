@@ -2,7 +2,7 @@
 /**
  * CAPTCHA MATEMÁTICO PERSONALIZADO
  * =================================
- * Sistema de verificación anti-bot mediante operaciones matemáticas simples
+ * Sistema de verificación anti-bot mediante operaciones matemáticas simples 
  */
 
 class CaptchaMath {
