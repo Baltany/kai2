@@ -1,7 +1,8 @@
 <?php 
 session_start();
 include("includes/a_config.php");
-require_once __DIR__ . "/config_oauth.php"; // Configuración OAuth y reCAPTCHA
+require_once __DIR__ . "/config_oauth.php";
+require_once __DIR__ . "/captcha.php"; // CAPTCHA personalizado
 
 // Si ya está logueado, redirige al index
 if (isset($_SESSION['usuario_id'])) {
@@ -20,11 +21,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     $controller = new UsuarioController();
     
-    $recaptchaResponse = $_POST['g-recaptcha-response'] ?? '';
+    $captchaRespuesta = $_POST['captcha_respuesta'] ?? '';
     
-    // Verificar reCAPTCHA
-    if (!$controller->verificarRecaptcha($recaptchaResponse)) {
-        $error = "Por favor completa el reCAPTCHA";
+    // Verificar CAPTCHA personalizado
+    if (!CaptchaMath::verificar($captchaRespuesta)) {
+        $error = "Respuesta incorrecta al captcha. Inténtalo de nuevo.";
     } else {
         $datos = [
             'username' => $_POST['username'] ?? '',
@@ -57,8 +58,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro - Kairos</title>
     <?php include("includes/head-tag-contents.php"); ?>
-    <!-- reCAPTCHA v2 -->
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 
 <body>
@@ -187,10 +186,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         carácter especial (@$!%*?&)</small>
                                 </div>
 
-                                <!-- reCAPTCHA v2 -->
-                                <div class="mb-4 d-flex justify-content-center">
-                                    <div class="g-recaptcha" data-sitekey="<?php echo RECAPTCHA_SITE_KEY; ?>"></div>
-                                </div>
+                                <!-- CAPTCHA Matemático Personalizado -->
+                                <?php echo CaptchaMath::generarHTML(); ?>
 
                                 <!-- Buttons Row -->
                                 <div class="d-grid gap-2 mb-3">

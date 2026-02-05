@@ -315,7 +315,7 @@ class CookieManager {
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                             Cerrar
                         </button>
-                        <a href="productos.php" class="btn btn-info text-white">
+                        <a href="plataformas.php" class="btn btn-info text-white">
                             Ver Productos
                         </a>
                     </div>

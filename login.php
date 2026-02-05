@@ -1,7 +1,9 @@
 <?php 
 session_start();
 include("includes/a_config.php");
-require_once __DIR__ . "/config_oauth.php"; // Configuración OAuth y reCAPTCHA
+require_once __DIR__ . "/config_oauth.php";
+require_once __DIR__ . "/captcha.php"; // CAPTCHA personalizado
+require_once __DIR__ . "/cookie_manager.php"; // Gestión de cookies
 
 if (isset($_SESSION['usuario_id'])) {
     // Si ya está logueado, redirigir según su rol
@@ -53,11 +55,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['email'] ?? '';
     $password = $_POST['password'] ?? '';
     $rememberMe = isset($_POST['remember_me']);
-    $recaptchaResponse = $_POST['g-recaptcha-response'] ?? '';
+    $captchaRespuesta = $_POST['captcha_respuesta'] ?? '';
     
-    // Verificar reCAPTCHA
-    if (!$controller->verificarRecaptcha($recaptchaResponse)) {
-        $error = "Por favor completa el reCAPTCHA";
+    // Verificar CAPTCHA personalizado
+    if (!CaptchaMath::verificar($captchaRespuesta)) {
+        $error = "Respuesta incorrecta al captcha. Inténtalo de nuevo.";
     } else {
         $resultado = $controller->login($username, $password);
         
@@ -104,8 +106,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php include("includes/head-tag-contents.php"); ?>
     <!-- Google OAuth -->
     <script src="https://accounts.google.com/gsi/client" async defer></script>
-    <!-- reCAPTCHA v2 -->
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 
 <body>
@@ -178,10 +178,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     </label>
                                 </div>
 
-                                <!-- reCAPTCHA v2 -->
-                                <div class="mb-4 d-flex justify-content-center">
-                                    <div class="g-recaptcha" data-sitekey="<?php echo RECAPTCHA_SITE_KEY; ?>"></div>
-                                </div>
+                                <!-- CAPTCHA Matemático Personalizado -->
+                                <?php echo CaptchaMath::generarHTML(); ?>
 
                                 <!-- Login Button -->
                                 <div class="d-grid gap-2 mb-4">
@@ -222,7 +220,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
     </main>
 
-    <?php include("includes/footer.php"); ?>
     <script src="js/scripts.js"></script>
 
     <!-- Google OAuth Callback Handler -->
@@ -243,6 +240,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         form.submit();
     }
     </script>
+
+    <!-- Modales de Gestión de Cookies -->
+    <?php 
+    // Modal de aceptación de cookies (primera visita)
+    echo CookieManager::generarModalCookies();
+    
+    // Modal de sugerencia de registro (primera visita, si ya aceptó cookies)
+    echo CookieManager::generarModalSugerenciaRegistro();
+    
+    // Modal de novedades (1 vez al mes, solo usuarios logueados)
+    echo CookieManager::generarModalNovedades();
+    ?>
 </body>
 
 </html>
