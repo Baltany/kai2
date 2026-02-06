@@ -75,6 +75,10 @@ session_start();
 			$CURRENT_PAGE = "terninoslegales"; 
 			$PAGE_TITLE = "Terminos legales";
 			break;
+		case "/valoracion.php":
+			$CURRENT_PAGE = "valoracion"; 
+			$PAGE_TITLE = "Valoracion";
+			break;
 		// ============================================
 		// RUTAS DE ADMINISTRACIÓN
 		// ============================================

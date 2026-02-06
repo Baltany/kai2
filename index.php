@@ -38,6 +38,7 @@ if ($platformId) {
 <header>
     <?php include("includes/navigation.php"); ?>
     <?php include("includes/carrito.php"); ?>
+    <?php include("includes/valoracion.php"); ?>
 </header>
 
 <!-- Main Content -->
