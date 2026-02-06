@@ -1,6 +1,10 @@
 {
   "scripts": {
-    "dev:linux": "sass -w scss:css & php -S localhost:70"
+    "dev:linux": "sass -w scss:css & php -S localhost:70",
+    "dev:win" : "concurrently \"sass -w scss:css\" \"php -S localhost:70\""
+  },
+    "devDependencies": {
+    "concurrently": "^9.0.0"
   },
   "dependencies": {
     "bootstrap": "^5.3.8",
