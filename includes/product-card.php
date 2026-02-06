@@ -37,7 +37,10 @@ $productId = $productId ?? '#';
             <div class="product-card-price">
                 <?php echo $price; ?>
             </div>
-
+            <button class="product-card-button btn-add-to-cart" data-product-id="<?php echo $productId; ?>"
+                data-product-name="<?php echo htmlspecialchars($productName); ?>">
+                Valorar
+            </button>
             <!-- Botón añadir al carrito con data-product-id -->
             <button class="product-card-button btn-add-to-cart" data-product-id="<?php echo $productId; ?>"
                 data-product-name="<?php echo htmlspecialchars($productName); ?>">
