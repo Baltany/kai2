@@ -83,7 +83,7 @@ npm install
 Inicia el servidor.(tanto de xampp como de node)
 
 Accede desde el navegador:
-http://localhost/kai2:[PUERTO]
+http://localhost:[PUERTO]
 
 
 ## BBDD
