@@ -221,8 +221,7 @@ if ($platformId) {
 
     // Modales de gestión de cookies
     echo CookieManager::generarModalCookies();
-    echo CookieManager::generarModalSugerenciaRegistro();
-    echo CookieManager::generarModalNovedades();
+
     ?>
 </body>
 
