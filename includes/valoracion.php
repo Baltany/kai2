@@ -124,8 +124,9 @@ function guardarValoracion() {
             btnGuardar.textContent = 'Guardar Valoración';
 
             if (data.success) {
-                alert('¡Gracias! Tu valoración se ha guardado correctamente');
                 cerrarModalValoracion();
+                // Recargar la página para mostrar la nueva valoración
+                location.reload();
             } else {
                 alert(data.message || 'Error al guardar la valoración');
             }

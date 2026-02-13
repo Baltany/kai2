@@ -50,6 +50,12 @@ $error = '';
 $exito = '';
 $resultado = null;
 
+// Mostrar error de Google OAuth si existe
+if (isset($_SESSION['error_google'])) {
+    $error = $_SESSION['error_google'];
+    unset($_SESSION['error_google']);
+}
+
 // Si el formulario se envía
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['email'] ?? '';

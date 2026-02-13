@@ -176,6 +176,14 @@ class UsuarioController {
                 return ["success" => false, "message" => "Email de Google no disponible"];
             }
 
+            // Si no hay nombre, usar la parte del email antes del @
+            if (empty($googleNombre)) {
+                $googleNombre = explode('@', $googleEmail)[0];
+            }
+            if (empty($googleApellido)) {
+                $googleApellido = '';
+            }
+
             // Buscar usuario por email
             $sql = "SELECT * FROM usuario WHERE correo = :correo";
             $stmt = $this->conexion->prepare($sql);
@@ -202,6 +210,17 @@ class UsuarioController {
             } else {
                 // Crear nuevo usuario desde Google
                 $username = str_replace(' ', '_', strtolower($googleNombre . $googleApellido));
+                // Si el username queda vacío, usar la parte del email
+                if (empty($username)) {
+                    $username = str_replace(' ', '_', strtolower(explode('@', $googleEmail)[0]));
+                }
+                // Limitar a caracteres válidos y máximo 50 chars
+                $username = preg_replace('/[^a-z0-9_]/', '', $username);
+                if (empty($username)) {
+                    $username = 'google_user';
+                }
+                $username = substr($username, 0, 45);
+                
                 // Asegurar username único
                 $usernameBase = $username;
                 $contador = 1;
@@ -243,7 +262,8 @@ class UsuarioController {
             }
 
         } catch (Exception $e) {
-            return ["success" => false, "message" => "Error: " . $e->getMessage()];
+            error_log("Error en loginGoogle: " . $e->getMessage());
+            return ["success" => false, "message" => "Error al iniciar sesión con Google: " . $e->getMessage()];
         }
     }
 
