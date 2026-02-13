@@ -15,7 +15,7 @@
     </header>
 
     <!-- Main Content -->
-    <main class="afiliacion-main">
+    <main id="main-content" class="afiliacion-main">
         <div class="container">
             
             <!-- TÍTULO -->

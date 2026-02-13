@@ -1,6 +1,6 @@
 <?php include("includes/a_config.php");?>
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
 	<?php include("includes/head-tag-contents.php");?>
 </head>
@@ -9,7 +9,7 @@
 <?php include("includes/design-top.php");?>
 <?php include("includes/navigation.php");?>
 
-<main>
+<main id="main-content">
 <!-- About Section-->
 <section class="page-section bg-primary text-white mb-0" id="about">
         <div class="container">

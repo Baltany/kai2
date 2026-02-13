@@ -2,7 +2,7 @@
 
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-<meta name="description" content="" />
+<meta name="description" content="Kairos - Tu tienda online de videojuegos y productos digitales" />
 <meta name="author" content="" />
 <!-- Icon-->
 <link rel="icon" type="image/png" href="assets/img/icon.png" />

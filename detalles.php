@@ -73,7 +73,7 @@ $mediaValoracion = $valoracionController->obtenerMediaProducto($productoId);
     </header>
 
     <!-- Main Content -->
-    <main class="details-main">
+    <main id="main-content" class="details-main">
         <div class="container-fluid">
             <div class="details-container">
 

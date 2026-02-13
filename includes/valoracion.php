@@ -1,9 +1,9 @@
 <!-- Modal para Valorar Producto -->
-<div id="modalValoracion" class="modal-valoracion-overlay" style="display: none;">
+<div id="modalValoracion" class="modal-valoracion-overlay" role="dialog" aria-modal="true" aria-labelledby="modalValoracionTitle" style="display: none;">
     <div class="modal-valoracion-content">
         <div class="modal-valoracion-header">
-            <h2>Valorar Producto</h2>
-            <button class="modal-close-btn" onclick="cerrarModalValoracion()">&times;</button>
+            <h2 id="modalValoracionTitle">Valorar Producto</h2>
+            <button class="modal-close-btn" onclick="cerrarModalValoracion()" aria-label="Cerrar modal de valoración">&times;</button>
         </div>
 
         <div class="modal-valoracion-body">
@@ -11,19 +11,20 @@
 
             <!-- Stars para la puntuación -->
             <div class="estrellas-container">
-                <div class="estrellas" id="estrellas">
-                    <span class="estrella" data-valor="1">★</span>
-                    <span class="estrella" data-valor="2">★</span>
-                    <span class="estrella" data-valor="3">★</span>
-                    <span class="estrella" data-valor="4">★</span>
-                    <span class="estrella" data-valor="5">★</span>
+                <div class="estrellas" id="estrellas" role="group" aria-label="Seleccionar puntuación">
+                    <button type="button" class="estrella" data-valor="1" aria-label="1 estrella">★</button>
+                    <button type="button" class="estrella" data-valor="2" aria-label="2 estrellas">★</button>
+                    <button type="button" class="estrella" data-valor="3" aria-label="3 estrellas">★</button>
+                    <button type="button" class="estrella" data-valor="4" aria-label="4 estrellas">★</button>
+                    <button type="button" class="estrella" data-valor="5" aria-label="5 estrellas">★</button>
                 </div>
-                <span class="puntuacion-texto" id="puntuacionTexto">0/5</span>
+                <span class="puntuacion-texto" id="puntuacionTexto" aria-live="polite">0/5</span>
             </div>
 
             <!-- Comentario -->
+            <label for="comentario" class="visually-hidden">Comentario sobre el producto</label>
             <textarea id="comentario" class="comentario-input" placeholder="Cuéntanos qué te pareció (opcional)"
-                maxlength="500" rows="4"></textarea>
+                maxlength="500" rows="4" aria-label="Comentario sobre el producto"></textarea>
             <small class="texto-ayuda">Máximo 500 caracteres</small>
         </div>
 

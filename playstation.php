@@ -23,7 +23,7 @@ $productos = $productoController->obtenerPorPlataforma(2);
     </header>
 
     <!-- Main Content -->
-    <main>
+    <main id="main-content">
         <section class="hero-banner">
             <!-- Contenedor del video -->
             <div class="banner-video-container">

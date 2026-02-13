@@ -15,7 +15,7 @@
     </header>
 
     <!-- Main Content -->
-    <main class="terminos-main">
+    <main id="main-content" class="terminos-main">
         <div class="container">
             <!-- Título -->
             <h1 class="terminos-titulo">Condiciones Generales de Venta</h1>

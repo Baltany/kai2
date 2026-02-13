@@ -15,7 +15,7 @@
     </header>
 
     <!-- Main Content -->
-    <main class="zona-pago-main">
+    <main id="main-content" class="zona-pago-main">
         <div class="contenedor-pago">
             <div class="row g-0">
                 <!-- Productos (Izquierda) -->

@@ -15,7 +15,7 @@
     </header>
 
     <!-- Main Content -->
-    <main class="soporte-main">
+    <main id="main-content" class="soporte-main">
         <div class="container">
             
             <!-- TÍTULO -->
@@ -40,7 +40,7 @@
                     <div class="soporte-card">
                         <div class="soporte-icon">
                             <!-- Icono de bolsa de compras -->
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" role="img" aria-label="Icono de pedidos">
                                 <path d="M7 4V2a1 1 0 0 1 2 0v2h6V2a1 1 0 0 1 2 0v2h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2zm12 4H5v12h14V8zM8 12a4 4 0 1 1 8 0H8z"/>
                             </svg>
                         </div>
@@ -54,7 +54,7 @@
                     <div class="soporte-card">
                         <div class="soporte-icon">
                             <!-- Icono de tarjeta de crédito -->
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" role="img" aria-label="Icono de pago">
                                 <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/>
                             </svg>
                         </div>
@@ -68,7 +68,7 @@
                     <div class="soporte-card">
                         <div class="soporte-icon">
                             <!-- Icono de candado -->
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" role="img" aria-label="Icono de seguridad">
                                 <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM9 6c0-1.66 1.34-3 3-3s3 1.34 3 3v2H9V6zm9 14H6V10h12v10zm-6-3c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z"/>
                             </svg>
                         </div>

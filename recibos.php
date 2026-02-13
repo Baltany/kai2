@@ -15,7 +15,7 @@
     </header>
 
     <!-- Main Content -->
-    <main class="recibos-main">
+    <main id="main-content" class="recibos-main">
         <div class="container">
             <!-- Título -->
             <div class="row">

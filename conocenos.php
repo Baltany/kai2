@@ -15,7 +15,7 @@
     </header>
 
     <!-- Main Content -->
-    <main class="conocenos-main">
+    <main id="main-content" class="conocenos-main">
         <div class="container">
             
             <!-- SECCIÓN 1: ¿QUIÉNES SOMOS? - SIN IMAGEN -->

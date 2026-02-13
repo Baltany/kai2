@@ -15,7 +15,7 @@
     </header>
 
     <!-- Main Content -->
-    <main class="terminos-main">
+    <main id="main-content" class="terminos-main">
         <div class="container">
             <!-- Título principal -->
             <h1 class="terminos-titulo">Términos Legales</h1>

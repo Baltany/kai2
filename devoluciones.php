@@ -15,7 +15,7 @@
     </header>
 
     <!-- Main Content -->
-    <main class="devoluciones-main">
+    <main id="main-content" class="devoluciones-main">
         <div class="container"> <!-- ✅ Bootstrap container -->
             
             <!-- TÍTULO -->

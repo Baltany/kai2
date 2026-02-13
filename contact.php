@@ -1,6 +1,6 @@
 <?php include("includes/a_config.php");?>
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
 	<?php include("includes/head-tag-contents.php");?>
 </head>
@@ -8,7 +8,7 @@
 
 <?php include("includes/design-top.php");?>
 <?php include("includes/navigation.php");?>
-<main>
+<main id="main-content">
 <!-- Contact Section-->
 <section class="page-section" id="contact">
         <div class="container">

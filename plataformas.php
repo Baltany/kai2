@@ -15,7 +15,7 @@
     </header>
 
     <!-- Main Content -->
-    <main class="plataformas-main">
+    <main id="main-content" class="plataformas-main">
         <div class="container">
             <!-- Contenedor principal con borde punteado -->
             <div class="plataformas-wrapper">

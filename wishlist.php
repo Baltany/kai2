@@ -15,7 +15,7 @@
     </header>
 
     <!-- Main Content -->
-    <main class="wishlist-main">
+    <main id="main-content" class="wishlist-main">
         <div class="container-fluid">
             <div class="wishlist-container">
                 <!-- Grid de Productos - UNA COLUMNA COMPLETA -->
