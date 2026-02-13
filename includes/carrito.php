@@ -17,7 +17,8 @@ if ($idUsuario) {
 ?>
 
 <!-- Offcanvas Carrito (se abre de derecha a izquierda) -->
-<div class="offcanvas offcanvas-end" tabindex="-1" id="cartModal" aria-labelledby="cartModalLabel">
+<div class="offcanvas offcanvas-end" tabindex="-1" id="cartModal" role="dialog" aria-labelledby="cartModalLabel"
+    aria-modal="true">
     <!-- Header -->
     <div class="offcanvas-header">
         <h5 class="offcanvas-title" id="cartModalLabel">Tu Carrito</h5>

@@ -40,15 +40,17 @@ $productId = $productId ?? '#';
 
             <!-- Botón Valorar -->
             <button class="product-card-button btn-valorar"
+                aria-label="Valorar <?php echo htmlspecialchars($productName); ?>"
                 onclick="abrirModalValoracion(<?php echo $productId; ?>, '<?php echo htmlspecialchars($productName); ?>')">
-                ⭐ VALORAR
+                <span aria-hidden="true">⭐</span> VALORAR
             </button>
 
 
             <!-- Botón añadir al carrito -->
             <button class="product-card-button btn-add-to-cart" data-product-id="<?php echo $productId; ?>"
-                data-product-name="<?php echo htmlspecialchars($productName); ?>">
-                🛒 AÑADIR AL CARRITO
+                data-product-name="<?php echo htmlspecialchars($productName); ?>"
+                aria-label="Añadir <?php echo htmlspecialchars($productName); ?> al carrito">
+                <span aria-hidden="true">🛒</span> AÑADIR AL CARRITO
             </button>
         </div>
     </div>
