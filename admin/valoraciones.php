@@ -79,9 +79,10 @@ $usuarios = $usuarioController->obtenerTodosUsuarios();
     <!-- Menú sencillo -->
     <nav class="admin-menu">
         <div class="menu-container">
-            <a href="productos.php" class="menu-link">Productos</a>
+            <a href="../index.php" class="menu-link">Ir a la Tienda</a>
+            <a href="productos.php" class="menu-link active">Productos</a>
             <a href="usuarios.php" class="menu-link">Usuarios</a>
-            <a href="valoraciones.php" class="menu-link active">Valoraciones</a>
+            <a href="valoraciones.php" class="menu-link">Valoraciones</a>
             <a href="../logout.php" class="menu-link active">Logout</a>
         </div>
     </nav>

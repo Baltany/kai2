@@ -202,18 +202,32 @@ class UsuarioController {
             } else {
                 // Crear nuevo usuario desde Google
                 $username = str_replace(' ', '_', strtolower($googleNombre . $googleApellido));
+                
+                // Asegurar username único
+                $usernameBase = $username;
+                $contador = 1;
+                while (true) {
+                    $sqlCheck = "SELECT id FROM usuario WHERE username = :username";
+                    $stmtCheck = $this->conexion->prepare($sqlCheck);
+                    $stmtCheck->bindParam(':username', $username, PDO::PARAM_STR);
+                    $stmtCheck->execute();
+                    if ($stmtCheck->rowCount() === 0) break;
+                    $username = $usernameBase . $contador;
+                    $contador++;
+                }
                 $passwordAleatorio = bin2hex(random_bytes(16));
                 $passwordHasheada = password_hash($passwordAleatorio, PASSWORD_BCRYPT);
-
                 $sql = "INSERT INTO usuario (username, password, nombre, apellidos, correo, rol, activo) 
                         VALUES (:username, :password, :nombre, :apellidos, :correo, 3, 1)";
+                $sql = "INSERT INTO usuario (username, password, nombre, apellidos, correo, fecha_nacimiento, codigo_postal, telefono, rol, activo) 
+                        VALUES (:username, :password, :nombre, :apellidos, :correo, NULL, NULL, NULL, 3, 1)";
                 $stmt = $this->conexion->prepare($sql);
                 $stmt->bindParam(':username', $username, PDO::PARAM_STR);
                 $stmt->bindParam(':password', $passwordHasheada, PDO::PARAM_STR);
-                $stmt->bindParam(':nombre', $googleNombre, PDO::PARAM_STR);
-                $stmt->bindParam(':apellidos', $googleApellido, PDO::PARAM_STR);
-                $stmt->bindParam(':correo', $googleEmail, PDO::PARAM_STR);
+                
 
+
+                
                 if ($stmt->execute()) {
                     $usuarioId = $this->conexion->lastInsertId();
 
