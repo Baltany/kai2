@@ -2,6 +2,7 @@
 include("includes/a_config.php"); 
 require_once __DIR__ . "/controller/ProductoController.php";
 require_once __DIR__ . "/controller/CarritoController.php";
+require_once __DIR__ . "/controller/ValoracionController.php";
 
 // Obtener el ID del producto
 $productoId = isset($_GET['id']) ? (int)$_GET['id'] : 0;
@@ -47,6 +48,11 @@ if ($idUsuario) {
 // Obtener géneros del producto
 $generosProducto = $productoController->obtenerGenerosProducto($productoId);
 $generosTexto = !empty($generosProducto) ? implode(', ', array_column($generosProducto, 'nombre')) : 'Sin especificar';
+
+// Obtener valoraciones del producto
+$valoracionController = new ValoracionController();
+$valoraciones = $valoracionController->obtenerPorProducto($productoId);
+$mediaValoracion = $valoracionController->obtenerMediaProducto($productoId);
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -63,6 +69,7 @@ $generosTexto = !empty($generosProducto) ? implode(', ', array_column($generosPr
     <header>
         <?php include("includes/navigation.php"); ?>
         <?php include("includes/carrito.php"); ?>
+        <?php include("includes/valoracion.php"); ?>
     </header>
 
     <!-- Main Content -->
@@ -197,6 +204,66 @@ $generosTexto = !empty($generosProducto) ? implode(', ', array_column($generosPr
                             </ul>
                         </div>
                     </div>
+                </div>
+
+                <!-- SECCIÓN DE VALORACIONES -->
+                <div class="row mb-3 mt-4">
+                    <div class="col-12">
+                        <h2 class="requirements-title">VALORACIONES DE USUARIOS</h2>
+                        <?php if ($mediaValoracion && $mediaValoracion['total'] > 0): ?>
+                        <div class="mb-3">
+                            <span style="color: #f5c518; font-size: 1.3rem;">
+                                <?php for ($i = 1; $i <= 5; $i++): ?>
+                                    <?php echo $i <= round($mediaValoracion['media']) ? '★' : '☆'; ?>
+                                <?php endfor; ?>
+                            </span>
+                            <span class="text-muted ms-2">
+                                <?php echo number_format($mediaValoracion['media'], 1); ?>/5 
+                                (<?php echo $mediaValoracion['total']; ?> <?php echo $mediaValoracion['total'] == 1 ? 'valoración' : 'valoraciones'; ?>)
+                            </span>
+                        </div>
+                        <?php endif; ?>
+                    </div>
+                </div>
+
+                <?php if ($idUsuario): ?>
+                <div class="row mb-3">
+                    <div class="col-12">
+                        <button class="btn btn-primary" onclick="abrirModalValoracion(<?php echo $productoId; ?>, '<?php echo htmlspecialchars(addslashes($titulo)); ?>')">
+                            ✍️ Escribir una valoración
+                        </button>
+                    </div>
+                </div>
+                <?php endif; ?>
+
+                <div class="row g-3 mb-4">
+                    <?php if (!empty($valoraciones)): ?>
+                        <?php foreach ($valoraciones as $val): ?>
+                        <div class="col-12">
+                            <div class="requirements-card" style="padding: 1rem 1.5rem;">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <strong style="color: #e0d0ff;"><?php echo htmlspecialchars($val['username']); ?></strong>
+                                    <small class="text-muted"><?php echo date('d/m/Y', strtotime($val['fecha_valoracion'])); ?></small>
+                                </div>
+                                <div class="mb-2" style="color: #f5c518;">
+                                    <?php for ($i = 1; $i <= 5; $i++): ?>
+                                        <?php echo $i <= $val['puntuacion'] ? '★' : '☆'; ?>
+                                    <?php endfor; ?>
+                                    <span class="text-muted ms-2">(<?php echo $val['puntuacion']; ?>/5)</span>
+                                </div>
+                                <?php if (!empty($val['comentario'])): ?>
+                                <p style="color: #ccc; margin-bottom: 0;"><?php echo nl2br(htmlspecialchars($val['comentario'])); ?></p>
+                                <?php else: ?>
+                                <p class="text-muted" style="margin-bottom: 0;"><em>Sin comentario</em></p>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <div class="col-12">
+                            <p class="text-muted">Aún no hay valoraciones para este producto. ¡Sé el primero en valorar!</p>
+                        </div>
+                    <?php endif; ?>
                 </div>
 
             </div>
