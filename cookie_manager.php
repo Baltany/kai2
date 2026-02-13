@@ -32,8 +32,8 @@ class CookieManager {
      * Marca que el usuario aceptó las cookies
      */
     public static function aceptarCookies() {
-        setcookie(self::COOKIE_ACEPTADAS, 'si', time() + self::DURACION_1_ANO, '/', '', true, true);
-        setcookie(self::COOKIE_DECIDIDAS, 'si', time() + self::DURACION_1_ANO, '/', '', true, true);
+        setcookie(self::COOKIE_ACEPTADAS, 'si', time() + self::DURACION_1_ANO, '/', '', false, true);
+        setcookie(self::COOKIE_DECIDIDAS, 'si', time() + self::DURACION_1_ANO, '/', '', false, true);
         setcookie(self::COOKIE_PRIMERA_VISITA, 'no', time() + self::DURACION_1_ANO, '/', '', false, false);
     }
     
@@ -41,7 +41,7 @@ class CookieManager {
      * Marca que el usuario denegó las cookies (solo obligatorias)
      */
     public static function denegarCookies() {
-        setcookie(self::COOKIE_DECIDIDAS, 'solo_obligatorias', time() + self::DURACION_1_ANO, '/', '', true, true);
+        setcookie(self::COOKIE_DECIDIDAS, 'solo_obligatorias', time() + self::DURACION_1_ANO, '/', '', false, true);
         setcookie(self::COOKIE_PRIMERA_VISITA, 'no', time() + self::DURACION_1_ANO, '/', '', false, false);
     }
     
@@ -125,8 +125,15 @@ class CookieManager {
     
     /**
      * Genera el HTML del modal de aceptación de cookies
+     * Solo se muestra cuando el usuario ha iniciado sesión y no ha decidido aún
      */
     public static function generarModalCookies() {
+        // Solo mostrar si el usuario está logueado
+        if (!isset($_SESSION['usuario_id'])) {
+            return '';
+        }
+        
+        // No mostrar si ya decidió
         if (self::cookiesDecididas()) {
             return '';
         }

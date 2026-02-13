@@ -219,10 +219,8 @@ if ($platformId) {
 <?php 
     require_once __DIR__ . "/cookie_manager.php";
 
-    // Modales de gestión de cookies
+    // Modal de aceptación de cookies (solo después de login)
     echo CookieManager::generarModalCookies();
-    echo CookieManager::generarModalSugerenciaRegistro();
-    echo CookieManager::generarModalNovedades();
     ?>
 </body>
 

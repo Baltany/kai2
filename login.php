@@ -243,14 +243,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <!-- Modales de Gestión de Cookies -->
     <?php 
-    // Modal de aceptación de cookies (primera visita)
+    // Modal de aceptación de cookies (solo después de login)
     echo CookieManager::generarModalCookies();
-    
-    // Modal de sugerencia de registro (primera visita, si ya aceptó cookies)
-    echo CookieManager::generarModalSugerenciaRegistro();
-    
-    // Modal de novedades (1 vez al mes, solo usuarios logueados)
-    echo CookieManager::generarModalNovedades();
     ?>
 </body>
 

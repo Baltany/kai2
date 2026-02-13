@@ -219,7 +219,7 @@ class UsuarioController {
                 $passwordHasheada = password_hash($passwordAleatorio, PASSWORD_BCRYPT);
 
                 $sql = "INSERT INTO usuario (username, password, nombre, apellidos, correo, fecha_nacimiento, codigo_postal, telefono, rol, activo) 
-                        VALUES (:username, :password, :nombre, :apellidos, :correo, NULL, NULL, NULL, 3, 1)";
+                        VALUES (:username, :password, :nombre, :apellidos, :correo, '2000-01-01', '00000', '000000000', 3, 1)";
                 $stmt = $this->conexion->prepare($sql);
                 $stmt->bindParam(':username', $username, PDO::PARAM_STR);
                 $stmt->bindParam(':password', $passwordHasheada, PDO::PARAM_STR);
