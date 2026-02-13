@@ -1,0 +1,5 @@
+tengo que corregir que el usuario con rol cliente pueda ver las valoraciones de otros usuarios por ejemplo en detalles.php,
+que cuando inicias sesion con google sino hay cuenta se cree automáticamente,
+que cuando el admin inicia sesion,pueda ver tambien el index.php añadir un boton que lo lleve,
+lo mismo con el editor,las cookies que salgan una vez inicias sesión y aparezca quieres aceptar o denegar si las deniega que pueda navegar por la pagina
+pero acepta solo las obligatorias 
