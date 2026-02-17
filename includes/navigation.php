@@ -1,4 +1,4 @@
-<!-- <a class="skip-to-content" href="#main-content">Saltar al contenido principal</a> -->
+<a class="skip-to-content" href="#main-content">Saltar al contenido principal</a>
 <nav class="kairos-header fixed-top" role="navigation" aria-label="Navegación principal">
     <div class="kairos-header-container">
 

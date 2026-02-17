@@ -87,7 +87,7 @@ $mediaValoracion = $valoracionController->obtenerMediaProducto($productoId);
 
                             <!-- Badge de descuento (si existe) -->
                             <?php if ($descuentoTexto): ?>
-                            <div class="details-discount-badge">
+                            <div class="details-discount-badge" role="img" aria-label="Descuento del <?php echo $descuento; ?> por ciento">
                                 <?php echo $descuentoTexto; ?>
                             </div>
                             <?php endif; ?>
@@ -116,18 +116,18 @@ $mediaValoracion = $valoracionController->obtenerMediaProducto($productoId);
                                 <p><?php echo nl2br(htmlspecialchars($descripcion)); ?></p>
                             </div>
 
-                            <div class="details-price-section">
+                            <div class="details-price-section" role="region" aria-label="Información de precio">
                                 <?php if ($descuento > 0): ?>
                                 <!-- Precio con descuento -->
                                 <div class="d-flex align-items-center gap-2 mb-2">
-                                    <span class="text-decoration-line-through text-muted" style="font-size: 1.2rem;">
+                                    <span class="text-decoration-line-through text-muted" style="font-size: 1.2rem;" aria-label="Precio original tachado">
                                         <?php echo number_format($precioOriginal, 2); ?>€
                                     </span>
-                                    <div class="details-price"><?php echo number_format($precioFinal, 2); ?>€</div>
+                                    <div class="details-price" aria-label="Precio con descuento"><?php echo number_format($precioFinal, 2); ?>€</div>
                                 </div>
                                 <?php else: ?>
                                 <!-- Precio normal -->
-                                <div class="details-price"><?php echo number_format($precioFinal, 2); ?>€</div>
+                                <div class="details-price" aria-label="Precio del producto"><?php echo number_format($precioFinal, 2); ?>€</div>
                                 <?php endif; ?>
 
                                 <!-- Botón añadir al carrito -->
@@ -135,31 +135,36 @@ $mediaValoracion = $valoracionController->obtenerMediaProducto($productoId);
                                 <?php if ($idUsuario): ?>
                                 <?php if ($enCarrito): ?>
                                 <!-- Ya está en el carrito -->
-                                <button class="details-add-btn" style="background: #10b981; cursor: default;" disabled>
-                                    ✓ YA ESTÁ EN TU CARRITO
+                                <button class="details-add-btn" style="background: #10b981; cursor: default;" disabled aria-disabled="true" aria-label="<?php echo htmlspecialchars($titulo); ?> ya está en tu carrito">
+                                    <span aria-hidden="true">✓</span> YA ESTÁ EN TU CARRITO
                                 </button>
-                                <a href="zonadepago.php" class="btn btn-primary w-100 mt-2">
+                                <a href="zonadepago.php" class="btn btn-primary w-100 mt-2" aria-label="Ir al carrito de compras">
                                     IR AL CARRITO
                                 </a>
                                 <?php else: ?>
                                 <!-- Botón para añadir -->
                                 <button class="details-add-btn btn-add-to-cart-detalle"
                                     data-product-id="<?php echo $productoId; ?>"
-                                    data-product-name="<?php echo htmlspecialchars($titulo); ?>">
+                                    data-product-name="<?php echo htmlspecialchars($titulo); ?>"
+                                    aria-label="Añadir <?php echo htmlspecialchars($titulo); ?> al carrito">
                                     AÑADIR AL CARRITO
                                 </button>
                                 <?php endif; ?>
                                 <?php else: ?>
                                 <!-- No está logueado -->
                                 <a href="login.php" class="details-add-btn"
-                                    style="text-decoration: none; display: block; text-align: center;">
+                                    style="text-decoration: none; display: block; text-align: center;"
+                                    role="button"
+                                    aria-label="Inicia sesión para comprar <?php echo htmlspecialchars($titulo); ?>">
                                     INICIA SESIÓN PARA COMPRAR
                                 </a>
                                 <?php endif; ?>
                                 <?php else: ?>
                                 <!-- Sin stock -->
                                 <button class="details-add-btn" disabled
-                                    style="opacity: 0.5; cursor: not-allowed; background: #666;">
+                                    style="opacity: 0.5; cursor: not-allowed; background: #666;"
+                                    aria-disabled="true"
+                                    aria-label="Producto agotado: <?php echo htmlspecialchars($titulo); ?> sin stock disponible">
                                     PRODUCTO AGOTADO
                                 </button>
                                 <?php endif; ?>
@@ -211,12 +216,14 @@ $mediaValoracion = $valoracionController->obtenerMediaProducto($productoId);
                         <h2 class="requirements-title">VALORACIONES DE USUARIOS</h2>
                         <?php if ($mediaValoracion && $mediaValoracion['total'] > 0): ?>
                         <div class="mb-3">
-                            <span style="color: #f5c518; font-size: 1.3rem;">
+                            <span style="color: #f5c518; font-size: 1.3rem;" 
+                                  role="img" 
+                                  aria-label="Valoración media: <?php echo number_format($mediaValoracion['media'], 1); ?> de 5 estrellas">
                                 <?php for ($i = 1; $i <= 5; $i++): ?>
-                                <?php echo $i <= round($mediaValoracion['media']) ? '★' : '☆'; ?>
+                                <span aria-hidden="true"><?php echo $i <= round($mediaValoracion['media']) ? '★' : '☆'; ?></span>
                                 <?php endfor; ?>
                             </span>
-                            <span class="text-muted ms-2">
+                            <span class="text-muted ms-2" aria-label="<?php echo $mediaValoracion['total']; ?> <?php echo $mediaValoracion['total'] == 1 ? 'valoración' : 'valoraciones'; ?> totales">
                                 <?php echo number_format($mediaValoracion['media'], 1); ?>/5
                                 (<?php echo $mediaValoracion['total']; ?>
                                 <?php echo $mediaValoracion['total'] == 1 ? 'valoración' : 'valoraciones'; ?>)
@@ -229,8 +236,9 @@ $mediaValoracion = $valoracionController->obtenerMediaProducto($productoId);
                 <div class="row mb-3">
                     <div class="col-12">
                         <button class="btn btn-primary"
-                            onclick="abrirModalValoracion(<?php echo $productoId; ?>, '<?php echo htmlspecialchars(addslashes($titulo)); ?>')">
-                            ✍️ Escribir una valoración
+                            onclick="abrirModalValoracion(<?php echo $productoId; ?>, '<?php echo htmlspecialchars(addslashes($titulo)); ?>')"
+                            aria-label="Escribir una valoración para <?php echo htmlspecialchars($titulo); ?>">
+                            <span aria-hidden="true">✍️</span> Escribir una valoración
                         </button>
                     </div>
                 </div>
@@ -239,16 +247,19 @@ $mediaValoracion = $valoracionController->obtenerMediaProducto($productoId);
                     <?php if (!empty($valoraciones)): ?>
                     <?php foreach ($valoraciones as $val): ?>
                     <div class="col-12">
-                        <div class="requirements-card" style="padding: 1rem 1.5rem;">
+                        <article class="requirements-card" style="padding: 1rem 1.5rem;">
                             <div class="d-flex justify-content-between align-items-center mb-2">
                                 <strong
                                     style="color: #e0d0ff;"><?php echo htmlspecialchars($val['username']); ?></strong>
-                                <small
-                                    class="text-muted"><?php echo date('d/m/Y', strtotime($val['fecha_valoracion'])); ?></small>
+                                <time datetime="<?php echo $val['fecha_valoracion']; ?>" class="text-muted">
+                                    <?php echo date('d/m/Y', strtotime($val['fecha_valoracion'])); ?>
+                                </time>
                             </div>
-                            <div class="mb-2" style="color: #f5c518;">
+                            <div class="mb-2" style="color: #f5c518;" 
+                                 role="img" 
+                                 aria-label="Valoración: <?php echo $val['puntuacion']; ?> de 5 estrellas">
                                 <?php for ($i = 1; $i <= 5; $i++): ?>
-                                <?php echo $i <= $val['puntuacion'] ? '★' : '☆'; ?>
+                                <span aria-hidden="true"><?php echo $i <= $val['puntuacion'] ? '★' : '☆'; ?></span>
                                 <?php endfor; ?>
                                 <span class="text-muted ms-2">(<?php echo $val['puntuacion']; ?>/5)</span>
                             </div>
@@ -258,7 +269,7 @@ $mediaValoracion = $valoracionController->obtenerMediaProducto($productoId);
                             <?php else: ?>
                             <p class="text-muted" style="margin-bottom: 0;"><em>Sin comentario</em></p>
                             <?php endif; ?>
-                        </div>
+                        </article>
                     </div>
                     <?php endforeach; ?>
                     <?php else: ?>

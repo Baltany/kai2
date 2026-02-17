@@ -17,10 +17,12 @@
     <!-- Main Content -->
     <main class="zona-pago-main">
         <div class="contenedor-pago">
+            <h1 class="visually-hidden">Zona de Pago</h1>
             <div class="row g-0">
                 <!-- Productos (Izquierda) -->
                 <div class="col-md-7">
                     <div class="productos-list">
+                        <h2 class="visually-hidden">Productos en tu carrito</h2>
                         <!-- Producto 1 -->
                         <div class="producto-item">
                             <div class="d-flex gap-3">
@@ -122,7 +124,7 @@
                 <div class="col-md-5">
                     <div class="resumen-card">
                         <!-- Título -->
-                        <h4 class="resumen-titulo mb-4">Resumen del pedido</h4>
+                        <h2 class="resumen-titulo mb-4">Resumen del pedido</h2>
 
                         <!-- Subtotal -->
                         <div class="resumen-row">

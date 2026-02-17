@@ -1,3 +1,23 @@
+// ===== Skip to Content Link (Accesibilidad) =====
+.skip-to-content {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: $primario;
+    color: $texto_claro;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    z-index: 10000;
+    border-radius: 0 0 4px 0;
+    font-weight: 600;
+    
+    &:focus {
+        top: 0;
+        outline: 3px solid $resalte;
+        outline-offset: 2px;
+    }
+}
+
 .kairos-header {
     width: 100%;
     background: $primario;

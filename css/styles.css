@@ -16616,6 +16616,22 @@ html, body {
     .product-card .product-card-button:active {
       transform: translateY(0); }
 
+.skip-to-content {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: #1c0538;
+  color: #fffdfa;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  z-index: 10000;
+  border-radius: 0 0 4px 0;
+  font-weight: 600; }
+  .skip-to-content:focus {
+    top: 0;
+    outline: 3px solid #6f12e0;
+    outline-offset: 2px; }
+
 .kairos-header {
   width: 100%;
   background: #1c0538;
@@ -17961,6 +17977,22 @@ body {
 
   .resumen-card {
     margin-top: 20px; } }
+.skip-to-content {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: #1c0538;
+  color: #fffdfa;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  z-index: 10000;
+  border-radius: 0 0 4px 0;
+  font-weight: 600; }
+  .skip-to-content:focus {
+    top: 0;
+    outline: 3px solid #6f12e0;
+    outline-offset: 2px; }
+
 .kairos-header {
   width: 100%;
   background: #1c0538;
