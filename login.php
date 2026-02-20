@@ -136,23 +136,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <!-- Mostrar Error -->
                             <?php if ($error): ?>
                             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                <strong>❌ Error:</strong> <?php echo htmlspecialchars($error); ?>
+                                <strong><span aria-hidden="true">❌</span> Error:</strong> <?php echo htmlspecialchars($error); ?>
                                 <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                    aria-label="Close"></button>
+                                    aria-label="Cerrar alerta de error"></button>
                             </div>
                             <?php endif; ?>
 
                             <!-- Mostrar Éxito -->
                             <?php if ($exito): ?>
                             <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                <strong>✅ Éxito:</strong> <?php echo htmlspecialchars($exito); ?> Redirigiendo...
+                                <strong><span aria-hidden="true">✅</span> Éxito:</strong> <?php echo htmlspecialchars($exito); ?> Redirigiendo...
                                 <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                    aria-label="Close"></button>
+                                    aria-label="Cerrar alerta de éxito"></button>
                             </div>
                             <?php endif; ?>
 
                             <!-- Formulario Login -->
-                            <form method="POST" action="" novalidate>
+                            <form method="POST" action="" novalidate aria-label="Formulario de inicio de sesión">
 
                                 <!-- Email/Username Input -->
                                 <div class="mb-3">
@@ -160,8 +160,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     <input type="text" id="email" name="email" class="form-control form-control-lg"
                                         placeholder="correo@ejemplo.com o usuario_nombre"
                                         value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email']) : ''; ?>"
+                                        autocomplete="username"
+                                        aria-describedby="emailHelp"
                                         required />
-                                    <div class="invalid-feedback d-block" style="display: none;">
+                                    <div id="emailHelp" class="invalid-feedback d-block" style="display: none;">
                                         Por favor introduce un email o usuario válido.
                                     </div>
                                 </div>
@@ -170,8 +172,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 <div class="mb-4">
                                     <label for="password" class="form-label fw-500">Contraseña</label>
                                     <input type="password" id="password" name="password"
-                                        class="form-control form-control-lg" placeholder="••••••••" required />
-                                    <div class="invalid-feedback d-block" style="display: none;">
+                                        class="form-control form-control-lg" placeholder="••••••••"
+                                        autocomplete="current-password"
+                                        aria-describedby="passwordHelp"
+                                        required />
+                                    <div id="passwordHelp" class="invalid-feedback d-block" style="display: none;">
                                         Por favor introduce tu contraseña.
                                     </div>
                                 </div>
@@ -190,7 +195,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 <!-- Login Button -->
                                 <div class="d-grid gap-2 mb-4">
                                     <button type="submit" class="btn btn-primary btn-lg fw-bold" name="enviar"
-                                        id="enviar">
+                                        id="enviar" aria-label="Iniciar sesión en Kairos">
                                         Iniciar Sesión
                                     </button>
                                 </div>

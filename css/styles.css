@@ -16876,6 +16876,16 @@ main > .container > .row > .col-12:first-child img {
       .card .card-title {
         font-size: 24px; } }
 
+.form-label,
+.form-check-label {
+  color: #ffffff !important;
+  font-weight: 500 !important;
+  margin-bottom: 0.5rem !important; }
+
+small.text-muted, .text-muted.small {
+  color: #e0e0e0 !important;
+  opacity: 0.9; }
+
 .form-control,
 .form-control-lg {
   background: rgba(255, 255, 255, 0.15) !important;
@@ -19400,12 +19410,12 @@ body {
   .admin-menu .menu-link {
     flex: 1;
     padding: 1rem 1.5rem;
-    color: #fffdfa;
+    color: #ffffff;
     text-decoration: none;
     border-right: 1px solid rgba(111, 18, 224, 0.2);
     transition: all 0.3s ease;
     text-align: center;
-    font-weight: 500;
+    font-weight: 600;
     display: block; }
     .admin-menu .menu-link:last-child {
       border-right: none; }
@@ -19435,7 +19445,7 @@ body {
   border-radius: 12px;
   border: 1px solid rgba(111, 18, 224, 0.2); }
   .admin-header h1, .admin-header .h1 {
-    color: #fffdfa;
+    color: #ffffff;
     font-size: 2rem;
     margin: 0;
     display: flex;

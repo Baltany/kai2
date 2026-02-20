@@ -93,7 +93,7 @@ class CaptchaMath {
         
         $html = '
         <div class="captcha-container mb-3">
-            <label class="form-label fw-500">Verificación Anti-Bot</label>
+            <label for="captcha_respuesta" class="form-label fw-500">Verificación Anti-Bot</label>
             <div class="captcha-question-box p-3 bg-light border rounded">
                 <p class="mb-2 text-center">
                     <strong>Resuelve esta operación:</strong>
@@ -107,9 +107,10 @@ class CaptchaMath {
                    name="captcha_respuesta" 
                    class="form-control form-control-lg mt-2" 
                    placeholder="Tu respuesta" 
+                   aria-describedby="captchaHelp"
                    required 
                    autocomplete="off">
-            <small class="text-muted">Completa la operación para continuar</small>
+            <small id="captchaHelp" class="form-text text-muted">Completa la operación para continuar</small>
         </div>';
         
         return $html;

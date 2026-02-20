@@ -77,6 +77,21 @@ main > .container > .row > .col-12:first-child {
     }
 }
 // ============================================================================
+// FORM LABEL - Etiquetas de inputs
+// ============================================================================
+.form-label,
+.form-check-label {
+    color: #ffffff !important; // Texto blanco puro para máximo contraste
+    font-weight: 500 !important;
+    margin-bottom: 0.5rem !important;
+}
+
+small.text-muted {
+    color: #e0e0e0 !important; // Gris muy claro en lugar de gris oscuro
+    opacity: 0.9;
+}
+
+// ============================================================================
 // FORM CONTROL - Inputs (reemplaza .frame-17)
 // ============================================================================
 .form-control,

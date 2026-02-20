@@ -65,87 +65,97 @@ $roles = $controller->obtenerRoles();
 
 <body>
     <!-- Menú sencillo -->
-    <nav class="admin-menu">
+    <nav class="admin-menu" role="navigation" aria-label="Menú de administración">
         <div class="menu-container">
-            <a href="../index.php" class="menu-link">Ir a la Tienda</a>
-            <a href="productos.php" class="menu-link active">Productos</a>
-            <a href="usuarios.php" class="menu-link">Usuarios</a>
-            <a href="valoraciones.php" class="menu-link">Valoraciones</a>
-            <a href="../logout.php" class="menu-link active">Logout</a>
+            <a href="../index.php" class="menu-link" aria-label="Ir a la tienda principal">Ir a la Tienda</a>
+            <a href="productos.php" class="menu-link" aria-label="Administrar productos">Productos</a>
+            <a href="usuarios.php" class="menu-link active" aria-current="page" aria-label="Administrar usuarios">Usuarios</a>
+            <a href="valoraciones.php" class="menu-link" aria-label="Administrar valoraciones">Valoraciones</a>
+            <a href="../logout.php" class="menu-link" aria-label="Cerrar sesión">Logout</a>
         </div>
     </nav>
 
     <div class="admin-panel">
         <div class="container">
-            <div class="admin-header">
-                <h1><i class="bi bi-people-fill"></i> Gestión de Usuarios</h1>
-                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCrearUsuario">
-                    <i class="bi bi-plus-circle"></i> Nuevo Usuario
+            <header class="admin-header">
+                <h1><i class="bi bi-people-fill" aria-hidden="true"></i> Gestión de Usuarios</h1>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCrearUsuario"
+                    aria-label="Abrir formulario para crear nuevo usuario">
+                    <i class="bi bi-plus-circle" aria-hidden="true"></i> Nuevo Usuario
                 </button>
-            </div>
+            </header>
 
             <?php if ($mensaje): ?>
             <div class="alert alert-<?= $tipoMensaje ?> alert-dismissible fade show" role="alert">
                 <?= htmlspecialchars($mensaje) ?>
-                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar alerta"></button>
             </div>
             <?php endif; ?>
 
             <div class="admin-content">
                 <div class="table-responsive">
-                    <table class="admin-table">
+                    <table class="admin-table" role="table" aria-label="Tabla de usuarios del sistema">
                         <thead>
                             <tr>
-                                <th>ID</th>
-                                <th>Username</th>
-                                <th>Nombre Completo</th>
-                                <th>Email</th>
-                                <th>Teléfono</th>
-                                <th>Rol</th>
-                                <th>Estado</th>
-                                <th>Fecha Registro</th>
-                                <th>Acciones</th>
+                                <th scope="col">ID</th>
+                                <th scope="col">Username</th>
+                                <th scope="col">Nombre Completo</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Teléfono</th>
+                                <th scope="col">Rol</th>
+                                <th scope="col">Estado</th>
+                                <th scope="col">Fecha Registro</th>
+                                <th scope="col">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php foreach ($usuarios as $usuario): ?>
                             <tr>
-                                <td><?= $usuario['id'] ?></td>
+                                <th scope="row"><?= $usuario['id'] ?></th>
                                 <td><?= htmlspecialchars($usuario['username']) ?></td>
                                 <td><?= htmlspecialchars($usuario['nombre'] . ' ' . $usuario['apellidos']) ?></td>
                                 <td><?= htmlspecialchars($usuario['correo']) ?></td>
                                 <td><?= htmlspecialchars($usuario['telefono']) ?></td>
                                 <td>
                                     <span
-                                        class="badge bg-<?= $usuario['rol'] == 1 ? 'danger' : ($usuario['rol'] == 2 ? 'warning' : 'info') ?>">
+                                        class="badge bg-<?= $usuario['rol'] == 1 ? 'danger' : ($usuario['rol'] == 2 ? 'warning' : 'info') ?>"
+                                        role="status"
+                                        aria-label="Rol: <?= $usuario['rol'] == 1 ? 'Administrador' : ($usuario['rol'] == 2 ? 'Trabajador' : 'Cliente') ?>">
                                         <?= $usuario['rol'] == 1 ? 'Admin' : ($usuario['rol'] == 2 ? 'Trabajador' : 'Cliente') ?>
                                     </span>
                                 </td>
                                 <td>
-                                    <span class="badge bg-<?= $usuario['activo'] ? 'success' : 'secondary' ?>">
+                                    <span class="badge bg-<?= $usuario['activo'] ? 'success' : 'secondary' ?>"
+                                        role="status"
+                                        aria-label="Estado: <?= $usuario['activo'] ? 'Activo' : 'Inactivo' ?>">
                                         <?= $usuario['activo'] ? 'Activo' : 'Inactivo' ?>
                                     </span>
                                 </td>
-                                <td><?= date('d/m/Y', strtotime($usuario['fecha_creacion'])) ?></td>
+                                <td><time datetime="<?= $usuario['fecha_creacion'] ?>"><?= date('d/m/Y', strtotime($usuario['fecha_creacion'])) ?></time></td>
                                 <td class="action-buttons">
                                     <button class="btn btn-sm btn-info"
-                                        onclick="editarUsuario(<?= htmlspecialchars(json_encode($usuario)) ?>)">
-                                        <i class="bi bi-pencil"></i>
+                                        onclick="editarUsuario(<?= htmlspecialchars(json_encode($usuario)) ?>)"
+                                        aria-label="Editar usuario <?= htmlspecialchars($usuario['username']) ?>">
+                                        <i class="bi bi-pencil" aria-hidden="true"></i>
                                     </button>
                                     <form method="POST" style="display: inline;"
-                                        onsubmit="return confirm('¿Cambiar estado del usuario?')">
+                                        onsubmit="return confirm('¿Cambiar estado del usuario?')"
+                                        aria-label="Cambiar estado de <?= htmlspecialchars($usuario['username']) ?>">
                                         <input type="hidden" name="accion" value="toggle_activo">
                                         <input type="hidden" name="id" value="<?= $usuario['id'] ?>">
-                                        <button type="submit" class="btn btn-sm btn-warning">
-                                            <i class="bi bi-toggle-<?= $usuario['activo'] ? 'on' : 'off' ?>"></i>
+                                        <button type="submit" class="btn btn-sm btn-warning"
+                                            aria-label="<?= $usuario['activo'] ? 'Desactivar' : 'Activar' ?> usuario <?= htmlspecialchars($usuario['username']) ?>">
+                                            <i class="bi bi-toggle-<?= $usuario['activo'] ? 'on' : 'off' ?>" aria-hidden="true"></i>
                                         </button>
                                     </form>
                                     <form method="POST" style="display: inline;"
-                                        onsubmit="return confirm('¿Eliminar este usuario permanentemente?')">
+                                        onsubmit="return confirm('¿Eliminar este usuario permanentemente?')"
+                                        aria-label="Eliminar usuario <?= htmlspecialchars($usuario['username']) ?>">
                                         <input type="hidden" name="accion" value="eliminar">
                                         <input type="hidden" name="id" value="<?= $usuario['id'] ?>">
-                                        <button type="submit" class="btn btn-sm btn-danger">
-                                            <i class="bi bi-trash"></i>
+                                        <button type="submit" class="btn btn-sm btn-danger"
+                                            aria-label="Eliminar permanentemente a <?= htmlspecialchars($usuario['username']) ?>">
+                                            <i class="bi bi-trash" aria-hidden="true"></i>
                                         </button>
                                     </form>
                                 </td>
@@ -159,12 +169,12 @@ $roles = $controller->obtenerRoles();
     </div>
 
     <!-- Modal Crear Usuario -->
-    <div class="modal fade" id="modalCrearUsuario" tabindex="-1">
-        <div class="modal-dialog modal-lg">
+    <div class="modal fade" id="modalCrearUsuario" tabindex="-1" aria-labelledby="modalCrearUsuarioLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title"><i class="bi bi-person-plus"></i> Crear Nuevo Usuario</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    <h5 class="modal-title" id="modalCrearUsuarioLabel"><i class="bi bi-person-plus" aria-hidden="true"></i> Crear Nuevo Usuario</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar formulario"></button>
                 </div>
                 <form method="POST">
                     <div class="modal-body">
@@ -172,62 +182,100 @@ $roles = $controller->obtenerRoles();
 
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label class="form-label">Username *</label>
-                                <input type="text" name="username" class="form-control" required>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label">Email *</label>
-                                <input type="email" name="correo" class="form-control" required>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label">Nombre *</label>
-                                <input type="text" name="nombre" class="form-control" required>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label">Apellidos *</label>
-                                <input type="text" name="apellidos" class="form-control" required>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label">Contraseña *</label>
-                                <input type="password" name="password" class="form-control" required>
-                                <small class="text-muted">Mín. 8 caracteres, mayúscula, minúscula, número y carácter
-                                    especial</small>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label">Fecha Nacimiento *</label>
-                                <input type="date" name="fecha_nacimiento" class="form-control" required>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-4 mb-3">
-                                <label class="form-label">Teléfono *</label>
-                                <input type="text" name="telefono" class="form-control" pattern="[0-9]{9}" required>
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <label class="form-label">Código Postal *</label>
-                                <input type="text" name="codigo_postal" class="form-control" pattern="[0-9]{5}"
+                                <label for="crear_username" class="form-label">Username *</label>
+                                <input type="text" id="crear_username" name="username" class="form-control" 
+                                    autocomplete="username" 
+                                    aria-describedby="crear_usernameHelp" 
                                     required>
+                                <small id="crear_usernameHelp" class="form-text text-muted">Mínimo 3 caracteres</small>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="crear_correo" class="form-label">Email *</label>
+                                <input type="email" id="crear_correo" name="correo" class="form-control" 
+                                    autocomplete="email" 
+                                    aria-describedby="crear_correoHelp" 
+                                    required>
+                                <small id="crear_correoHelp" class="form-text text-muted">Formato: correo@ejemplo.com</small>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="crear_nombre" class="form-label">Nombre *</label>
+                                <input type="text" id="crear_nombre" name="nombre" class="form-control" 
+                                    autocomplete="given-name" 
+                                    aria-describedby="crear_nombreHelp" 
+                                    required>
+                                <small id="crear_nombreHelp" class="form-text text-muted">Solo letras y espacios</small>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="crear_apellidos" class="form-label">Apellidos *</label>
+                                <input type="text" id="crear_apellidos" name="apellidos" class="form-control" 
+                                    autocomplete="family-name" 
+                                    aria-describedby="crear_apellidosHelp" 
+                                    required>
+                                <small id="crear_apellidosHelp" class="form-text text-muted">Solo letras y espacios</small>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="crear_password" class="form-label">Contraseña *</label>
+                                <input type="password" id="crear_password" name="password" class="form-control" 
+                                    autocomplete="new-password" 
+                                    aria-describedby="crear_passwordHelp" 
+                                    required>
+                                <small id="crear_passwordHelp" class="form-text text-muted">Mín. 8 caracteres, mayúscula, minúscula, número y carácter especial</small>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="crear_fecha_nacimiento" class="form-label">Fecha Nacimiento *</label>
+                                <input type="date" id="crear_fecha_nacimiento" name="fecha_nacimiento" class="form-control" 
+                                    autocomplete="bday" 
+                                    aria-describedby="crear_fechaHelp" 
+                                    required>
+                                <small id="crear_fechaHelp" class="form-text text-muted">Debe ser mayor de 16 años</small>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label for="crear_telefono" class="form-label">Teléfono *</label>
+                                <input type="text" id="crear_telefono" name="telefono" class="form-control" 
+                                    pattern="[0-9]{9}" 
+                                    inputmode="tel" 
+                                    autocomplete="tel" 
+                                    aria-describedby="crear_telefonoHelp" 
+                                    required>
+                                <small id="crear_telefonoHelp" class="form-text text-muted">9 dígitos sin espacios</small>
                             </div>
                             <div class="col-md-4 mb-3">
-                                <label class="form-label">Rol *</label>
-                                <select name="rol" class="form-select" required>
+                                <label for="crear_codigo_postal" class="form-label">Código Postal *</label>
+                                <input type="text" id="crear_codigo_postal" name="codigo_postal" class="form-control" 
+                                    pattern="[0-9]{5}" 
+                                    inputmode="numeric" 
+                                    autocomplete="postal-code" 
+                                    aria-describedby="crear_codigoPostalHelp" 
+                                    required>
+                                <small id="crear_codigoPostalHelp" class="form-text text-muted">5 dígitos</small>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="crear_rol" class="form-label">Rol *</label>
+                                <select id="crear_rol" name="rol" class="form-select" 
+                                    aria-describedby="crear_rolHelp" 
+                                    required>
                                     <?php foreach ($roles as $rol): ?>
                                     <option value="<?= $rol['id'] ?>"><?= ucfirst($rol['nombre']) ?></option>
                                     <?php endforeach; ?>
                                 </select>
+                                <small id="crear_rolHelp" class="form-text text-muted">Seleccione el rol del usuario</small>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-primary">Crear Usuario</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" 
+                            aria-label="Cancelar creación de usuario">Cancelar</button>
+                        <button type="submit" class="btn btn-primary" 
+                            aria-label="Crear nuevo usuario">Crear Usuario</button>
                     </div>
                 </form>
             </div>
@@ -235,12 +283,12 @@ $roles = $controller->obtenerRoles();
     </div>
 
     <!-- Modal Editar Usuario -->
-    <div class="modal fade" id="modalEditarUsuario" tabindex="-1">
-        <div class="modal-dialog modal-lg">
+    <div class="modal fade" id="modalEditarUsuario" tabindex="-1" aria-labelledby="modalEditarUsuarioLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title"><i class="bi bi-pencil-square"></i> Editar Usuario</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    <h5 class="modal-title" id="modalEditarUsuarioLabel"><i class="bi bi-pencil-square" aria-hidden="true"></i> Editar Usuario</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar formulario de edición"></button>
                 </div>
                 <form method="POST">
                     <div class="modal-body">
@@ -249,62 +297,100 @@ $roles = $controller->obtenerRoles();
 
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label class="form-label">Username *</label>
-                                <input type="text" name="username" id="edit_username" class="form-control" required>
+                                <label for="edit_username" class="form-label">Username *</label>
+                                <input type="text" name="username" id="edit_username" class="form-control" 
+                                    autocomplete="username" 
+                                    aria-describedby="edit_usernameHelp" 
+                                    required>
+                                <small id="edit_usernameHelp" class="form-text text-muted">Mínimo 3 caracteres</small>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label class="form-label">Email *</label>
-                                <input type="email" name="correo" id="edit_correo" class="form-control" required>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label">Nombre *</label>
-                                <input type="text" name="nombre" id="edit_nombre" class="form-control" required>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label">Apellidos *</label>
-                                <input type="text" name="apellidos" id="edit_apellidos" class="form-control" required>
+                                <label for="edit_correo" class="form-label">Email *</label>
+                                <input type="email" name="correo" id="edit_correo" class="form-control" 
+                                    autocomplete="email" 
+                                    aria-describedby="edit_correoHelp" 
+                                    required>
+                                <small id="edit_correoHelp" class="form-text text-muted">Formato: correo@ejemplo.com</small>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label class="form-label">Nueva Contraseña (dejar vacío para no cambiar)</label>
-                                <input type="password" name="password" class="form-control">
+                                <label for="edit_nombre" class="form-label">Nombre *</label>
+                                <input type="text" name="nombre" id="edit_nombre" class="form-control" 
+                                    autocomplete="given-name" 
+                                    aria-describedby="edit_nombreHelp" 
+                                    required>
+                                <small id="edit_nombreHelp" class="form-text text-muted">Solo letras y espacios</small>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label class="form-label">Fecha Nacimiento *</label>
+                                <label for="edit_apellidos" class="form-label">Apellidos *</label>
+                                <input type="text" name="apellidos" id="edit_apellidos" class="form-control" 
+                                    autocomplete="family-name" 
+                                    aria-describedby="edit_apellidosHelp" 
+                                    required>
+                                <small id="edit_apellidosHelp" class="form-text text-muted">Solo letras y espacios</small>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="edit_password" class="form-label">Nueva Contraseña (dejar vacío para no cambiar)</label>
+                                <input type="password" id="edit_password" name="password" class="form-control" 
+                                    autocomplete="new-password" 
+                                    aria-describedby="edit_passwordHelp">
+                                <small id="edit_passwordHelp" class="form-text text-muted">Mín. 8 caracteres, mayúscula, minúscula, número y carácter especial</small>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="edit_fecha_nacimiento" class="form-label">Fecha Nacimiento *</label>
                                 <input type="date" name="fecha_nacimiento" id="edit_fecha_nacimiento"
-                                    class="form-control" required>
+                                    class="form-control" 
+                                    autocomplete="bday" 
+                                    aria-describedby="edit_fechaHelp" 
+                                    required>
+                                <small id="edit_fechaHelp" class="form-text text-muted">Debe ser mayor de 16 años</small>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-md-4 mb-3">
-                                <label class="form-label">Teléfono *</label>
+                                <label for="edit_telefono" class="form-label">Teléfono *</label>
                                 <input type="text" name="telefono" id="edit_telefono" class="form-control"
-                                    pattern="[0-9]{9}" required>
+                                    pattern="[0-9]{9}" 
+                                    inputmode="tel" 
+                                    autocomplete="tel" 
+                                    aria-describedby="edit_telefonoHelp" 
+                                    required>
+                                <small id="edit_telefonoHelp" class="form-text text-muted">9 dígitos sin espacios</small>
                             </div>
                             <div class="col-md-4 mb-3">
-                                <label class="form-label">Código Postal *</label>
+                                <label for="edit_codigo_postal" class="form-label">Código Postal *</label>
                                 <input type="text" name="codigo_postal" id="edit_codigo_postal" class="form-control"
-                                    pattern="[0-9]{5}" required>
+                                    pattern="[0-9]{5}" 
+                                    inputmode="numeric" 
+                                    autocomplete="postal-code" 
+                                    aria-describedby="edit_codigoPostalHelp" 
+                                    required>
+                                <small id="edit_codigoPostalHelp" class="form-text text-muted">5 dígitos</small>
                             </div>
                             <div class="col-md-4 mb-3">
-                                <label class="form-label">Rol *</label>
-                                <select name="rol" id="edit_rol" class="form-select" required>
+                                <label for="edit_rol" class="form-label">Rol *</label>
+                                <select name="rol" id="edit_rol" class="form-select" 
+                                    aria-describedby="edit_rolHelp" 
+                                    required>
                                     <?php foreach ($roles as $rol): ?>
                                     <option value="<?= $rol['id'] ?>"><?= ucfirst($rol['nombre']) ?></option>
                                     <?php endforeach; ?>
                                 </select>
+                                <small id="edit_rolHelp" class="form-text text-muted">Seleccione el rol del usuario</small>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" 
+                            aria-label="Cancelar edición">Cancelar</button>
+                        <button type="submit" class="btn btn-primary" 
+                            aria-label="Guardar cambios del usuario">Guardar Cambios</button>
                     </div>
                 </form>
             </div>

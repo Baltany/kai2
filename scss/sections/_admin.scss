@@ -21,12 +21,12 @@
     .menu-link {
         flex: 1;
         padding: 1rem 1.5rem;
-        color: $texto_claro;
+        color: #ffffff; // Blanco puro para contraste máximo
         text-decoration: none;
         border-right: 1px solid rgba($resalte, 0.2);
         transition: all 0.3s ease;
         text-align: center;
-        font-weight: 500;
+        font-weight: 600; // Aumentado de 500 a 600 para mayor legibilidad
         display: block;
 
         &:last-child {
@@ -72,7 +72,7 @@
     border: 1px solid rgba($resalte, 0.2);
 
     h1 {
-        color: $texto_claro;
+        color: #ffffff; // Blanco puro para máximo contraste
         font-size: 2rem;
         margin: 0;
         display: flex;

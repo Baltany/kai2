@@ -85,19 +85,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <!-- Mostrar Error -->
                             <?php if ($error): ?>
                             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                <strong>❌ Error:</strong> <?php echo htmlspecialchars($error); ?>
+                                <strong><span aria-hidden="true">❌</span> Error:</strong> <?php echo htmlspecialchars($error); ?>
                                 <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                    aria-label="Close"></button>
+                                    aria-label="Cerrar alerta de error"></button>
                             </div>
                             <?php endif; ?>
 
                             <!-- Mostrar Éxito -->
                             <?php if ($exito): ?>
                             <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                <strong>✅ Éxito:</strong> <?php echo htmlspecialchars($exito); ?>
+                                <strong><span aria-hidden="true">✅</span> Éxito:</strong> <?php echo htmlspecialchars($exito); ?>
                                 <p class="mt-2 mb-0">Redirigiendo a login en 2 segundos...</p>
                                 <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                    aria-label="Close"></button>
+                                    aria-label="Cerrar alerta de éxito"></button>
                             </div>
                             <script>
                             setTimeout(() => {
@@ -107,7 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <?php endif; ?>
 
                             <!-- Formulario Registro -->
-                            <form method="POST" action="" novalidate>
+                            <form method="POST" action="" novalidate aria-label="Formulario de registro de usuario">
 
                                 <!-- Username Input -->
                                 <div class="mb-3">
@@ -115,8 +115,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     <input type="text" id="username" name="username"
                                         class="form-control form-control-lg" placeholder="usuario_nombre"
                                         value="<?php echo isset($_POST['username']) ? htmlspecialchars($_POST['username']) : ''; ?>"
+                                        autocomplete="username"
+                                        aria-describedby="usernameHelp"
                                         required />
-                                    <small class="text-muted">Alfanumérico y guion bajo, 3-50 caracteres</small>
+                                    <small id="usernameHelp" class="text-muted">Alfanumérico y guion bajo, 3-50 caracteres</small>
                                 </div>
 
                                 <!-- Nombre Input -->
@@ -125,6 +127,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     <input type="text" id="nombre" name="nombre" class="form-control form-control-lg"
                                         placeholder="Tu nombre"
                                         value="<?php echo isset($_POST['nombre']) ? htmlspecialchars($_POST['nombre']) : ''; ?>"
+                                        autocomplete="given-name"
                                         required />
                                 </div>
 
@@ -134,6 +137,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     <input type="text" id="apellidos" name="apellidos"
                                         class="form-control form-control-lg" placeholder="Tus apellidos"
                                         value="<?php echo isset($_POST['apellidos']) ? htmlspecialchars($_POST['apellidos']) : ''; ?>"
+                                        autocomplete="family-name"
                                         required />
                                 </div>
 
@@ -143,6 +147,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     <input type="email" id="email" name="email" class="form-control form-control-lg"
                                         placeholder="correo@ejemplo.com"
                                         value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email']) : ''; ?>"
+                                        autocomplete="email"
                                         required />
                                 </div>
 
@@ -152,8 +157,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     <input type="date" id="fecha_nacimiento" name="fecha_nacimiento"
                                         class="form-control form-control-lg"
                                         value="<?php echo isset($_POST['fecha_nacimiento']) ? htmlspecialchars($_POST['fecha_nacimiento']) : ''; ?>"
+                                        autocomplete="bday"
+                                        aria-describedby="birthdayHelp"
                                         required />
-                                    <small class="text-muted">Debes ser mayor de 18 años</small>
+                                    <small id="birthdayHelp" class="text-muted">Debes ser mayor de 18 años</small>
                                 </div>
 
                                 <!-- Codigo Postal Input -->
@@ -162,18 +169,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     <input type="text" id="codigo_postal" name="codigo_postal"
                                         class="form-control form-control-lg" placeholder="28001"
                                         value="<?php echo isset($_POST['codigo_postal']) ? htmlspecialchars($_POST['codigo_postal']) : ''; ?>"
-                                        maxlength="5" required />
-                                    <small class="text-muted">5 dígitos</small>
+                                        maxlength="5"
+                                        autocomplete="postal-code"
+                                        aria-describedby="postalHelp"
+                                        inputmode="numeric"
+                                        pattern="[0-9]{5}"
+                                        required />
+                                    <small id="postalHelp" class="text-muted">5 dígitos</small>
                                 </div>
 
                                 <!-- Teléfono Input -->
                                 <div class="mb-3">
                                     <label for="telefono" class="form-label fw-500">Teléfono</label>
-                                    <input type="text" id="telefono" name="telefono"
+                                    <input type="tel" id="telefono" name="telefono"
                                         class="form-control form-control-lg" placeholder="600000000"
                                         value="<?php echo isset($_POST['telefono']) ? htmlspecialchars($_POST['telefono']) : ''; ?>"
-                                        maxlength="9" required />
-                                    <small class="text-muted">9 dígitos</small>
+                                        maxlength="9"
+                                        autocomplete="tel"
+                                        aria-describedby="phoneHelp"
+                                        inputmode="numeric"
+                                        pattern="[0-9]{9}"
+                                        required />
+                                    <small id="phoneHelp" class="text-muted">9 dígitos</small>
                                 </div>
 
                                 <!-- Password Input -->
@@ -181,8 +198,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     <label for="password" class="form-label fw-500">Contraseña</label>
                                     <input type="password" id="password" name="password"
                                         class="form-control form-control-lg" placeholder="Crea una contraseña segura"
+                                        autocomplete="new-password"
+                                        aria-describedby="passwordHelp"
                                         required />
-                                    <small class="text-muted">Mínimo 8 caracteres: minúscula, mayúscula, número y
+                                    <small id="passwordHelp" class="text-muted">Mínimo 8 caracteres: minúscula, mayúscula, número y
                                         carácter especial (@$!%*?&)</small>
                                 </div>
 
@@ -191,10 +210,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                                 <!-- Buttons Row -->
                                 <div class="d-grid gap-2 mb-3">
-                                    <button type="submit" class="btn btn-primary btn-lg fw-bold">
+                                    <button type="submit" class="btn btn-primary btn-lg fw-bold"
+                                        aria-label="Registrarse en Kairos">
                                         Registrarse
                                     </button>
-                                    <a href="login.php" class="btn btn-outline-secondary btn-lg fw-bold">
+                                    <a href="login.php" class="btn btn-outline-secondary btn-lg fw-bold"
+                                        role="button"
+                                        aria-label="Cancelar registro y volver al inicio de sesión">
                                         Cancelar
                                     </a>
                                 </div>
