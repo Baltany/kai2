@@ -384,6 +384,25 @@
     .modal-body {
         padding: 2rem;
 
+        // Estilos para modal de ver comentario
+        strong {
+            color: $resalte;
+            font-weight: 700;
+        }
+
+        span {
+            color: $texto_claro;
+        }
+
+        p {
+            color: $texto_claro;
+            background: rgba($secundario, 0.3);
+            padding: 1rem;
+            border-radius: 6px;
+            border: 1px solid rgba($resalte, 0.2);
+            margin-top: 0.5rem;
+        }
+
         .form-label {
             color: $texto_claro;
             font-weight: 600;
@@ -445,13 +464,14 @@
 
         // Input de archivo - Estilo personalizado para Chrome
         .form-control[type="file"] {
-            padding: 0.625rem 0.875rem;
-            padding-left: 0;
+            padding: 0.625rem 0.75rem;
             border: 2px solid rgba($resalte, 0.4);
             background: rgba($secundario, 0.4);
             color: $texto_claro;
             cursor: pointer;
+            height: calc(1.5em + 1.25rem + 4px); // Altura fija para que coincida con otros inputs
             line-height: 1.5;
+            overflow: hidden;
             display: flex;
             align-items: center;
 
@@ -460,32 +480,30 @@
                 color: $texto_claro;
                 border: none;
                 padding: 0.625rem 1rem;
-                margin-right: 1rem;
-                margin-left: 0;
+                margin: -0.625rem 1rem -0.625rem -0.75rem;
+                height: calc(100% + 1.25rem);
                 cursor: pointer;
                 font-weight: 600;
                 transition: all 0.2s ease;
                 border-right: 2px solid rgba(#000000, 0.2);
-                flex-shrink: 0;
 
                 &:hover {
                     background: #8a3dff;
                 }
             }
 
-            // Firefox
+            // Firefox y otros navegadores
             &::-webkit-file-upload-button {
                 background: $resalte;
                 color: $texto_claro;
                 border: none;
                 padding: 0.625rem 1rem;
-                margin-right: 1rem;
-                margin-left: 0;
+                margin: -0.625rem 1rem -0.625rem -0.75rem;
+                height: calc(100% + 1.25rem);
                 cursor: pointer;
                 font-weight: 600;
                 transition: all 0.2s ease;
                 border-right: 2px solid rgba(#000000, 0.2);
-                flex-shrink: 0;
 
                 &:hover {
                     background: #8a3dff;

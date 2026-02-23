@@ -322,6 +322,7 @@ $modos = $controller->obtenerTodosModos();
                             <div class="col-md-6 mb-3">
                                 <label for="edit_cover" class="form-label">Nueva Imagen (dejar vacío para mantener actual)</label>
                                 <input type="file" id="edit_cover" name="cover" class="form-control" accept="image/*">
+                                <small class="text-muted">Ningún archivo seleccionado</small>
                             </div>
                         </div>
 

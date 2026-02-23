@@ -19749,6 +19749,18 @@ body {
       box-shadow: 0 0 0 5px rgba(111, 18, 224, 0.5); }
 .modal .modal-body {
   padding: 2rem; }
+  .modal .modal-body strong {
+    color: #6f12e0;
+    font-weight: 700; }
+  .modal .modal-body span {
+    color: #fffdfa; }
+  .modal .modal-body p {
+    color: #fffdfa;
+    background: rgba(94, 58, 139, 0.3);
+    padding: 1rem;
+    border-radius: 6px;
+    border: 1px solid rgba(111, 18, 224, 0.2);
+    margin-top: 0.5rem; }
   .modal .modal-body .form-label {
     color: #fffdfa;
     font-weight: 600;
@@ -19788,13 +19800,14 @@ body {
     .modal .modal-body .form-control[type="date"]::-webkit-datetime-edit-month-field, .modal .modal-body .form-control[type="date"]::-webkit-datetime-edit-day-field, .modal .modal-body .form-control[type="date"]::-webkit-datetime-edit-year-field {
       color: #fffdfa; }
   .modal .modal-body .form-control[type="file"] {
-    padding: 0.625rem 0.875rem;
-    padding-left: 0;
+    padding: 0.625rem 0.75rem;
     border: 2px solid rgba(111, 18, 224, 0.4);
     background: rgba(94, 58, 139, 0.4);
     color: #fffdfa;
     cursor: pointer;
+    height: calc(1.5em + 1.25rem + 4px);
     line-height: 1.5;
+    overflow: hidden;
     display: flex;
     align-items: center; }
     .modal .modal-body .form-control[type="file"]::file-selector-button {
@@ -19802,13 +19815,12 @@ body {
       color: #fffdfa;
       border: none;
       padding: 0.625rem 1rem;
-      margin-right: 1rem;
-      margin-left: 0;
+      margin: -0.625rem 1rem -0.625rem -0.75rem;
+      height: calc(100% + 1.25rem);
       cursor: pointer;
       font-weight: 600;
       transition: all 0.2s ease;
-      border-right: 2px solid rgba(0, 0, 0, 0.2);
-      flex-shrink: 0; }
+      border-right: 2px solid rgba(0, 0, 0, 0.2); }
       .modal .modal-body .form-control[type="file"]::file-selector-button:hover {
         background: #8a3dff; }
     .modal .modal-body .form-control[type="file"]::-webkit-file-upload-button {
@@ -19816,13 +19828,12 @@ body {
       color: #fffdfa;
       border: none;
       padding: 0.625rem 1rem;
-      margin-right: 1rem;
-      margin-left: 0;
+      margin: -0.625rem 1rem -0.625rem -0.75rem;
+      height: calc(100% + 1.25rem);
       cursor: pointer;
       font-weight: 600;
       transition: all 0.2s ease;
-      border-right: 2px solid rgba(0, 0, 0, 0.2);
-      flex-shrink: 0; }
+      border-right: 2px solid rgba(0, 0, 0, 0.2); }
       .modal .modal-body .form-control[type="file"]::-webkit-file-upload-button:hover {
         background: #8a3dff; }
     .modal .modal-body .form-control[type="file"]:focus {

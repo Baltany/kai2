@@ -186,12 +186,12 @@ $usuarios = $usuarioController->obtenerTodosUsuarios();
                                 <td><?= date('d/m/Y H:i', strtotime($valoracion['fecha_valoracion'])) ?></td>
                                 <td class="action-buttons">
                                     <button class="btn btn-sm btn-info"
-                                        onclick='editarValoracion(<?= json_encode($valoracion) ?>)'
+                                        onclick='editarValoracion(<?= htmlspecialchars(json_encode($valoracion), ENT_QUOTES, "UTF-8") ?>)'
                                         aria-label="Editar valoración de <?= htmlspecialchars($valoracion['username']) ?> sobre <?= htmlspecialchars($valoracion['producto_titulo']) ?>">
                                         <i class="bi bi-pencil" aria-hidden="true"></i>
                                     </button>
                                     <button class="btn btn-sm btn-primary"
-                                        onclick='verComentario(<?= json_encode($valoracion) ?>)'
+                                        onclick='verComentario(<?= htmlspecialchars(json_encode($valoracion), ENT_QUOTES, "UTF-8") ?>)'
                                         aria-label="Ver comentario completo de <?= htmlspecialchars($valoracion['username']) ?>">
                                         <i class="bi bi-eye" aria-hidden="true"></i>
                                     </button>
