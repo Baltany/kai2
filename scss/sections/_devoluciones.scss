@@ -60,6 +60,16 @@
 .devoluciones-content {
     // Contenedor principal, sin estilos adicionales
     // Bootstrap maneja el layout con .row y .col-*
+    max-width: 800px;
+    margin: 0 auto;
+    
+    .d-flex {
+        gap: 1rem; // Añadir gap entre texto y precio en pantallas grandes
+    }
+    
+    @media (max-width: 768px) {
+        max-width: 100%;
+    }
 }
 
 // =============================================================================
@@ -168,6 +178,13 @@
         background: darken($resalte, 10%);
         transform: translateY(-2px);
         box-shadow: 0 4px 15px rgba($resalte, 0.5);
+    }
+
+    &:focus,
+    &:focus-visible {
+        outline: 3px solid #ffffff;
+        outline-offset: 3px;
+        box-shadow: 0 0 0 5px rgba($resalte, 0.5);
     }
     
     &:active {

@@ -38,6 +38,15 @@
             color: $resalte;
         }
 
+        &:focus,
+        &:focus-visible {
+            outline: 3px solid #ffffff;
+            outline-offset: -3px;
+            background: rgba($resalte, 0.15);
+            color: $resalte;
+            z-index: 1;
+        }
+
         &.active {
             background: rgba($resalte, 0.2);
             color: $resalte;
@@ -97,6 +106,13 @@
             background: lighten($resalte, 10%);
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba($resalte, 0.4);
+        }
+
+        &:focus,
+        &:focus-visible {
+            outline: 3px solid #ffffff;
+            outline-offset: 3px;
+            box-shadow: 0 0 0 5px rgba($resalte, 0.5);
         }
 
         i {
@@ -237,6 +253,13 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         }
 
+        &:focus,
+        &:focus-visible {
+            outline: 3px solid #ffffff;
+            outline-offset: 2px;
+            transform: translateY(-2px);
+        }
+
         i {
             font-size: 1rem;
         }
@@ -298,6 +321,14 @@
         border: 1px solid rgba($resalte, 0.3);
         border-radius: 6px;
         padding: 0.75rem;
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+        background-repeat: no-repeat;
+        background-position: right 0.75rem center;
+        background-size: 16px 12px;
+        padding-right: 2.5rem;
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
 
         &:focus {
             border-color: $resalte;
@@ -328,6 +359,7 @@
         .modal-title {
             color: $texto_claro;
             font-weight: 600;
+            font-size: 1.25rem; // Tamaño igual que h5
             display: flex;
             align-items: center;
             gap: 0.75rem;
@@ -339,6 +371,13 @@
 
         .btn-close {
             filter: invert(1) grayscale(100%) brightness(200%);
+            
+            &:focus,
+            &:focus-visible {
+                outline: 3px solid #ffffff;
+                outline-offset: 2px;
+                box-shadow: 0 0 0 5px rgba($resalte, 0.5);
+            }
         }
     }
 
@@ -349,29 +388,160 @@
             color: $texto_claro;
             font-weight: 600;
             margin-bottom: 0.5rem;
+            font-size: 0.95rem;
         }
 
         .form-control,
         .form-select {
-            background: rgba($secundario, 0.3);
+            background: rgba($secundario, 0.4);
             color: $texto_claro;
-            border: 1px solid rgba($resalte, 0.3);
-            border-radius: 6px;
+            border: 2px solid rgba($resalte, 0.4);
+            border-radius: 8px;
+            padding: 0.625rem 0.875rem;
+            transition: all 0.2s ease;
 
             &:focus {
-                background: rgba($secundario, 0.5);
+                background: rgba($secundario, 0.6);
                 border-color: $resalte;
                 color: $texto_claro;
-                box-shadow: 0 0 0 0.2rem rgba($resalte, 0.25);
+                box-shadow: 0 0 0 0.25rem rgba($resalte, 0.3);
+                outline: 2px solid rgba($resalte, 0.5);
+                outline-offset: 2px;
             }
 
             &::placeholder {
-                color: rgba($texto_claro, 0.5);
+                color: rgba($texto_claro, 0.6);
+            }
+        }
+
+        // Input de fecha - Calendario blanco
+        .form-control[type="date"] {
+            color-scheme: dark;
+            
+            &::-webkit-calendar-picker-indicator {
+                filter: invert(1);
+                cursor: pointer;
+                opacity: 0.9;
+            }
+
+            &::-webkit-datetime-edit {
+                color: $texto_claro;
+            }
+
+            &::-webkit-datetime-edit-fields-wrapper {
+                color: $texto_claro;
+            }
+
+            &::-webkit-datetime-edit-text {
+                color: rgba($texto_claro, 0.7);
+            }
+
+            &::-webkit-datetime-edit-month-field,
+            &::-webkit-datetime-edit-day-field,
+            &::-webkit-datetime-edit-year-field {
+                color: $texto_claro;
+            }
+        }
+
+        // Input de archivo - Estilo personalizado para Chrome
+        .form-control[type="file"] {
+            padding: 0.625rem 0.875rem;
+            border: 2px solid rgba($resalte, 0.4);
+            background: rgba($secundario, 0.4);
+            color: $texto_claro;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+
+            &::file-selector-button {
+                background: $resalte;
+                color: $texto_claro;
+                border: none;
+                padding: 0.5rem 1rem;
+                margin-right: 1rem;
+                margin-left: -0.875rem;
+                margin-top: -0.625rem;
+                margin-bottom: -0.625rem;
+                border-radius: 6px 0 0 6px;
+                cursor: pointer;
+                font-weight: 600;
+                transition: all 0.2s ease;
+                border-right: 2px solid darken($resalte, 10%);
+
+                &:hover {
+                    background: lighten($resalte, 10%);
+                }
+            }
+
+            // Firefox
+            &::-webkit-file-upload-button {
+                background: $resalte;
+                color: $texto_claro;
+                border: none;
+                padding: 0.5rem 1rem;
+                margin-right: 1rem;
+                margin-left: -0.875rem;
+                margin-top: -0.625rem;
+                margin-bottom: -0.625rem;
+                border-radius: 6px 0 0 6px;
+                cursor: pointer;
+                font-weight: 600;
+                transition: all 0.2s ease;
+                border-right: 2px solid darken($resalte, 10%);
+
+                &:hover {
+                    background: lighten($resalte, 10%);
+                }
+            }
+
+            &:focus {
+                background: rgba($secundario, 0.6);
+                border-color: $resalte;
+                box-shadow: 0 0 0 0.25rem rgba($resalte, 0.3);
+                outline: 2px solid rgba($resalte, 0.5);
+                outline-offset: 2px;
+
+                &::file-selector-button,
+                &::-webkit-file-upload-button {
+                    background: lighten($resalte, 10%);
+                }
+            }
+        }
+
+        // Select con flechitas blancas
+        .form-select {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 0.75rem center;
+            background-size: 16px 12px;
+            padding-right: 2.5rem;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+
+            option {
+                background: $primario;
+                color: $texto_claro;
             }
         }
 
         .text-muted {
-            color: rgba($texto_claro, 0.6) !important;
+            color: rgba($texto_claro, 0.85) !important;
+            font-size: 0.875rem;
+            display: block;
+            margin-top: 0.375rem;
+            font-style: italic;
+        }
+
+        // Mejorar espaciado entre campos
+        .mb-3 {
+            margin-bottom: 1.25rem !important;
+        }
+
+        // Mejorar textarea
+        textarea.form-control {
+            resize: vertical;
+            min-height: 100px;
         }
     }
 
@@ -388,6 +558,13 @@
             &:hover {
                 background: rgba($texto_oscuro, 0.7);
             }
+
+            &:focus,
+            &:focus-visible {
+                outline: 3px solid #ffffff;
+                outline-offset: 2px;
+                box-shadow: 0 0 0 5px rgba($texto_claro, 0.3);
+            }
         }
 
         .btn-primary {
@@ -398,35 +575,61 @@
             &:hover {
                 background: lighten($resalte, 10%);
             }
+
+            &:focus,
+            &:focus-visible {
+                outline: 3px solid #ffffff;
+                outline-offset: 2px;
+                box-shadow: 0 0 0 5px rgba($resalte, 0.5);
+            }
         }
     }
 }
 
 // Checkboxes de géneros
 .generos-checkbox {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    padding: 1rem;
-    background: rgba($secundario, 0.2);
-    border-radius: 8px;
-    border: 1px solid rgba($resalte, 0.2);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 0.75rem 1.25rem;
+    padding: 1.25rem;
+    background: rgba($secundario, 0.3);
+    border-radius: 10px;
+    border: 2px solid rgba($resalte, 0.3);
 
     .form-check {
         margin: 0;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 0.75rem;
+        background: rgba($primario, 0.3);
+        border-radius: 6px;
+        transition: all 0.2s ease;
+
+        &:hover {
+            background: rgba($primario, 0.5);
+            transform: translateY(-1px);
+        }
 
         .form-check-input {
-            background-color: rgba($primario, 0.6);
-            border: 2px solid rgba($resalte, 0.5);
+            background-color: rgba($secundario, 0.6);
+            border: 2px solid rgba($resalte, 0.6);
             cursor: pointer;
+            width: 1.25rem;
+            height: 1.25rem;
+            margin: 0;
+            flex-shrink: 0;
 
             &:checked {
                 background-color: $resalte;
                 border-color: $resalte;
+                box-shadow: 0 0 8px rgba($resalte, 0.5);
             }
 
             &:focus {
-                box-shadow: 0 0 0 0.2rem rgba($resalte, 0.25);
+                box-shadow: 0 0 0 0.25rem rgba($resalte, 0.4);
+                outline: 2px solid rgba($resalte, 0.6);
+                outline-offset: 2px;
             }
         }
 
@@ -434,6 +637,9 @@
             color: $texto_claro;
             cursor: pointer;
             user-select: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin: 0;
         }
     }
 }

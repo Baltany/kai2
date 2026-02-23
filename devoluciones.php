@@ -27,13 +27,13 @@
 
             <!-- CONTENIDO -->
             <div class="row">
-                <div class="col-12">
+                <div class="col-12 col-md-10 col-lg-8 mx-auto">
                     <div class="devoluciones-content">
                         
                         <!-- SUBTOTAL -->
                         <div class="row mb-4"> <!-- ✅ Bootstrap row con margin-bottom -->
                             <div class="col-12">
-                                <div class="d-flex justify-content-between align-items-center"> <!-- ✅ Bootstrap flex -->
+                                <div class="d-flex justify-content-between align-items-center gap-3"> <!-- ✅ Bootstrap flex con gap -->
                                     <span class="devoluciones-text">Subtotal: (X productos)</span>
                                     <span class="devoluciones-price">99€</span>
                                 </div>
@@ -43,7 +43,7 @@
                         <!-- COSTE DE RECOGIDA -->
                         <div class="row mb-4">
                             <div class="col-12">
-                                <div class="d-flex justify-content-between align-items-center">
+                                <div class="d-flex justify-content-between align-items-center gap-3">
                                     <span class="devoluciones-text">Coste de recogida a domicilio</span>
                                     <span class="devoluciones-price">2,99€</span>
                                 </div>
@@ -67,7 +67,7 @@
                         <!-- TOTAL -->
                         <div class="row mb-5"> <!-- ✅ mb-5 para más espacio -->
                             <div class="col-12">
-                                <div class="d-flex justify-content-between align-items-center">
+                                <div class="d-flex justify-content-between align-items-center gap-3">
                                     <span class="devoluciones-total-text">Total de la devolución:</span>
                                     <span class="devoluciones-total-price">99€</span>
                                 </div>

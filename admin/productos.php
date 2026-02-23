@@ -57,14 +57,13 @@ $modos = $controller->obtenerTodosModos();
 
 <body>
     <!-- Menú sencillo -->
-    <!-- Menú sencillo -->
     <nav class="admin-menu">
         <div class="menu-container">
             <a href="../index.php" class="menu-link">Ir a la Tienda</a>
             <a href="productos.php" class="menu-link active">Productos</a>
             <a href="usuarios.php" class="menu-link">Usuarios</a>
             <a href="valoraciones.php" class="menu-link">Valoraciones</a>
-            <a href="../logout.php" class="menu-link active">Logout</a>
+            <a href="../logout.php" class="menu-link">Logout</a>
         </div>
     </nav>
 
@@ -80,7 +79,7 @@ $modos = $controller->obtenerTodosModos();
             <?php if ($mensaje): ?>
             <div class="alert alert-<?= $tipoMensaje ?> alert-dismissible fade show" role="alert">
                 <?= htmlspecialchars($mensaje) ?>
-                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar alerta"></button>
             </div>
             <?php endif; ?>
 
@@ -145,15 +144,17 @@ $modos = $controller->obtenerTodosModos();
                                 </td>
                                 <td class="action-buttons">
                                     <button class="btn btn-sm btn-info"
-                                        onclick="editarProducto(<?= htmlspecialchars(json_encode($producto)) ?>)">
-                                        <i class="bi bi-pencil"></i>
+                                        onclick="editarProducto(<?= htmlspecialchars(json_encode($producto)) ?>)"
+                                        aria-label="Editar producto <?= htmlspecialchars($producto['titulo']) ?>">
+                                        <i class="bi bi-pencil" aria-hidden="true"></i>
                                     </button>
                                     <form method="POST" style="display: inline;"
                                         onsubmit="return confirm('¿Eliminar este producto?')">
                                         <input type="hidden" name="accion" value="eliminar">
                                         <input type="hidden" name="id" value="<?= $producto['id'] ?>">
-                                        <button type="submit" class="btn btn-sm btn-danger">
-                                            <i class="bi bi-trash"></i>
+                                        <button type="submit" class="btn btn-sm btn-danger"
+                                            aria-label="Eliminar producto <?= htmlspecialchars($producto['titulo']) ?>">
+                                            <i class="bi bi-trash" aria-hidden="true"></i>
                                         </button>
                                     </form>
                                 </td>
@@ -171,8 +172,8 @@ $modos = $controller->obtenerTodosModos();
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title"><i class="bi bi-box-seam"></i> Crear Nuevo Producto</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    <h2 class="modal-title"><i class="bi bi-box-seam"></i> Crear Nuevo Producto</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar modal"></button>
                 </div>
                 <form method="POST" enctype="multipart/form-data">
                     <div class="modal-body">
@@ -180,31 +181,31 @@ $modos = $controller->obtenerTodosModos();
 
                         <div class="row">
                             <div class="col-md-8 mb-3">
-                                <label class="form-label">Título *</label>
-                                <input type="text" name="titulo" class="form-control" required>
+                                <label for="crear_titulo" class="form-label">Título *</label>
+                                <input type="text" id="crear_titulo" name="titulo" class="form-control" required>
                             </div>
                             <div class="col-md-4 mb-3">
-                                <label class="form-label">Fecha Lanzamiento</label>
-                                <input type="date" name="fecha_lanzamiento" class="form-control">
+                                <label for="crear_fecha_lanzamiento" class="form-label">Fecha Lanzamiento</label>
+                                <input type="date" id="crear_fecha_lanzamiento" name="fecha_lanzamiento" class="form-control">
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-md-3 mb-3">
-                                <label class="form-label">Precio (€) *</label>
-                                <input type="number" name="precio" class="form-control" step="0.01" min="0" required>
+                                <label for="crear_precio" class="form-label">Precio (€) *</label>
+                                <input type="number" id="crear_precio" name="precio" class="form-control" step="0.01" min="0" required>
                             </div>
                             <div class="col-md-3 mb-3">
-                                <label class="form-label">Descuento (%)</label>
-                                <input type="number" name="descuento" class="form-control" min="0" max="100" value="0">
+                                <label for="crear_descuento" class="form-label">Descuento (%)</label>
+                                <input type="number" id="crear_descuento" name="descuento" class="form-control" min="0" max="100" value="0">
                             </div>
                             <div class="col-md-3 mb-3">
-                                <label class="form-label">Stock *</label>
-                                <input type="number" name="stock" class="form-control" min="0" required>
+                                <label for="crear_stock" class="form-label">Stock *</label>
+                                <input type="number" id="crear_stock" name="stock" class="form-control" min="0" required>
                             </div>
                             <div class="col-md-3 mb-3">
-                                <label class="form-label">Plataforma *</label>
-                                <select name="platform_id" class="form-select" required>
+                                <label for="crear_platform_id" class="form-label">Plataforma *</label>
+                                <select id="crear_platform_id" name="platform_id" class="form-select" required>
                                     <option value="">Seleccionar...</option>
                                     <?php foreach ($plataformas as $plat): ?>
                                     <option value="<?= $plat['id'] ?>"><?= htmlspecialchars($plat['nombre']) ?></option>
@@ -215,8 +216,8 @@ $modos = $controller->obtenerTodosModos();
 
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label class="form-label">Modo de Juego *</label>
-                                <select name="modo" class="form-select" required>
+                                <label for="crear_modo" class="form-label">Modo de Juego *</label>
+                                <select id="crear_modo" name="modo" class="form-select" required>
                                     <option value="">Seleccionar...</option>
                                     <?php foreach ($modos as $modo): ?>
                                     <option value="<?= $modo['id'] ?>"><?= htmlspecialchars($modo['nombre']) ?></option>
@@ -224,15 +225,15 @@ $modos = $controller->obtenerTodosModos();
                                 </select>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label class="form-label">Imagen de Portada</label>
-                                <input type="file" name="cover" class="form-control" accept="image/*">
+                                <label for="crear_cover" class="form-label">Imagen de Portada</label>
+                                <input type="file" id="crear_cover" name="cover" class="form-control" accept="image/*">
                                 <small class="text-muted">Si no se sube imagen, se usará placeholder.png</small>
                             </div>
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label">Géneros *</label>
-                            <div class="generos-checkbox">
+                            <div class="generos-checkbox" role="group" aria-label="Seleccione los géneros del juego">
                                 <?php foreach ($generos as $genero): ?>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="checkbox" name="generos[]"
@@ -246,8 +247,8 @@ $modos = $controller->obtenerTodosModos();
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">Descripción *</label>
-                            <textarea name="descripcion" class="form-control" rows="4" required></textarea>
+                            <label for="crear_descripcion" class="form-label">Descripción *</label>
+                            <textarea id="crear_descripcion" name="descripcion" class="form-control" rows="4" required></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -264,8 +265,8 @@ $modos = $controller->obtenerTodosModos();
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title"><i class="bi bi-pencil-square"></i> Editar Producto</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    <h2 class="modal-title"><i class="bi bi-pencil-square"></i> Editar Producto</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar modal"></button>
                 </div>
                 <form method="POST" enctype="multipart/form-data">
                     <div class="modal-body">
@@ -274,11 +275,11 @@ $modos = $controller->obtenerTodosModos();
 
                         <div class="row">
                             <div class="col-md-8 mb-3">
-                                <label class="form-label">Título *</label>
+                                <label for="edit_titulo" class="form-label">Título *</label>
                                 <input type="text" name="titulo" id="edit_titulo" class="form-control" required>
                             </div>
                             <div class="col-md-4 mb-3">
-                                <label class="form-label">Fecha Lanzamiento</label>
+                                <label for="edit_fecha_lanzamiento" class="form-label">Fecha Lanzamiento</label>
                                 <input type="date" name="fecha_lanzamiento" id="edit_fecha_lanzamiento"
                                     class="form-control">
                             </div>
@@ -286,21 +287,21 @@ $modos = $controller->obtenerTodosModos();
 
                         <div class="row">
                             <div class="col-md-3 mb-3">
-                                <label class="form-label">Precio (€) *</label>
+                                <label for="edit_precio" class="form-label">Precio (€) *</label>
                                 <input type="number" name="precio" id="edit_precio" class="form-control" step="0.01"
                                     min="0" required>
                             </div>
                             <div class="col-md-3 mb-3">
-                                <label class="form-label">Descuento (%)</label>
+                                <label for="edit_descuento" class="form-label">Descuento (%)</label>
                                 <input type="number" name="descuento" id="edit_descuento" class="form-control" min="0"
                                     max="100">
                             </div>
                             <div class="col-md-3 mb-3">
-                                <label class="form-label">Stock *</label>
+                                <label for="edit_stock" class="form-label">Stock *</label>
                                 <input type="number" name="stock" id="edit_stock" class="form-control" min="0" required>
                             </div>
                             <div class="col-md-3 mb-3">
-                                <label class="form-label">Plataforma *</label>
+                                <label for="edit_platform_id" class="form-label">Plataforma *</label>
                                 <select name="platform_id" id="edit_platform_id" class="form-select" required>
                                     <?php foreach ($plataformas as $plat): ?>
                                     <option value="<?= $plat['id'] ?>"><?= htmlspecialchars($plat['nombre']) ?></option>
@@ -311,7 +312,7 @@ $modos = $controller->obtenerTodosModos();
 
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label class="form-label">Modo de Juego *</label>
+                                <label for="edit_modo" class="form-label">Modo de Juego *</label>
                                 <select name="modo" id="edit_modo" class="form-select" required>
                                     <?php foreach ($modos as $modo): ?>
                                     <option value="<?= $modo['id'] ?>"><?= htmlspecialchars($modo['nombre']) ?></option>
@@ -319,14 +320,14 @@ $modos = $controller->obtenerTodosModos();
                                 </select>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label class="form-label">Nueva Imagen (dejar vacío para mantener actual)</label>
-                                <input type="file" name="cover" class="form-control" accept="image/*">
+                                <label for="edit_cover" class="form-label">Nueva Imagen (dejar vacío para mantener actual)</label>
+                                <input type="file" id="edit_cover" name="cover" class="form-control" accept="image/*">
                             </div>
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label">Géneros *</label>
-                            <div class="generos-checkbox" id="edit_generos">
+                            <div class="generos-checkbox" id="edit_generos" role="group" aria-label="Seleccione los géneros del juego">
                                 <?php foreach ($generos as $genero): ?>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="checkbox" name="generos[]"
@@ -340,7 +341,7 @@ $modos = $controller->obtenerTodosModos();
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">Descripción *</label>
+                            <label for="edit_descripcion" class="form-label">Descripción *</label>
                             <textarea name="descripcion" id="edit_descripcion" class="form-control" rows="4"
                                 required></textarea>
                         </div>

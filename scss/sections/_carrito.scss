@@ -44,6 +44,13 @@
             color: $resalte;
             opacity: 1;
         }
+
+        &:focus,
+        &:focus-visible {
+            outline: 3px solid #ffffff;
+            outline-offset: 2px;
+            box-shadow: 0 0 0 5px rgba($resalte, 0.5);
+        }
     }
 }
 
@@ -163,8 +170,13 @@
             color: $resalte;
         }
 
-        &:focus {
-            outline: none;
+        &:focus,
+        &:focus-visible {
+            outline: 3px solid #ffffff;
+            outline-offset: 2px;
+            opacity: 1;
+            color: $resalte;
+            box-shadow: 0 0 0 5px rgba($resalte, 0.4);
         }
     }
 }
@@ -190,9 +202,12 @@
         background-color: transparent;
     }
 
-    &:focus {
-        outline: none;
-        box-shadow: none;
+    &:focus,
+    &:focus-visible {
+        outline: 3px solid #ffffff;
+        outline-offset: 2px;
+        color: #ff4d4d;
+        box-shadow: 0 0 0 5px rgba(#ff4d4d, 0.3);
     }
 
     i {
@@ -260,8 +275,11 @@
                     box-shadow: 0 6px 20px rgba($resalte, 0.5);
                 }
 
-                &:focus {
-                    box-shadow: 0 0 0 0.2rem rgba($resalte, 0.25);
+                &:focus,
+                &:focus-visible {
+                    outline: 3px solid #ffffff;
+                    outline-offset: 3px;
+                    box-shadow: 0 0 0 5px rgba($resalte, 0.5);
                 }
             }
 
@@ -275,8 +293,11 @@
                     border-color: $texto_claro;
                 }
 
-                &:focus {
-                    box-shadow: 0 0 0 0.2rem rgba($texto_claro, 0.25);
+                &:focus,
+                &:focus-visible {
+                    outline: 3px solid #ffffff;
+                    outline-offset: 3px;
+                    box-shadow: 0 0 0 5px rgba($texto_claro, 0.3);
                 }
             }
         }

@@ -173,7 +173,7 @@ $roles = $controller->obtenerRoles();
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalCrearUsuarioLabel"><i class="bi bi-person-plus" aria-hidden="true"></i> Crear Nuevo Usuario</h5>
+                    <h2 class="modal-title" id="modalCrearUsuarioLabel"><i class="bi bi-person-plus" aria-hidden="true"></i> Crear Nuevo Usuario</h2>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar formulario"></button>
                 </div>
                 <form method="POST">
@@ -287,7 +287,7 @@ $roles = $controller->obtenerRoles();
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalEditarUsuarioLabel"><i class="bi bi-pencil-square" aria-hidden="true"></i> Editar Usuario</h5>
+                    <h2 class="modal-title" id="modalEditarUsuarioLabel"><i class="bi bi-pencil-square" aria-hidden="true"></i> Editar Usuario</h2>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar formulario de edición"></button>
                 </div>
                 <form method="POST">

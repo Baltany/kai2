@@ -80,10 +80,10 @@ $usuarios = $usuarioController->obtenerTodosUsuarios();
     <nav class="admin-menu">
         <div class="menu-container">
             <a href="../index.php" class="menu-link">Ir a la Tienda</a>
-            <a href="productos.php" class="menu-link active">Productos</a>
+            <a href="productos.php" class="menu-link">Productos</a>
             <a href="usuarios.php" class="menu-link">Usuarios</a>
-            <a href="valoraciones.php" class="menu-link">Valoraciones</a>
-            <a href="../logout.php" class="menu-link active">Logout</a>
+            <a href="valoraciones.php" class="menu-link active">Valoraciones</a>
+            <a href="../logout.php" class="menu-link">Logout</a>
         </div>
     </nav>
 
@@ -99,7 +99,7 @@ $usuarios = $usuarioController->obtenerTodosUsuarios();
             <?php if ($mensaje): ?>
             <div class="alert alert-<?= $tipoMensaje ?> alert-dismissible fade show" role="alert">
                 <?= htmlspecialchars($mensaje) ?>
-                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar alerta"></button>
             </div>
             <?php endif; ?>
 
@@ -108,7 +108,7 @@ $usuarios = $usuarioController->obtenerTodosUsuarios();
                 <div class="filters-section mb-4">
                     <div class="row">
                         <div class="col-md-4">
-                            <label class="form-label">Filtrar por Producto</label>
+                            <label for="filtroProducto" class="form-label">Filtrar por Producto</label>
                             <select class="form-select" id="filtroProducto" onchange="filtrarTabla()">
                                 <option value="">Todos los productos</option>
                                 <?php foreach ($productos as $prod): ?>
@@ -117,7 +117,7 @@ $usuarios = $usuarioController->obtenerTodosUsuarios();
                             </select>
                         </div>
                         <div class="col-md-4">
-                            <label class="form-label">Filtrar por Usuario</label>
+                            <label for="filtroUsuario" class="form-label">Filtrar por Usuario</label>
                             <select class="form-select" id="filtroUsuario" onchange="filtrarTabla()">
                                 <option value="">Todos los usuarios</option>
                                 <?php foreach ($usuarios as $usr): ?>
@@ -126,7 +126,7 @@ $usuarios = $usuarioController->obtenerTodosUsuarios();
                             </select>
                         </div>
                         <div class="col-md-4">
-                            <label class="form-label">Filtrar por Puntuación</label>
+                            <label for="filtroPuntuacion" class="form-label">Filtrar por Puntuación</label>
                             <select class="form-select" id="filtroPuntuacion" onchange="filtrarTabla()">
                                 <option value="">Todas las puntuaciones</option>
                                 <option value="5">⭐⭐⭐⭐⭐ (5 estrellas)</option>
@@ -186,12 +186,14 @@ $usuarios = $usuarioController->obtenerTodosUsuarios();
                                 <td><?= date('d/m/Y H:i', strtotime($valoracion['fecha_valoracion'])) ?></td>
                                 <td class="action-buttons">
                                     <button class="btn btn-sm btn-info"
-                                        onclick='editarValoracion(<?= json_encode($valoracion) ?>)'>
-                                        <i class="bi bi-pencil"></i>
+                                        onclick='editarValoracion(<?= json_encode($valoracion) ?>)'
+                                        aria-label="Editar valoración de <?= htmlspecialchars($valoracion['username']) ?> sobre <?= htmlspecialchars($valoracion['producto_titulo']) ?>">
+                                        <i class="bi bi-pencil" aria-hidden="true"></i>
                                     </button>
                                     <button class="btn btn-sm btn-primary"
-                                        onclick='verComentario(<?= json_encode($valoracion) ?>)'>
-                                        <i class="bi bi-eye"></i>
+                                        onclick='verComentario(<?= json_encode($valoracion) ?>)'
+                                        aria-label="Ver comentario completo de <?= htmlspecialchars($valoracion['username']) ?>">
+                                        <i class="bi bi-eye" aria-hidden="true"></i>
                                     </button>
                                     <form method="POST" style="display: inline;"
                                         onsubmit="return confirm('¿Eliminar esta valoración?')">
@@ -199,8 +201,9 @@ $usuarios = $usuarioController->obtenerTodosUsuarios();
                                         <input type="hidden" name="id_usuario" value="<?= $valoracion['id_usuario'] ?>">
                                         <input type="hidden" name="id_producto"
                                             value="<?= $valoracion['id_producto'] ?>">
-                                        <button type="submit" class="btn btn-sm btn-danger">
-                                            <i class="bi bi-trash"></i>
+                                        <button type="submit" class="btn btn-sm btn-danger"
+                                            aria-label="Eliminar valoración de <?= htmlspecialchars($valoracion['username']) ?>">
+                                            <i class="bi bi-trash" aria-hidden="true"></i>
                                         </button>
                                     </form>
                                 </td>
@@ -218,8 +221,8 @@ $usuarios = $usuarioController->obtenerTodosUsuarios();
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title"><i class="bi bi-star"></i> Crear Nueva Valoración</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    <h2 class="modal-title"><i class="bi bi-star"></i> Crear Nueva Valoración</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar modal"></button>
                 </div>
                 <form method="POST">
                     <div class="modal-body">
@@ -227,8 +230,8 @@ $usuarios = $usuarioController->obtenerTodosUsuarios();
 
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label class="form-label">Usuario *</label>
-                                <select name="id_usuario" class="form-select" required>
+                                <label for="crear_id_usuario" class="form-label">Usuario *</label>
+                                <select id="crear_id_usuario" name="id_usuario" class="form-select" required>
                                     <option value="">Seleccionar usuario...</option>
                                     <?php foreach ($usuarios as $usuario): ?>
                                     <option value="<?= $usuario['id'] ?>">
@@ -239,8 +242,8 @@ $usuarios = $usuarioController->obtenerTodosUsuarios();
                                 </select>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label class="form-label">Producto *</label>
-                                <select name="id_producto" class="form-select" required>
+                                <label for="crear_id_producto" class="form-label">Producto *</label>
+                                <select id="crear_id_producto" name="id_producto" class="form-select" required>
                                     <option value="">Seleccionar producto...</option>
                                     <?php foreach ($productos as $producto): ?>
                                     <option value="<?= $producto['id'] ?>">
@@ -253,17 +256,20 @@ $usuarios = $usuarioController->obtenerTodosUsuarios();
 
                         <div class="mb-3">
                             <label class="form-label">Puntuación *</label>
-                            <div class="rating-input">
+                            <div class="rating-input" role="group" aria-label="Seleccione la puntuación de 1 a 5 estrellas">
                                 <?php for ($i = 5; $i >= 1; $i--): ?>
                                 <input type="radio" name="puntuacion" id="star<?= $i ?>" value="<?= $i ?>" required>
-                                <label for="star<?= $i ?>"><i class="bi bi-star-fill"></i></label>
+                                <label for="star<?= $i ?>">
+                                    <i class="bi bi-star-fill" aria-hidden="true"></i>
+                                    <span class="visually-hidden">Puntuación: <?= $i ?> estrellas</span>
+                                </label>
                                 <?php endfor; ?>
                             </div>
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">Comentario</label>
-                            <textarea name="comentario" class="form-control" rows="4" maxlength="500"
+                            <label for="crear_comentario" class="form-label">Comentario</label>
+                            <textarea id="crear_comentario" name="comentario" class="form-control" rows="4" maxlength="500"
                                 placeholder="Escribe un comentario sobre el producto (opcional)"></textarea>
                             <small class="text-muted">Máximo 500 caracteres</small>
                         </div>
@@ -282,8 +288,8 @@ $usuarios = $usuarioController->obtenerTodosUsuarios();
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title"><i class="bi bi-pencil-square"></i> Editar Valoración</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    <h2 class="modal-title"><i class="bi bi-pencil-square"></i> Editar Valoración</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar modal"></button>
                 </div>
                 <form method="POST">
                     <div class="modal-body">
@@ -298,17 +304,20 @@ $usuarios = $usuarioController->obtenerTodosUsuarios();
 
                         <div class="mb-3">
                             <label class="form-label">Puntuación *</label>
-                            <div class="rating-input">
+                            <div class="rating-input" role="group" aria-label="Seleccione la puntuación de 1 a 5 estrellas">
                                 <?php for ($i = 5; $i >= 1; $i--): ?>
                                 <input type="radio" name="puntuacion" id="edit_star<?= $i ?>" value="<?= $i ?>"
                                     required>
-                                <label for="edit_star<?= $i ?>"><i class="bi bi-star-fill"></i></label>
+                                <label for="edit_star<?= $i ?>">
+                                    <i class="bi bi-star-fill" aria-hidden="true"></i>
+                                    <span class="visually-hidden">Puntuación: <?= $i ?> estrellas</span>
+                                </label>
                                 <?php endfor; ?>
                             </div>
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">Comentario</label>
+                            <label for="edit_comentario" class="form-label">Comentario</label>
                             <textarea name="comentario" id="edit_comentario" class="form-control" rows="4"
                                 maxlength="500"></textarea>
                             <small class="text-muted">Máximo 500 caracteres</small>
@@ -328,8 +337,8 @@ $usuarios = $usuarioController->obtenerTodosUsuarios();
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title"><i class="bi bi-chat-square-text"></i> Comentario Completo</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    <h2 class="modal-title"><i class="bi bi-chat-square-text"></i> Comentario Completo</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar modal"></button>
                 </div>
                 <div class="modal-body">
                     <div class="mb-3">
