@@ -19789,44 +19789,42 @@ body {
       color: #fffdfa; }
   .modal .modal-body .form-control[type="file"] {
     padding: 0.625rem 0.875rem;
+    padding-left: 0;
     border: 2px solid rgba(111, 18, 224, 0.4);
     background: rgba(94, 58, 139, 0.4);
     color: #fffdfa;
     cursor: pointer;
+    line-height: 1.5;
     display: flex;
     align-items: center; }
     .modal .modal-body .form-control[type="file"]::file-selector-button {
       background: #6f12e0;
       color: #fffdfa;
       border: none;
-      padding: 0.5rem 1rem;
+      padding: 0.625rem 1rem;
       margin-right: 1rem;
-      margin-left: -0.875rem;
-      margin-top: -0.625rem;
-      margin-bottom: -0.625rem;
-      border-radius: 6px 0 0 6px;
+      margin-left: 0;
       cursor: pointer;
       font-weight: 600;
       transition: all 0.2s ease;
-      border-right: 2px solid #580eb1; }
+      border-right: 2px solid rgba(0, 0, 0, 0.2);
+      flex-shrink: 0; }
       .modal .modal-body .form-control[type="file"]::file-selector-button:hover {
-        background: #8a36ef; }
+        background: #8a3dff; }
     .modal .modal-body .form-control[type="file"]::-webkit-file-upload-button {
       background: #6f12e0;
       color: #fffdfa;
       border: none;
-      padding: 0.5rem 1rem;
+      padding: 0.625rem 1rem;
       margin-right: 1rem;
-      margin-left: -0.875rem;
-      margin-top: -0.625rem;
-      margin-bottom: -0.625rem;
-      border-radius: 6px 0 0 6px;
+      margin-left: 0;
       cursor: pointer;
       font-weight: 600;
       transition: all 0.2s ease;
-      border-right: 2px solid #580eb1; }
+      border-right: 2px solid rgba(0, 0, 0, 0.2);
+      flex-shrink: 0; }
       .modal .modal-body .form-control[type="file"]::-webkit-file-upload-button:hover {
-        background: #8a36ef; }
+        background: #8a3dff; }
     .modal .modal-body .form-control[type="file"]:focus {
       background: rgba(94, 58, 139, 0.6);
       border-color: #6f12e0;
@@ -19834,7 +19832,7 @@ body {
       outline: 2px solid rgba(111, 18, 224, 0.5);
       outline-offset: 2px; }
       .modal .modal-body .form-control[type="file"]:focus::file-selector-button, .modal .modal-body .form-control[type="file"]:focus::-webkit-file-upload-button {
-        background: #8a36ef; }
+        background: #8a3dff; }
   .modal .modal-body .form-select {
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
     background-repeat: no-repeat;
@@ -19942,11 +19940,15 @@ body {
     cursor: pointer;
     font-size: 2rem;
     color: rgba(255, 253, 250, 0.3);
-    transition: all 0.2s ease; }
-    .rating-input label:hover, .rating-input label:hover ~ label {
+    transition: all 0.2s ease;
+    display: inline-block; }
+    .rating-input label i {
+      color: rgba(255, 253, 250, 0.3);
+      transition: all 0.2s ease; }
+    .rating-input label:hover i, .rating-input label:hover ~ label i {
       color: #ffc107;
       transform: scale(1.1); }
-  .rating-input input[type="radio"]:checked ~ label {
+  .rating-input input[type="radio"]:checked ~ label i {
     color: #ffc107; }
 
 .badge {
